@@ -1,0 +1,17 @@
+/bin/
+/target/
+ModTheSpire.jar.lnk
+src/main/main.iml
+/.idea/
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.vscode/
+ThMod.iml
+/.idea/codeStyles/
+MvnPackage.cmd
+errlogorin.txt
+todo.txt
+LoggerPackage.cmd
+src/main/resources/img/char/Marisa/backup/Marisa.7z
+src/main/resources/img/char/Marisa/Marisa_2.7z
+/lib/
