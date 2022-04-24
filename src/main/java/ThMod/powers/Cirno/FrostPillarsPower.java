@@ -1,23 +1,25 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.potions.SmokeBomb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class FleeingPower extends AbstractPower {
+public class FrostPillarsPower extends AbstractPower {
 	
-	public static final String POWER_ID = "FleeingPower";
+	public static final String POWER_ID = "FrostPillarsPower";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS =
 			powerStrings.DESCRIPTIONS;
 	
-	public FleeingPower(int amount) {
+	public FrostPillarsPower(int amount) {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
@@ -25,14 +27,7 @@ public class FleeingPower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/Fleeing.png");
-		
-		this.isTurnBased = true;
-	}
-	
-	@Override
-	public void stackPower(int stackAmount) {
-		// 不能堆叠
+		this.img = new Texture("img/powers/FrostPillarsPower.png");
 	}
 	
 	@Override
@@ -50,13 +45,17 @@ public class FleeingPower extends AbstractPower {
 	}
 	
 	@Override
-	public void atEndOfRound() {
-		if (this.amount <= 1) {
-			new SmokeBomb().use(this.owner);
-			
-			return;
+	public int onAttacked(DamageInfo info, int damageAmount) {
+		if (info.type != DamageInfo.DamageType.THORNS &&
+				info.type != DamageInfo.DamageType.HP_LOSS &&
+				info.owner != null && info.owner != this.owner) {
+			this.flash();
+			this.addToTop(new DamageAction(info.owner,
+					new DamageInfo(this.owner, this.amount, DamageInfo.DamageType.THORNS),
+					AbstractGameAction.AttackEffect.SLASH_VERTICAL, true));
+			this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
 		}
 		
-		this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+		return damageAmount;
 	}
 }

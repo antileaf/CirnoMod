@@ -1,23 +1,23 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.potions.SmokeBomb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class FleeingPower extends AbstractPower {
+public class FunkyPower extends AbstractPower {
 	
-	public static final String POWER_ID = "FleeingPower";
+	public static final String POWER_ID = "FunkyPower";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS =
 			powerStrings.DESCRIPTIONS;
 	
-	public FleeingPower(int amount) {
+	public FunkyPower(int amount) {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
@@ -25,17 +25,9 @@ public class FleeingPower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/Fleeing.png");
-		
-		this.isTurnBased = true;
+		this.img = new Texture("img/powers/FunkyPower.png");
 	}
 	
-	@Override
-	public void stackPower(int stackAmount) {
-		// 不能堆叠
-	}
-	
-	@Override
 	public void updateDescription() { // TODO: 还没太懂这里的逻辑，后面看一下
 //		if (this.cnt > 0) {
 //			this.description =
@@ -50,13 +42,8 @@ public class FleeingPower extends AbstractPower {
 	}
 	
 	@Override
-	public void atEndOfRound() {
-		if (this.amount <= 1) {
-			new SmokeBomb().use(this.owner);
-			
-			return;
-		}
-		
-		this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+	public void onCardDraw(AbstractCard card) {
+		this.addToTop(new ApplyPowerAction(this.owner, this.owner,
+				new ChillPower(this.amount), this.amount, true));
 	}
 }

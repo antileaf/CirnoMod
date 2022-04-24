@@ -6,30 +6,19 @@ package ThMod;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.Cirno.*;
-import ThMod.patches.AbstractCardEnum;
+import ThMod.characters.Cirno;
 import basemod.BaseMod;
-import basemod.ModLabeledToggleButton;
-import basemod.ModPanel;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.core.Settings.GameLanguage;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.dungeons.Exordium;
-import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.helpers.CardHelper;
-import com.megacrit.cardcrawl.helpers.FontHelper;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -485,20 +474,13 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new Flee());
 	}
 	
-	class Keywords {
+	static class Keywords {
 		
 		Keyword[] keywords;
 	}
 	
-	public static AbstractCard getRandomMarisaCard() {
-		AbstractCard card;
-		int rng = AbstractDungeon.miscRng.random(0, 100);
-		if (rng == 15) {
-			card = new GuidingStar();
-		} else {
-			card = AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
-		}
-		return card;
+	public static AbstractCard getRandomCirnoCard() {
+		return AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
 	}
 	
 }

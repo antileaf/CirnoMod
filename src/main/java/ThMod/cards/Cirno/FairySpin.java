@@ -6,6 +6,7 @@ import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.status.Dazed;
@@ -53,9 +54,11 @@ public class FairySpin extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.setMotivated(ThMod.isMotivated(this));
 		
-		int cnt = this.magicNumber;
-		if (this.isMotivated)
-			cnt += p.getPower("Motivation").amount;
+		int cnt = this.magicNumber, motivated_cnt = 0;
+		if (this.isMotivated) {
+			motivated_cnt = p.getPower("Motivation").amount;
+			cnt += motivated_cnt;
+		}
 		
 		for (int i = 0; i < cnt; i++) {
 			this.addToTop(new DamageRandomEnemyAction(
@@ -65,6 +68,9 @@ public class FairySpin extends AbstractCirnoCard {
 		
 		this.addToTop(new MakeTempCardInDrawPileAction(new Dazed(),
 				cnt, true, true)); // 一起洗
+		
+		if (this.isMotivated)
+			this.addToTop(new ReducePowerAction(p, p, "Motivation", motivated_cnt));
 	}
 	
 	public AbstractCard makeCopy() {

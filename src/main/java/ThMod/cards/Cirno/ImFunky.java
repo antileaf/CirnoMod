@@ -1,70 +1,56 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FleeingPower;
+import ThMod.powers.Cirno.FunkyPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.potions.SmokeBomb;
 
-public class Flee extends AbstractCirnoCard {
+public class ImFunky extends AbstractCirnoCard {
 	
-	public static final String ID = "Flee";
-	public static final String IMG_PATH = "img/cards/Flee.png";
+	public static final String ID = "ImFunky";
+	public static final String IMG_PATH = "img/cards/ImFunky.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 0;
-	private static final int ROUND_CNT = 4;
-	private static final int MOTIVATION_COST = -1;
+	private static final int COST = 3;
+	private static final int UPGRADED_COST = 2;
+	private static final int FUNKY_GAIN = 1;
 	
-	public Flee() {
+	public ImFunky() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.SKILL,
+			CardType.POWER,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.RARE,
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = this.baseMagicNumber = ROUND_CNT;
+		this.magicNumber = FUNKY_GAIN;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (!(new SmokeBomb().canUse())) {
-			// TODO: 输出一个额外信息，比如 "在 Boss 战中不能逃跑！"
-			
-			return;
-		}
-		
-		this.setMotivated(ThMod.isMotivated(this));
-		
-		int cnt = this.magicNumber;
-		if (this.isMotivated)
-			cnt -= p.getPower("Motivation").amount;
-		
-		this.addToBot(new ApplyPowerAction(p, p, new FleeingPower(cnt)));
+		this.addToTop(new ApplyPowerAction(p, p, new FunkyPower(this.magicNumber)));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new Flee();
+		return new ImFunky();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			this.isInnate = true;
+			upgradeBaseCost(UPGRADED_COST);
 			initializeDescription();
 		}
 	}

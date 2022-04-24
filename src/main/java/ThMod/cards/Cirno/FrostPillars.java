@@ -1,30 +1,31 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FleeingPower;
+import ThMod.powers.Cirno.FrostPillarsPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.potions.SmokeBomb;
 
-public class Flee extends AbstractCirnoCard {
+public class FrostPillars extends AbstractCirnoCard {
 	
-	public static final String ID = "Flee";
-	public static final String IMG_PATH = "img/cards/Flee.png";
+	public static final String ID = "FrostPillars";
+	public static final String IMG_PATH = "img/cards/FrostPillars.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 0;
-	private static final int ROUND_CNT = 4;
-	private static final int MOTIVATION_COST = -1;
+	private static final int COST = 2;
+	private static final int BLOCK = 12;
+	private static final int UPGRADE_PLUS_BLOCK = 4;
+	private static final int RETURN_DAMAGE = 8;
+	private static final int UPGRADE_RETURN_DAMAGE = 2;
 	
-	public Flee() {
+	public FrostPillars() {
 		super(
 			ID,
 			NAME,
@@ -37,34 +38,25 @@ public class Flee extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = this.baseMagicNumber = ROUND_CNT;
+		this.block = this.baseBlock = BLOCK;
+		this.magicNumber = this.baseMagicNumber = RETURN_DAMAGE;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (!(new SmokeBomb().canUse())) {
-			// TODO: 输出一个额外信息，比如 "在 Boss 战中不能逃跑！"
-			
-			return;
-		}
-		
-		this.setMotivated(ThMod.isMotivated(this));
-		
-		int cnt = this.magicNumber;
-		if (this.isMotivated)
-			cnt -= p.getPower("Motivation").amount;
-		
-		this.addToBot(new ApplyPowerAction(p, p, new FleeingPower(cnt)));
+		this.addToBot(new GainBlockAction(p, this.block));
+		this.addToBot(new ApplyPowerAction(p, p, new FrostPillarsPower(this.magicNumber)));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new Flee();
+		return new FrostPillars();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			this.isInnate = true;
+			upgradeBlock(UPGRADE_PLUS_BLOCK);
+			upgradeMagicNumber(UPGRADE_RETURN_DAMAGE);
 			initializeDescription();
 		}
 	}

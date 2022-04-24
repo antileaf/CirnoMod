@@ -89,23 +89,29 @@ public class Cirno extends CustomPlayer {
 	public ArrayList<String> getStartingDeck() { // 初始卡组
 		ArrayList<String> ret = new ArrayList<>();
 		
+		for (int i = 0; i < 5; i++) {
+			ret.add("IcicleShot");
+			ret.add("IceBarrier");
+		}
+		
 		ret.add("IcicleShot");
-//		retVal.add("Strike_MRS");
+		ret.add("ShowOff");
+		
 		return ret;
 	}
 	
 	public ArrayList<String> getStartingRelics() { // 初始遗物
-		ArrayList<String> retVal = new ArrayList<>();
-		retVal.add("CrystalWings");
+		ArrayList<String> ret = new ArrayList<>();
+		ret.add("CrystalWings");
 		UnlockTracker.markRelicAsSeen("CrystalWings");
-		return retVal;
+		return ret;
 	}
 	
-	private static final int STARTING_HP = 75;
-	private static final int MAX_HP = 75;
+	private static final int STARTING_HP = 69;
+	private static final int MAX_HP = 69;
 	private static final int STARTING_GOLD = 99;
 	private static final int HAND_SIZE = 5;
-	private static final int ASCENSION_MAX_HP_LOSS = 5;
+	private static final int ASCENSION_MAX_HP_LOSS = 4;
 	
 	public CharSelectInfo getLoadout() { // the rest of the character loadout so includes your character select screen info plus hp and starting gold
 		String title;
