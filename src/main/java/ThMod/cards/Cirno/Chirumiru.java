@@ -46,9 +46,9 @@ public class Chirumiru extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToTop(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
-		this.addToTop(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
-		this.addToTop(new DrawCardAction(this.magicNumber));
+		this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
+		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
+		this.addToBot(new DrawCardAction(this.magicNumber));
 	}
 	
 	public AbstractCard makeCopy() {

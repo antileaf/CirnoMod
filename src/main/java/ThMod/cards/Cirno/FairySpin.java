@@ -52,13 +52,9 @@ public class FairySpin extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.isMotivated(this));
+		this.setMotivated(ThMod.calcMotivated(this));
 		
-		int cnt = this.magicNumber, motivated_cnt = 0;
-		if (this.isMotivated) {
-			motivated_cnt = p.getPower("Motivation").amount;
-			cnt += motivated_cnt;
-		}
+		int cnt = this.magicNumber + this.motivatedCnt;
 		
 		for (int i = 0; i < cnt; i++) {
 			this.addToTop(new DamageRandomEnemyAction(
@@ -70,7 +66,7 @@ public class FairySpin extends AbstractCirnoCard {
 				cnt, true, true)); // 一起洗
 		
 		if (this.isMotivated)
-			this.addToTop(new ReducePowerAction(p, p, "Motivation", motivated_cnt));
+			this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivatedCnt));
 	}
 	
 	public AbstractCard makeCopy() {

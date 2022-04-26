@@ -54,9 +54,11 @@ public class PerfectFreeze extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.isMotivated(this));
+		this.setMotivated(ThMod.calcMotivated(this));
 		
 		if (this.isMotivated) {
+			this.calculateCardDamage(null);
+			
 			int cnt = this.magicNumber;
 			if (p.hasPower("ChillPower"))
 				cnt += p.getPower("ChillPower").amount;

@@ -9,6 +9,7 @@ public abstract class AbstractCirnoCard extends CustomCard {
 	public int motivationGain = 0;
 	public int chillGain = 0;
 	public boolean isMotivated = false;
+	public int motivatedCnt = 0;
 	
 	public AbstractCirnoCard(
 			String id,
@@ -34,7 +35,8 @@ public abstract class AbstractCirnoCard extends CustomCard {
 		);
 	}
 	
-	public void setMotivated(boolean isMotivated) {
-		this.isMotivated = isMotivated;
+	public void setMotivated(int motivatedCnt) {
+		this.isMotivated = motivatedCnt > 0;
+		this.motivatedCnt = motivatedCnt;
 	}
 }

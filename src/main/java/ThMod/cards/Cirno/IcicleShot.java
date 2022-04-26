@@ -5,6 +5,7 @@ import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -52,7 +53,7 @@ public class IcicleShot extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.isMotivated(this));
+		this.setMotivated(ThMod.calcMotivated(this));
 		int cnt = (this.isMotivated ? CNT : MOTIVATED_CNT);
 		
 		for (int i = 0; i < cnt; i++) {
@@ -60,6 +61,8 @@ public class IcicleShot extends AbstractCirnoCard {
 					new DamageInfo(p, this.damage, this.damageTypeForTurn),
 					AbstractGameAction.AttackEffect.SLASH_DIAGONAL, false));
 		}
+		
+		this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivationCost));
 	}
 	
 	public AbstractCard makeCopy() {

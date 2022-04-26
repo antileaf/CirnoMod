@@ -5,6 +5,7 @@ import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.FleeingPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -47,13 +48,17 @@ public class Flee extends AbstractCirnoCard {
 			return;
 		}
 		
-		this.setMotivated(ThMod.isMotivated(this));
+		this.setMotivated(ThMod.calcMotivated(this));
 		
-		int cnt = this.magicNumber;
+		int cnt = this.magicNumber - this.motivatedCnt;
+		
 		if (this.isMotivated)
-			cnt -= p.getPower("Motivation").amount;
+			this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivatedCnt));
 		
-		this.addToBot(new ApplyPowerAction(p, p, new FleeingPower(cnt)));
+		if (cnt <= 1) // 按照卡面描述，如果回合数小于等于 1 则立刻逃跑，不必等到回合结束
+			(new SmokeBomb()).use(m);
+		else
+			this.addToBot(new ApplyPowerAction(p, p, new FleeingPower(cnt)));
 	}
 	
 	public AbstractCard makeCopy() {

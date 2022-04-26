@@ -94,18 +94,21 @@ public class ThMod implements PostExhaustSubscriber,
 	private ArrayList<AbstractCard> cardsToAdd = new ArrayList<>();
 	//private ArrayList<AbstractRelic> relicsToAdd = new ArrayList<>();
 	
-	public static boolean isMotivated(AbstractCirnoCard card) {
+	public static int calcMotivated(AbstractCirnoCard card) { // 只计算 不修改
 		AbstractPlayer p = AbstractDungeon.player;
 		
 		if (!p.hasPower("Motivation"))
-			return false;
+			return 0;
 		
 		AbstractPower motivation = p.getPower("Motivation");
 		
 		if (motivation.amount <= 0)
-			return false;
+			return 0;
 		
-		return motivation.amount >= card.motivationCost;
+		if (card.motivationCost < 0)
+			return motivation.amount;
+		
+		return Integer.min(motivation.amount, card.motivationCost);
 	}
 
   /*
