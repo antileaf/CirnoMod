@@ -19,6 +19,7 @@ public class ShowOff extends AbstractCirnoCard {
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 0;
 	private static final int CHILL_GAIN = 1;
 	private static final int UPGRADE_PLUS_CHILL_GAIN = 1;
@@ -54,11 +55,11 @@ public class ShowOff extends AbstractCirnoCard {
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_CHILL_GAIN);
-			this.chillGain = this.damage;
-			upgradeBlock(UPGRADE_PLUS_MOTIVATION_GAIN);
-			this.motivationGain = this.block;
 			
+			this.chillGain += UPGRADE_PLUS_CHILL_GAIN;
+			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
+			
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

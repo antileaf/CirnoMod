@@ -2,6 +2,7 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
+import ThMod.powers.Cirno.ChillPower;
 import ThMod.powers.Cirno.MotivationPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -20,7 +21,7 @@ public class HighSpirit extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 0;
-	private static final int DRAW_CNT = 2;
+	private static final int DRAW_CNT = 1;
 	private static final int UPGRADE_PLUS_DRAW_CNT = 1;
 	private static final int MOTIVATION_GAIN = 1;
 	
@@ -37,16 +38,20 @@ public class HighSpirit extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.motivationGain = this.block = this.baseBlock = MOTIVATION_GAIN;
+		this.chillGain = this.motivationGain = MOTIVATION_GAIN;
 		this.magicNumber = this.baseMagicNumber = DRAW_CNT;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (p.hasPower("Motivation") && p.getPower("Motivation").amount > 0) {
+		if (p.hasPower("MotivationPower") && p.getPower("MotivationPower").amount > 0)
 			this.addToBot(new DrawCardAction(this.magicNumber));
-		}
 		else
 			this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
+		
+		if (p.hasPower("ChillPower") && p.getPower("ChillPower").amount > 0)
+			this.addToBot(new DrawCardAction(this.magicNumber));
+		else
+			this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
 	}
 	
 	public AbstractCard makeCopy() {

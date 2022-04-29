@@ -97,10 +97,10 @@ public class ThMod implements PostExhaustSubscriber,
 	public static int calcMotivated(AbstractCirnoCard card) { // 只计算 不修改
 		AbstractPlayer p = AbstractDungeon.player;
 		
-		if (!p.hasPower("Motivation"))
+		if (!p.hasPower("MotivationPower"))
 			return 0;
 		
-		AbstractPower motivation = p.getPower("Motivation");
+		AbstractPower motivation = p.getPower("MotivationPower");
 		
 		if (motivation.amount <= 0)
 			return 0;
@@ -468,13 +468,18 @@ public class ThMod implements PostExhaustSubscriber,
 	private void loadCardsToAdd() {
 		cardsToAdd.clear();
 		
-		// cardsToAdd.add(new Strike_MRS());
-		cardsToAdd.add(new IceGrain());
-		cardsToAdd.add(new IceBarrier());
-		cardsToAdd.add(new IcicleShot());
 		cardsToAdd.add(new Chirumiru());
 		cardsToAdd.add(new FairySpin());
 		cardsToAdd.add(new Flee());
+		cardsToAdd.add(new FrostPillars());
+		cardsToAdd.add(new HighSpirit());
+		cardsToAdd.add(new IceBarrier());
+		cardsToAdd.add(new IceGrain());
+		cardsToAdd.add(new IcicleShot());
+		cardsToAdd.add(new ImFunky());
+		cardsToAdd.add(new PerfectFreeze());
+		cardsToAdd.add(new ShowOff());
+		cardsToAdd.add(new ThreeFairiesHelp());
 	}
 	
 	static class Keywords {

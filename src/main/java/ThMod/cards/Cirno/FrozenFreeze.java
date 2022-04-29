@@ -2,57 +2,56 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FunkyPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
+import com.megacrit.cardcrawl.actions.common.RemoveAllBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class ImFunky extends AbstractCirnoCard {
+public class FrozenFreeze extends AbstractCirnoCard {
 	
-	public static final String ID = "ImFunky";
-	public static final String IMG_PATH = "img/cards/ImFunky.png";
+	public static final String ID = "FrozenFreeze";
+	public static final String IMG_PATH = "img/cards/FrozenFreeze.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 3;
-	private static final int UPGRADED_COST = 2;
-	private static final int FUNKY_GAIN = 1;
+	private static final int COST = 1;
+	private static final int BLOCK = 10;
+	private static final int UPGRADE_PLUS_BLOCK = 3;
 	
-	public ImFunky() {
+	public FrozenFreeze() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.POWER,
+			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.RARE,
+			CardRarity.COMMON,
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = FUNKY_GAIN;
+		this.block = this.baseBlock = BLOCK;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new FunkyPower(this.magicNumber)));
+		this.addToBot(new RemoveAllBlockAction(p, p));
+		this.addToBot(new GainBlockAction(p, this.block));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new ImFunky();
+		return new FrozenFreeze();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			upgradeBaseCost(UPGRADED_COST);
-			this.rawDescription = UPGRADE_DESCRIPTION;
+			upgradeBlock(UPGRADE_PLUS_BLOCK);
 			initializeDescription();
 		}
 	}

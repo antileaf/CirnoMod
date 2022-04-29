@@ -1,9 +1,10 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
+import ThMod.powers.Cirno.FrostMeteorPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,27 +13,20 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class IcicleShot extends AbstractCirnoCard {
+public class FrostMeteor extends AbstractCirnoCard {
 	
-	public static final String ID = "IcicleShot";
-	public static final String IMG_PATH = "img/cards/IcicleShot.png";
+	public static final String ID = "FrostMeteor";
+	public static final String IMG_PATH = "img/cards/FrostMeteor.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 2;
+	private static final int COST = 1;
+	private static final int ATTACK_DMG = 8;
+	private static final int UPGRADE_PLUS_ATTACK_DMG = 3;
+	private static final int CNT = 1;
 	
-	private static final int ATTACK_DMG = 7;
-	
-	private static final int UPGRADE_PLUS_DMG = 2;
-	
-	private static final int CNT = 2;
-	
-	private static final int MOTIVATION_COST = 1;
-	
-	private static final int MOTIVATED_CNT = 3;
-	
-	public IcicleShot() {
+	public FrostMeteor() {
 		super(
 			ID,
 			NAME,
@@ -41,37 +35,31 @@ public class IcicleShot extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.BASIC,
+			CardRarity.UNCOMMON,
 			CardTarget.ENEMY
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
 		this.magicNumber = this.baseMagicNumber = CNT;
-		this.motivationCost = MOTIVATION_COST;
-//		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
-		int cnt = (this.isMotivated ? CNT : MOTIVATED_CNT);
+		this.addToBot(new DamageAction(m,
+				new DamageInfo(p, this.damage, this.damageTypeForTurn),
+				AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 		
-		for (int i = 0; i < cnt; i++) {
-			this.addToBot(new DamageAction(m,
-					new DamageInfo(p, this.damage, this.damageTypeForTurn),
-					AbstractGameAction.AttackEffect.SLASH_DIAGONAL, false));
-		}
-		
-//		this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivationCost));
+		this.addToBot(new ApplyPowerAction(p, p, new FrostMeteorPower(this.magicNumber)));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new IcicleShot();
+		return new FrostMeteor();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
+			
+			upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
 			initializeDescription();
 		}
 	}

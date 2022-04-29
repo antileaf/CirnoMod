@@ -10,33 +10,33 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class ImFunky extends AbstractCirnoCard {
+public class SecretSmoothie extends AbstractCirnoCard {
 	
-	public static final String ID = "ImFunky";
-	public static final String IMG_PATH = "img/cards/ImFunky.png";
+	public static final String ID = "SecretSmoothie";
+	public static final String IMG_PATH = "img/cards/SecretSmoothie.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 3;
-	private static final int UPGRADED_COST = 2;
-	private static final int FUNKY_GAIN = 1;
+	private static final int COST = 1;
+	private static final int CNT = 1;
 	
-	public ImFunky() {
+	public SecretSmoothie() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.POWER,
+			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.RARE,
+			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = FUNKY_GAIN;
+		this.tags.add(CardTags.HEALING);
+		this.magicNumber = this.baseMagicNumber = CNT;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -44,14 +44,14 @@ public class ImFunky extends AbstractCirnoCard {
 	}
 	
 	public AbstractCard makeCopy() {
-		return new ImFunky();
+		return new SecretSmoothie();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			upgradeBaseCost(UPGRADED_COST);
+			this.retain = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
