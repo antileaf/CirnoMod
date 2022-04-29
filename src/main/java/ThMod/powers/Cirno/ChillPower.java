@@ -24,7 +24,7 @@ public class ChillPower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = amount;
+		this.amount = (this.owner.hasPower("CirnoOverloadPower") ? 0 : amount);
 		
 		this.type = AbstractPower.PowerType.BUFF;
 		updateDescription();
@@ -33,6 +33,9 @@ public class ChillPower extends AbstractPower {
 	
 	@Override
 	public void stackPower(int stackAmount) {
+		if (this.owner.hasPower("CirnoOverloadPower"))
+			return;
+		
 		// 大号蝴蝶结：每当获得寒冷时获得 1 点干劲
 		if (stackAmount > 0 && AbstractDungeon.player.hasRelic("BigBowknot")) {
 			// TODO: Flash

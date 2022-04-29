@@ -5,7 +5,6 @@ import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.FleeingPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -21,6 +20,7 @@ public class Flee extends AbstractCirnoCard {
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 0;
 	private static final int ROUND_CNT = 4;
 	private static final int MOTIVATION_COST = -1;
@@ -39,6 +39,7 @@ public class Flee extends AbstractCirnoCard {
 		);
 		
 		this.magicNumber = this.baseMagicNumber = ROUND_CNT;
+		this.motivationCost = MOTIVATION_COST;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -52,8 +53,8 @@ public class Flee extends AbstractCirnoCard {
 		
 		int cnt = this.magicNumber - this.motivatedCnt;
 		
-		if (this.isMotivated)
-			this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivatedCnt));
+//		if (this.isMotivated)
+//			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivatedCnt));
 		
 		if (cnt <= 1) // 按照卡面描述，如果回合数小于等于 1 则立刻逃跑，不必等到回合结束
 			(new SmokeBomb()).use(m);
@@ -70,6 +71,7 @@ public class Flee extends AbstractCirnoCard {
 			upgradeName();
 			
 			this.isInnate = true;
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

@@ -6,7 +6,6 @@ import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -23,6 +22,7 @@ public class PerfectFreeze extends AbstractCirnoCard {
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 0;
 	
 	private static final int ATTACK_DMG = 0;
@@ -72,7 +72,7 @@ public class PerfectFreeze extends AbstractCirnoCard {
 				}
 			}
 			
-			this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivationCost));
+//			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivationCost));
 		}
 	}
 	
@@ -86,6 +86,8 @@ public class PerfectFreeze extends AbstractCirnoCard {
 			upgradeDamage(UPGRADE_PLUS_DMG);
 			upgradeMagicNumber(UPGRADE_PLUS_CNT);
 			this.motivationCost = UPGRADED_MOTIVATION_COST;
+			
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

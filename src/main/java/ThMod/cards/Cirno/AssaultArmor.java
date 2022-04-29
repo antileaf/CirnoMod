@@ -2,57 +2,63 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FunkyPower;
+import ThMod.powers.Cirno.CirnoOverloadPower;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class ImFunky extends AbstractCirnoCard {
+public class AssaultArmor extends AbstractCirnoCard {
 	
-	public static final String ID = "ImFunky";
-	public static final String IMG_PATH = "img/cards/ImFunky.png";
+	public static final String ID = "AssaultArmor";
+	public static final String IMG_PATH = "img/cards/AssaultArmor.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 3;
-	private static final int UPGRADED_COST = 2;
-	private static final int FUNKY_GAIN = 1;
+	private static final int COST = 2;
 	
-	public ImFunky() {
+	private static final int ATTACK_DMG = 30;
+	private static final int UPGRADE_PLUS_DMG = 10;
+	
+	public AssaultArmor() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.POWER,
+			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.RARE,
-			CardTarget.SELF
+			CardRarity.UNCOMMON,
+			CardTarget.ALL_ENEMY
 		);
 		
-		this.magicNumber = FUNKY_GAIN;
+		this.damage = this.baseDamage = ATTACK_DMG;
+		this.isMultiDamage = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new FunkyPower(this.magicNumber)));
+		this.calculateCardDamage(null);
+		
+		this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn,
+				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
+		
+		this.addToBot(new ApplyPowerAction(p, p, new CirnoOverloadPower()));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new ImFunky();
+		return new AssaultArmor();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
-			
-			upgradeBaseCost(UPGRADED_COST);
-			this.rawDescription = UPGRADE_DESCRIPTION;
+			upgradeDamage(UPGRADE_PLUS_DMG);
 			initializeDescription();
 		}
 	}

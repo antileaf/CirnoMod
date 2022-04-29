@@ -6,7 +6,6 @@ import ThMod.cards.CirnoChoiceCards.LunaChildsHelp;
 import ThMod.cards.CirnoChoiceCards.StarSapphiresHelp;
 import ThMod.cards.CirnoChoiceCards.SunnyMilksHelp;
 import ThMod.patches.AbstractCardEnum;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -18,7 +17,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.ArrayList;
 
-class ThreeFairiesHelp extends AbstractCirnoCard {
+public class ThreeFairiesHelp extends AbstractCirnoCard {
 	
 	public static final String ID = "ThreeFairiesHelp";
 	public static final String IMG_PATH = "img/cards/ThreeFairiesHelp.png";
@@ -26,6 +25,7 @@ class ThreeFairiesHelp extends AbstractCirnoCard {
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
 	private static final int MOTIVATION_COST = 1;
 	
@@ -67,8 +67,8 @@ class ThreeFairiesHelp extends AbstractCirnoCard {
 			this.addToBot(new UseCardAction(card));
 		}
 		
-		if (this.isMotivated)
-			this.addToTop(new ReducePowerAction(p, p, "Motivation", this.motivationCost));
+//		if (this.isMotivated)
+//			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivationCost));
 	}
 	
 	@Override
@@ -80,6 +80,7 @@ class ThreeFairiesHelp extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			upgradeName();
 			
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}
