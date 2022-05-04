@@ -11,23 +11,22 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class IceMachineGun extends AbstractCirnoCard {
+public class GreatCrusher extends AbstractCirnoCard {
 	
-	public static final String ID = "IceMachineGun";
-	public static final String IMG_PATH = "img/cards/IceMachineGun.png";
+	public static final String ID = "GreatCrusher";
+	public static final String IMG_PATH = "img/cards/GreatCrusher.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 0;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+	private static final int COST = 3;
 	
-	private static final int ATTACK_DMG = 0;
+	private static final int ATTACK_DMG = 1;
+	private static final int CNT = 6;
+	private static final int UPGRADE_PLUS_CNT = 1;
 	
-	private static final int UPGRADE_PLUS_DMG = 1;
-	
-	private static final int CNT = 4;
-	
-	public IceMachineGun() {
+	public GreatCrusher() {
 		super(
 			ID,
 			NAME,
@@ -36,33 +35,30 @@ public class IceMachineGun extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.RARE,
 			CardTarget.ALL_ENEMY
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
 		this.magicNumber = this.baseMagicNumber = CNT;
-//		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
-	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		for (int i = 0; i < this.magicNumber; i++) {
+		for (int i = 1; i <= this.magicNumber; i++)
 			this.addToBot(new DamageRandomEnemyAction(
-					new DamageInfo(p, this.damage, this.damageTypeForTurn),
-					AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-		}
+					new DamageInfo(p, i, this.damageTypeForTurn),
+					AbstractGameAction.AttackEffect.SLASH_HEAVY));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new IceMachineGun();
+		return new GreatCrusher();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
+			
+			upgradeMagicNumber(UPGRADE_PLUS_CNT);
 			initializeDescription();
 		}
 	}

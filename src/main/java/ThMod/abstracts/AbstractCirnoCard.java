@@ -39,4 +39,17 @@ public abstract class AbstractCirnoCard extends CustomCard {
 		this.isMotivated = motivatedCnt > 0;
 		this.motivatedCnt = motivatedCnt;
 	}
+	
+	@Override
+	public AbstractCard makeStatEquivalentCopy() {
+		AbstractCirnoCard card = (AbstractCirnoCard) super.makeStatEquivalentCopy();
+		
+		card.motivationCost = this.motivationCost;
+		card.motivationGain = this.motivationGain;
+		card.chillGain = this.chillGain;
+		card.isMotivated = this.isMotivated;
+		card.motivatedCnt = this.motivatedCnt;
+		
+		return card;
+	}
 }

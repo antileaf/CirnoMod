@@ -11,23 +11,22 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class IceMachineGun extends AbstractCirnoCard {
+public class ButterflyFairysHelp extends AbstractCirnoCard {
 	
-	public static final String ID = "IceMachineGun";
-	public static final String IMG_PATH = "img/cards/IceMachineGun.png";
+	public static final String ID = "ButterflyFairysHelp";
+	public static final String IMG_PATH = "img/cards/ButterflyFairysHelp.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 0;
 	
-	private static final int ATTACK_DMG = 0;
+	private static final int ATTACK_DMG = 1;
 	
-	private static final int UPGRADE_PLUS_DMG = 1;
+	private static final int CNT = 6;
+	private static final int UPGRADE_PLUS_CNT = 2;
 	
-	private static final int CNT = 4;
-	
-	public IceMachineGun() {
+	public ButterflyFairysHelp() {
 		super(
 			ID,
 			NAME,
@@ -36,12 +35,13 @@ public class IceMachineGun extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.UNCOMMON,
 			CardTarget.ALL_ENEMY
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
 		this.magicNumber = this.baseMagicNumber = CNT;
+		this.exhaust = true;
 //		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
@@ -55,14 +55,15 @@ public class IceMachineGun extends AbstractCirnoCard {
 	}
 	
 	public AbstractCard makeCopy() {
-		return new IceMachineGun();
+		return new ButterflyFairysHelp();
 	}
 	
 	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
+			
+			upgradeMagicNumber(UPGRADE_PLUS_CNT);
 			initializeDescription();
 		}
 	}

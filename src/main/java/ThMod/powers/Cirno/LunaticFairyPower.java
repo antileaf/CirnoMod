@@ -1,30 +1,33 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class CirnoOverloadPower extends AbstractPower {
+public class LunaticFairyPower extends AbstractPower {
 	
-	public static final String POWER_ID = "CirnoOverloadPower";
+	public static final String POWER_ID = "LunaticFairyPower";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
 	public static final String[] DESCRIPTIONS =
 			powerStrings.DESCRIPTIONS;
 	
-	public CirnoOverloadPower() {
+	public LunaticFairyPower(int amount) {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = -1;
+		this.amount = amount;
 		
-		this.type = PowerType.BUFF; // 不应当被防止或去除
+		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/CirnoOverloadPower.png");
+		this.img = new Texture("img/powers/LunaticFairyPower.png");
 	}
 	
 	@Override
@@ -42,7 +45,19 @@ public class CirnoOverloadPower extends AbstractPower {
 	}
 	
 	@Override
-	public void atEndOfRound() {
-		this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+	public void atStartOfTurn() {
+		this.addToBot(new GainEnergyAction(this.amount));
+	}
+	
+	@Override
+	public void onCardDraw(AbstractCard card) {
+		this.addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
+		
+		if (card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL
+			|| card.type == AbstractCard.CardType.POWER) {
+			for (int i = 0; i < this.amount; i++)
+				this.addToBot(new MakeTempCardInHandAction(
+						AbstractDungeon.returnTrulyRandomCardInCombat(card.type)));
+		}
 	}
 }

@@ -3,31 +3,31 @@ package ThMod.cards.Cirno;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class IceMachineGun extends AbstractCirnoCard {
+public class IceSpear extends AbstractCirnoCard {
 	
-	public static final String ID = "IceMachineGun";
-	public static final String IMG_PATH = "img/cards/IceMachineGun.png";
+	public static final String ID = "IceSpear";
+	public static final String IMG_PATH = "img/cards/IceSpear.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 0;
+	private static final int COST = 1;
 	
-	private static final int ATTACK_DMG = 0;
+	private static final int ATTACK_DMG = 7;
+	private static final int AMPLIFIED_ATTACK_DMG = 11;
+	private static final int UPGRADE_PLUS_DMG = 3;
+	private static final int UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG = 4;
 	
-	private static final int UPGRADE_PLUS_DMG = 1;
-	
-	private static final int CNT = 4;
-	
-	public IceMachineGun() {
+	public IceSpear() {
 		super(
 			ID,
 			NAME,
@@ -37,32 +37,37 @@ public class IceMachineGun extends AbstractCirnoCard {
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.COMMON,
-			CardTarget.ALL_ENEMY
+			CardTarget.ENEMY
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
-		this.magicNumber = this.baseMagicNumber = CNT;
-//		this.damageType = DamageInfo.DamageType.NORMAL;
+		this.magicNumber = this.baseMagicNumber = AMPLIFIED_ATTACK_DMG;
 	}
 	
 	@Override
+	public void applyPowers() {
+		// TODO: 正确显示额外伤害
+	}
+	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		for (int i = 0; i < this.magicNumber; i++) {
-			this.addToBot(new DamageRandomEnemyAction(
-					new DamageInfo(p, this.damage, this.damageTypeForTurn),
-					AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-		}
+		boolean has_debuff = false;
+		for (AbstractPower power : m.powers)
+			has_debuff |= (power.type == AbstractPower.PowerType.DEBUFF);
+		
+		this.addToBot(new DamageAction(m, new DamageInfo(p, (has_debuff ? this.magicNumber : this.damage),
+				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new IceMachineGun();
+		return new IceSpear();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
+			
 			upgradeDamage(UPGRADE_PLUS_DMG);
+			upgradeMagicNumber(UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG);
 			initializeDescription();
 		}
 	}
