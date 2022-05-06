@@ -6,7 +6,9 @@ package ThMod;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.Cirno.*;
+import ThMod.cards.CirnoChoiceCards.*;
 import ThMod.characters.Cirno;
+import ThMod.relics.CrystalWings;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -29,8 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static ThMod.patches.AbstractCardEnum.CIRNO_CHOICE_COLOR;
-import static ThMod.patches.AbstractCardEnum.CIRNO_COLOR;
+import static ThMod.patches.AbstractCardEnum.*;
 import static ThMod.patches.ThModClassEnum.CIRNO;
 
 @SuppressWarnings("Duplicates")
@@ -280,13 +281,17 @@ public class ThMod implements PostExhaustSubscriber,
 	}
 	
 	public void receiveEditRelics() {
-//		logger.info("Begin editing relics.");
+		logger.info("Begin editing relics.");
+		BaseMod.addRelicToCustomPool(
+				new CrystalWings(),
+				CIRNO_COLOR
+		);
 //		BaseMod.addRelicToCustomPool(
 //				new BigShroomBag(),
 //				MARISA_COLOR
 //		);
 		
-//		logger.info("Relics editing finished.");
+		logger.info("Relics editing finished.");
 	}
 	
 	public void receiveEditCards() {
@@ -541,6 +546,14 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new TengusCamera());
 		cardsToAdd.add(new ThreeFairiesHelp());
 		cardsToAdd.add(new WishOfBreeze());
+		
+		cardsToAdd.add(new RedTextbook());
+		cardsToAdd.add(new YellowTextbook());
+		cardsToAdd.add(new BlueTextbook());
+		
+		cardsToAdd.add(new SunnyMilksHelp());
+		cardsToAdd.add(new LunaChildsHelp());
+		cardsToAdd.add(new StarSapphiresHelp());
 	}
 	
 	static class Keywords {

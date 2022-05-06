@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 public class MinusK extends AbstractCirnoCard {
 	
-	public static final String ID = "ColdBeer";
-	public static final String IMG_PATH = "img/cards/ColdBeer.png";
+	public static final String ID = "MinusK";
+	public static final String IMG_PATH = "img/cards/MinusK.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -31,7 +31,7 @@ public class MinusK extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		

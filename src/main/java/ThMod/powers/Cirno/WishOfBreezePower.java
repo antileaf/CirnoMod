@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class WishOfBreezePower extends AbstractPower {
 	
-	public static final String POWER_ID = "WishOfBreeze";
+	public static final String POWER_ID = "WishOfBreezePower";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -27,52 +27,46 @@ public class WishOfBreezePower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/WishOfBreeze.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/WishOfBreezePower.png");
 	}
 	
 	@Override
-	public void updateDescription() { // TODO: 还没太懂这里的逻辑，后面看一下
-//		if (this.cnt > 0) {
-//			this.description =
-//					(
-//							DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]
-//									+ "," + DESCRIPTIONS[2] + (int) Math.pow(2, this.cnt) + DESCRIPTIONS[3]
-//					);
-//		} else {
-//			this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + ".");
-//		}
-		this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2]);
+	public void updateDescription() {
+		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}
 	
 	@Override
-	public void atEndOfRound() {
-		AbstractPlayer p = AbstractDungeon.player;
-		
-		if (p.discardPile.isEmpty())
-			return;
-		
-		int cnt = Integer.min(this.amount, p.discardPile.size());
-		
-		ArrayList<Integer> array = new ArrayList<>();
-		for (int i = 0; i < cnt; i++) {
-			int x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
+	public void atEndOfTurn(boolean isPlayer) {
+		if (isPlayer) {
+			AbstractPlayer p = AbstractDungeon.player;
 			
-			while (array.contains(x))
-				x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
+			if (p.discardPile.isEmpty())
+				return;
 			
-			array.add(x);
+			int cnt = Integer.min(this.amount, p.discardPile.size());
+			
+			ArrayList<Integer> array = new ArrayList<>();
+			for (int i = 0; i < cnt; i++) {
+				int x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
+				
+				while (array.contains(x))
+					x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
+				
+				array.add(x);
+			}
+			
+			ArrayList<AbstractCard> cards = new ArrayList<>();
+			for (int i : array)
+				cards.add(p.discardPile.group.get(i));
+			
+			for (AbstractCard card : cards) {
+				p.discardPile.removeCard(card);
+				p.hand.addToHand(card);
+				card.lighten(false);
+			}
+			
+			p.hand.refreshHandLayout();
 		}
-		
-		ArrayList<AbstractCard> cards = new ArrayList<>();
-		for (int i : array)
-			cards.add(p.discardPile.group.get(i));
-		
-		for (AbstractCard card : cards) {
-			p.discardPile.removeCard(card);
-			p.hand.addToHand(card);
-			card.lighten(false);
-		}
-		
-		p.hand.refreshHandLayout();
 	}
 }

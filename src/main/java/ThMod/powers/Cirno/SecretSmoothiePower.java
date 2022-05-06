@@ -21,35 +21,29 @@ public class SecretSmoothiePower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = 1;
+		this.amount = amount;
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/SecretSmoothiePower.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/SecretSmoothiePower.png");
 	}
 	
 	@Override
-	public void updateDescription() { // TODO: 还没太懂这里的逻辑，后面看一下
-//		if (this.cnt > 0) {
-//			this.description =
-//					(
-//							DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]
-//									+ "," + DESCRIPTIONS[2] + (int) Math.pow(2, this.cnt) + DESCRIPTIONS[3]
-//					);
-//		} else {
-//			this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + ".");
-//		}
-		this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2]);
+	public void updateDescription() {
+		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}
 	
 	@Override
-	public void atEndOfRound() {
-		if (this.owner.hasPower("ChillPower")) {
-			int chill = this.owner.getPower("ChillPower").amount;
-			if (chill > 0)
-				this.addToBot(new HealAction(this.owner, this.owner, this.amount * chill));
+	public void atEndOfTurn(boolean isPlayer) {
+		if (isPlayer) {
+			if (this.owner.hasPower("ChillPower")) {
+				int chill = this.owner.getPower("ChillPower").amount;
+				if (chill > 0)
+					this.addToBot(new HealAction(this.owner, this.owner, this.amount * chill));
+			}
+			
+			this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
 		}
-		
-		this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
 	}
 }

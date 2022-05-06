@@ -36,7 +36,7 @@ public class ImFunky extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = FUNKY_GAIN;
+		this.magicNumber = this.baseMagicNumber = FUNKY_GAIN;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

@@ -26,7 +26,8 @@ public class FridgePower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/FridgePower.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/FridgePower.png");
 	}
 	
 	@Override

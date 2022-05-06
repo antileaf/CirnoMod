@@ -11,8 +11,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class IceFishing extends AbstractCirnoCard {
 	
-	public static final String ID = "IceBarrier";
-	public static final String IMG_PATH = "img/cards/IceBarrier.png";
+	public static final String ID = "IceFishing";
+	public static final String IMG_PATH = "img/cards/IceFishing.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

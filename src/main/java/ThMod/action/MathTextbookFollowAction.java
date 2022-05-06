@@ -16,7 +16,7 @@ public class MathTextbookFollowAction extends AbstractGameAction {
 	}
 	
 	public void update() {
-		if (this.isDone) {
+		if (!this.isDone) {
 			for (AbstractCard card : DrawCardAction.drawnCards) {
 				if (card.type != cardType) {
 					AbstractDungeon.player.hand.moveToDiscardPile(card);
@@ -24,6 +24,8 @@ public class MathTextbookFollowAction extends AbstractGameAction {
 					GameActionManager.incrementDiscard(false);
 				}
 			}
+			
+			this.isDone = true;
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class MathTextbook extends CustomCard {
 		super(
 			id,
 			name,
-			img,
+			"img/cards/Cirno/Th123Cirno.png",
 			COST,
 			rawDescription,
 			CardType.POWER,

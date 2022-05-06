@@ -26,7 +26,8 @@ public class FrozenSpringMotivationPower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/FrozenSpringMotivationPower.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/FrozenSpringMotivationPower.png");
 	}
 	
 	@Override

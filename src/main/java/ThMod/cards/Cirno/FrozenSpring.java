@@ -36,7 +36,8 @@ public class FrozenSpring extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.heal = this.baseHeal = 1;
+		this.magicNumber = this.baseMagicNumber = 1;
+		this.tags.add(CardTags.HEALING);
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

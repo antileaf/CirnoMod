@@ -2,7 +2,7 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FunkyPower;
+import ThMod.powers.Cirno.SecretSmoothiePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -37,10 +37,11 @@ public class SecretSmoothie extends AbstractCirnoCard {
 		
 		this.tags.add(CardTags.HEALING);
 		this.magicNumber = this.baseMagicNumber = CNT;
+		this.exhaust = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new FunkyPower(this.magicNumber)));
+		this.addToBot(new ApplyPowerAction(p, p, new SecretSmoothiePower(this.magicNumber)));
 	}
 	
 	public AbstractCard makeCopy() {

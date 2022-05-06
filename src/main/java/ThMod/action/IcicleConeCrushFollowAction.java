@@ -17,17 +17,19 @@ public class IcicleConeCrushFollowAction extends AbstractGameAction {
 	AbstractMonster target;
 	int damage, block, chill, motivation;
 	
-	public IcicleConeCrushFollowAction(int damage, int block, int chill, int motivation) {
+	public IcicleConeCrushFollowAction(AbstractMonster target, int damage, int block, int chill, int motivation) {
 		this.actionType = ActionType.CARD_MANIPULATION;
 		
 		this.damage = damage;
 		this.block = block;
 		this.chill = chill;
 		this.motivation = motivation;
+		
+		this.target = target;
 	}
 	
 	public void update() {
-		if (this.isDone) {
+		if (!this.isDone) {
 			AbstractPlayer p = AbstractDungeon.player;
 			
 			for (AbstractCard card : DrawCardAction.drawnCards) {
@@ -43,6 +45,8 @@ public class IcicleConeCrushFollowAction extends AbstractGameAction {
 					this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivation)));
 				}
 			}
+			
+			this.isDone = true;
 		}
 	}
 }

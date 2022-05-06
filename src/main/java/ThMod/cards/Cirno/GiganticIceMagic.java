@@ -46,7 +46,10 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 	public void applyPowers() {
 		super.applyPowers();
 		
-		int cnt = AbstractDungeon.actionManager.cardsPlayedThisTurn.size();
+		int cnt = 0;
+		for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn)
+			if (!c.cardID.equals(this.cardID))
+				cnt++;
 		this.magicNumber = cnt;
 		this.damage = this.baseDamage - 12 * cnt;
 		

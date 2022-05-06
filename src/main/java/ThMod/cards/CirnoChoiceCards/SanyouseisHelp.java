@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.unique.DiscoveryAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -21,7 +22,7 @@ public class SanyouseisHelp extends CustomCard {
 		super(
 			id,
 			name,
-			img,
+			"img/cards/Cirno/Th123Cirno.png",
 			COST,
 			rawDescription,
 			CardType.POWER,
@@ -39,7 +40,7 @@ public class SanyouseisHelp extends CustomCard {
 			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		else {
-			this.addToBot(new DiscoveryAction(this.cardType, 3));
+			this.addToBot(new DiscoveryAction(this.cardType, 1));
 		}
 	}
 	
@@ -51,6 +52,7 @@ public class SanyouseisHelp extends CustomCard {
 		if (!this.upgraded) {
 			upgradeName();
 			
+			this.rawDescription = CardCrawlGame.languagePack.getCardStrings(this.cardID).UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

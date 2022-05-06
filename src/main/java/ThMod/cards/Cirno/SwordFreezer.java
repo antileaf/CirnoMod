@@ -56,11 +56,13 @@ public class SwordFreezer extends AbstractCirnoCard {
 				skill++;
 		}
 		
-		this.addToBot(new ApplyPowerAction(p, p,
-				new VigorPower(p, this.magicNumber * attack)));
+		if (this.magicNumber * attack > 0)
+			this.addToBot(new ApplyPowerAction(p, p,
+					new VigorPower(p, this.magicNumber * attack)));
 		
 		if (this.isMotivated)
-			this.addToBot(new GainBlockAction(p, this.block * skill));
+			for (int i = 0; i < skill; i++)
+				this.addToBot(new GainBlockAction(p, this.block));
 	}
 	
 	public AbstractCard makeCopy() {

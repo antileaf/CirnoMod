@@ -34,7 +34,7 @@ public class AssaultArmor extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
+			CardRarity.RARE,
 			CardTarget.ALL_ENEMY
 		);
 		

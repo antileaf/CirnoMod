@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
-import com.esotericsoftware.spine.AnimationState;
 import com.megacrit.cardcrawl.actions.AbstractGameAction.AttackEffect;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -68,7 +67,7 @@ public class Cirno extends CustomPlayer {
 		logger.info("init Marisa");
 		
 		initializeClass(
-				null,
+				"img/char/Cirno/cirno.png",
 				CIRNO_SHOULDER_2, // required call to load textures and setup energy/loadout
 				CIRNO_SHOULDER_1,
 				CIRNO_CORPSE,
@@ -92,7 +91,7 @@ public class Cirno extends CustomPlayer {
 		ArrayList<String> ret = new ArrayList<>();
 		
 		for (int i = 0; i < 5; i++) {
-			ret.add("IcicleShot");
+			ret.add("IceGrain");
 			ret.add("IceBarrier");
 		}
 		
@@ -120,10 +119,10 @@ public class Cirno extends CustomPlayer {
 		String flavor;
 		if (Settings.language == Settings.GameLanguage.ZHS || Settings.language == Settings.GameLanguage.ZHT) {
 			title = "琪露诺";
-			flavor = "笨蛋";
+			flavor = "居住在雾之湖的冰之妖精。笨蛋。";
 		} else {
 			title = "Cirno";
-			flavor = "Baka";
+			flavor = "Baka!";
 		}
 		return new CharSelectInfo(
 				title,
@@ -153,7 +152,7 @@ public class Cirno extends CustomPlayer {
 		if (Settings.language == GameLanguage.ZHS) {
 			title = "冰之小妖精";
 		} else {
-			title = "Ice Fairy";
+			title = "Little Ice Fairy";
 		}
 		return title;
 	}
@@ -237,12 +236,12 @@ public class Cirno extends CustomPlayer {
 	}
 	
 	public void damage(DamageInfo info) {
-		if ((info.owner != null) && (info.type != DamageInfo.DamageType.THORNS)
-				&& (info.output - this.currentBlock > 0)) {
-			AnimationState.TrackEntry e = this.state.setAnimation(0, "Hit", false);
-			this.state.addAnimation(0, "Idle", true, 0.0F);
-			e.setTimeScale(1.0F);
-		}
+//		if ((info.owner != null) && (info.type != DamageInfo.DamageType.THORNS)
+//				&& (info.output - this.currentBlock > 0)) {
+//			AnimationState.TrackEntry e = this.state.setAnimation(0, "Hit", false);
+//			this.state.addAnimation(0, "Idle", true, 0.0F);
+//			e.setTimeScale(1.0F);
+//		}
 		super.damage(info);
 	}
 	

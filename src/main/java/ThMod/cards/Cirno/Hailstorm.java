@@ -34,7 +34,7 @@ public class Hailstorm extends AbstractCirnoCard {
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.UNCOMMON,
-			CardTarget.ENEMY
+			CardTarget.ALL_ENEMY
 		);
 		
 		this.magicNumber = this.baseMagicNumber = MULTIPLIER;

@@ -32,7 +32,7 @@ public class Flee extends AbstractCirnoCard {
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.SKILL,
+			CardType.POWER,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.COMMON,
 			CardTarget.SELF

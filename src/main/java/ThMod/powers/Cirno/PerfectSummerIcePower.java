@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class PerfectSummerIcePower extends AbstractPower {
 	
-	public static final String POWER_ID = "LunaticFairyPower";
+	public static final String POWER_ID = "PerfectSummerIcePower";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -28,7 +28,8 @@ public class PerfectSummerIcePower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/LunaticFairyPower.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/PerfectSummerIcePower.png");
 	}
 	
 	@Override
@@ -38,17 +39,8 @@ public class PerfectSummerIcePower extends AbstractPower {
 	}
 	
 	@Override
-	public void updateDescription() { // TODO: 还没太懂这里的逻辑，后面看一下
-//		if (this.cnt > 0) {
-//			this.description =
-//					(
-//							DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]
-//									+ "," + DESCRIPTIONS[2] + (int) Math.pow(2, this.cnt) + DESCRIPTIONS[3]
-//					);
-//		} else {
-//			this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + ".");
-//		}
-		this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + this.amount + DESCRIPTIONS[2]);
+	public void updateDescription() {
+		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}
 	
 	@Override

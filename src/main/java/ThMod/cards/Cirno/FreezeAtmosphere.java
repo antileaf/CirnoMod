@@ -46,6 +46,7 @@ public class FreezeAtmosphere extends AbstractCirnoCard {
 		
 		this.magicNumber = this.baseMagicNumber = CNT;
 		this.motivationCost = MOTIVATION_COST;
+		this.exhaust = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -57,10 +58,10 @@ public class FreezeAtmosphere extends AbstractCirnoCard {
 					o.intent == AbstractMonster.Intent.ATTACK_BUFF ||
 					o.intent == AbstractMonster.Intent.ATTACK_DEBUFF ||
 					o.intent == AbstractMonster.Intent.ATTACK_DEFEND)
-				this.addToBot(new ApplyPowerAction(p, o,
+				this.addToBot(new ApplyPowerAction(o, p,
 						new WeakPower(o, this.magicNumber, false)));
 			else
-				this.addToBot(new ApplyPowerAction(p, o,
+				this.addToBot(new ApplyPowerAction(o, p,
 						new VulnerablePower(o, this.magicNumber, false)));
 		}
 		
@@ -73,7 +74,7 @@ public class FreezeAtmosphere extends AbstractCirnoCard {
 			this.motivatedCnt = Integer.min(this.motivatedCnt, debuffs.size());
 			
 			for (int i = 0; i < this.motivatedCnt; i++) {
-				int k = AbstractDungeon.miscRng.random(0, debuffs.size());
+				int k = AbstractDungeon.miscRng.random(0, debuffs.size() - 1);
 				String s = debuffs.get(k);
 				this.addToTop(new RemoveSpecificPowerAction(p, p, s));
 				

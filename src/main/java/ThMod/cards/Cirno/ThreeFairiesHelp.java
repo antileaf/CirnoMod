@@ -63,8 +63,9 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 			this.addToBot(new ChooseOneAction(choices));
 		}
 		else {
-			AbstractCard card = choices.get(AbstractDungeon.cardRng.random(choices.size()));
+			AbstractCard card = choices.get(AbstractDungeon.cardRng.random(0, choices.size() - 1));
 			this.addToBot(new UseCardAction(card));
+//			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		
 //		if (this.isMotivated)

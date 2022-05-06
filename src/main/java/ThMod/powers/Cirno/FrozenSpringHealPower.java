@@ -26,7 +26,8 @@ public class FrozenSpringHealPower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/FrozenSpringHealPower.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/FrozenSpringHealPower.png");
 	}
 	
 	@Override

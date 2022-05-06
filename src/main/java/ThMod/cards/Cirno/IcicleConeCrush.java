@@ -48,7 +48,7 @@ public class IcicleConeCrush extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new DrawCardAction(this.magicNumber, new IcicleConeCrushFollowAction(
-				this.damage, this.block, this.chillGain, this.motivationGain)));
+				m, this.damage, this.block, this.chillGain, this.motivationGain)));
 	}
 	
 	public AbstractCard makeCopy() {

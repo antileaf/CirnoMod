@@ -1,5 +1,6 @@
 package ThMod.powers.Cirno;
 
+import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
@@ -26,28 +27,20 @@ public class MotivationPower extends AbstractPower {
 		
 		this.type = AbstractPower.PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/Motivation.png");
+		this.img = new Texture("img/powers/Nineball32.png");
+//		this.img = new Texture("img/powers/Motivation.png");
 	}
 	
 	@Override
 	public void stackPower(int stackAmount) {
-		if (this.owner.hasPower("CirnoOverloadPower"))
-			return;
-		
-		this.fontScale = 8.0F;
-		this.amount += stackAmount;
+		if (!this.owner.hasPower("CirnoOverloadPower")) {
+			this.fontScale = 8.0F;
+			this.amount += stackAmount;
+		}
 	}
 	
-	public void updateDescription() { // TODO
-//		if (this.cnt > 0) {
-//			this.description =
-//					(
-//							DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]
-//									+ "," + DESCRIPTIONS[2] + (int) Math.pow(2, this.cnt) + DESCRIPTIONS[3]
-//					);
-//		} else {
-//			this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] + ".");
-//		}
+	public void updateDescription() {
+		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}
 	
 	@Override
@@ -57,6 +50,8 @@ public class MotivationPower extends AbstractPower {
 			
 			this.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID,
 					((AbstractCirnoCard) card).motivatedCnt));
+			
+			ThMod.logger.info("Motivated card: " + card.cardID);
 		}
 	}
 }

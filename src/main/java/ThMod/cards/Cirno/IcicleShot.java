@@ -53,7 +53,7 @@ public class IcicleShot extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.setMotivated(ThMod.calcMotivated(this));
-		int cnt = (this.isMotivated ? CNT : MOTIVATED_CNT);
+		int cnt = (this.isMotivated ? MOTIVATED_CNT : CNT);
 		
 		for (int i = 0; i < cnt; i++) {
 			this.addToBot(new DamageAction(m,

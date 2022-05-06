@@ -1,293 +1,123 @@
 {
-  "DarkMatterPower": {
-    "NAME": "暗物质",
+  "AbsoluteZeroPower": {
+    "NAME": "绝对零度",
     "DESCRIPTIONS": [
-      "这回合你不能再打出 #y暗物质 。",
-      ""
+      "每当你 消耗 一张牌，获得", "层 寒冷 。"
     ]
   },
-  "ExtraDraw": {
-    "NAME": "第二宇宙速度",
+  "ChillPower": {
+    "NAME": "寒冷",
     "DESCRIPTIONS": [
-      "回合开始时，额外抽 #b",
-      " 张卡，并将 #b",
-      " 张 #y灼伤 加入手牌。"
+      "使你的攻击伤害和从卡牌中获得的格挡增加", "点。 NL 在你的回合开始时，其层数将会减半。"
     ]
   },
-  "EventHorizonPower": {
-    "NAME": "黑洞边缘",
+  "CirnoOverloadPower": {
+    "NAME": "过载",
     "DESCRIPTIONS": [
-      "当你发动 #y增幅 时，可以选一张弃牌堆的攻击卡加入手牌。本效果每回合只能发动 #b",
-      " 次。",
-      "（当前可用次数： ",
-      "）"
+      "琪露诺累了。即使开高达的妖精也是需要休息的！ NL 你在本回合无法再获得 寒冷 或 干劲 。"
     ]
   },
-  "IllusionStarPower": {
-    "NAME": "幻像之星",
+  "FleeingPower": {
+    "NAME": "溜了溜了",
     "DESCRIPTIONS": [
-      "At the start of your turn , transform ",
-      "card(s) of your hand."
+      "回合后，从当前战斗中逃跑。"
     ]
   },
-  "MilliPulsaPower": {
-    "NAME": "毫秒脉冲星",
+  "FreezeTouchMePower": {
+    "NAME": "降温",
     "DESCRIPTIONS": [
-      "你不需要支付额外的能量来发动 #y增幅 。",
-      ""
+      "直到你的下个回合，每当你失去 格挡 ，获得等同于失去值一半的 格挡 。"
     ]
   },
-  "SatellIllusPower": {
-    "NAME": "卫星幻觉",
+  "FridgePower": {
+    "NAME": "冰箱",
     "DESCRIPTIONS": [
-      "每当你使用一张不在你卡组中的卡时，抽 #b",
-      " 张卡。"
+      "当你即将死亡时，免死并恢复 #b30% 生命。", "你在本场战斗中已经触发过冰箱效果了。"
     ]
   },
-  "TempStrength": {
-    "NAME": "Temproy Strength",
+  "FrostKingBlockPower": {
+    "NAME": "霜冻格挡",
     "DESCRIPTIONS": [
-      "Your next blow deals additional ",
-      " damage."
+      "每当你临时获得一张牌，就获得", "点 格挡 。"
     ]
   },
-  "TempStrengthLoss": {
-    "NAME": "力量下降",
+  "FrostKingMotivationPower": {
+    "NAME": "霜冻之王",
     "DESCRIPTIONS": [
-      "这个生物的攻击力下降了 #b",
-      " 点。"
+      "每当你临时获得一张牌，就获得", "点 干劲 。"
     ]
   },
-  "ExtraEnergyPower": {
-    "NAME": "Extra Energy",
+  "FrostMeteorPower": {
+    "NAME": "凝结流星",
     "DESCRIPTIONS": [
-      "Gain ",
-      " energy in addition each turn."
+      "下", "次 消耗 一张攻击牌或技能牌时，改为将其置入弃牌堆。"
     ]
   },
-  "ChargeUpPower": {
-    "NAME": " 蓄力 ",
+  "FrostPillarsPower": {
+    "NAME": "冰柱",
     "DESCRIPTIONS": [
-      "你现在有",
-      "层 #y蓄力 ",
-      "你的下一次攻击会造成 #b",
-      " 倍伤害。"
+      "下一名攻击你的敌人将会受到", "点伤害。"
     ]
   },
-  "PolarisUniquePower": {
-    "NAME": "北极星",
+  "FrozenSpringHealPower": {
+    "NAME": "冰冻温泉",
     "DESCRIPTIONS": [
-      "在回合开始时，如果 #y北极星 在你的抽卡堆里，则获得 #b1 点能量。"
+      "下", "次 消耗 一张牌时，恢复 #b1 点生命。"
     ]
   },
-  "OrrerysSunPower": {
-    "NAME": "太阳仪",
+  "FrozenSpringMotivationPower": {
+    "NAME": "冰冻温泉！",
     "DESCRIPTIONS": [
-      "每次消耗 #y蓄力 层数，都会对所有敌人造成 #b",
-      " 点伤害。"
+      "下", "次 消耗 一张牌时，获得 #b1 点 干劲 。"
     ]
   },
-  "Charged": {
-    "NAME": "Charged!",
+  "FunkyPower": {
+    "NAME": "贫民区舞后",
     "DESCRIPTIONS": [
-      "Your next blow will do ",
-      " times damage"
+      "每抽一张牌，获得", "层 寒冷 。"
     ]
   },
-  "BlazeAwayPower": {
-    "NAME": "Blaze Away",
+  "LunaticFairyPower": {
+    "NAME": "狂气",
     "DESCRIPTIONS": [
-      "复制 #b",
-      " 张你接下来使用的攻击牌到手牌。"
+      "每回合开始时额外获得", "点 能量 。 NL 每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的", "张随机牌。"
     ]
   },
-  "MPPower": {
-    "NAME": "火力全开！",
+  "MinusKPower": {
+    "NAME": "负K",
     "DESCRIPTIONS": [
-      "你的本回合的攻击会造成 #b",
-      " 倍伤害。"
+      "下", "次 消耗 一张牌时，获得 [E] 。"
     ]
   },
-  "EnergyFlowPower": {
-    "NAME": "能量涌动",
+  "MotivationPower": {
+    "NAME": "干劲",
     "DESCRIPTIONS": [
-      "在你的回合结束时，获得 #b",
-      " 层 #y蓄力 。"
+      "你当前拥有", "点 干劲 。"
     ]
   },
-  "PulseMagicPower": {
-    "NAME": "脉冲魔术",
+  "PerfectSummerIcePower": {
+    "NAME": "完美的夏日之冰",
     "DESCRIPTIONS": [
-      "本回合内你不再需要支付额外能量来发动 #y增幅 效果。",
-      "WWWWWWWWWWW"
+      "每回合开始时，随机将", "张 类别 与稀有度互不相同的牌加入你的手牌。"
     ]
   },
-  "SingularityPower": {
-    "NAME": "奇点",
+  "SecretSmoothiePower": {
+    "NAME": "刨冰！",
     "DESCRIPTIONS": [
-      "每当你使用一张费用为 0 的卡时，使你手中一张随机攻击牌攻击力增加 #b",
-      " 点。"
+      "回合结束时，恢复相当于你的 寒冷 层数", "倍的生命值。"
     ]
   },
-  "WitchOfGreedGold": {
-    "NAME": "强欲魔女",
+  "WishOfBreezePower": {
+    "NAME": "微风祈愿",
     "DESCRIPTIONS": [
-      "战斗结束时获得 #b",
-      " 金币 。"
+      "每回合结束时，随机将弃牌堆中的", "张牌返回手牌。"
     ]
   },
-  "WitchOfGreedPotion": {
-    "NAME": "强欲魔女",
-    "DESCRIPTIONS": [
-      "战斗结束时获得 #b",
-      " 瓶随机药剂。"
-    ]
-  },
-  "OneTimeOffPlusPower": {
-    "NAME": "球形中~",
-    "DESCRIPTIONS": [
-      "这回合你将不再触发 #y增幅 和 #y蓄力 效果。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "OneTimeOffPower": {
-    "NAME": "球形中~",
-    "DESCRIPTIONS": [
-      "这回合你将不再触发 #y增幅 效果。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "SuperNovaPower": {
-    "NAME": "超新星",
-    "DESCRIPTIONS": [
-      "你每 #y消耗 一张 #y灼伤 ，获得 #b",
-      "你每 #y消耗 一张 #y诅咒 或 #y状态 ，获得 #b",
-      " 层 #y力量 。NL 你不再受到 #y灼伤 的伤害。 NL 在你的回合结束时， #y消耗 你所有的手牌"
-    ]
-  },
-  "CasketOfStarPlusPower": {
-    "NAME": "星之器",
-    "DESCRIPTIONS": [
-      "每当你获得 #y格挡 ，将 #b",
-      " 张 #y升级 过的 #y火花 加入手牌。"
-    ]
-  },
-  "CasketOfStarPower": {
-    "NAME": "星之器",
-    "DESCRIPTIONS": [
-      "每当你获得 #y格挡 ，将 #b",
-      " 张 #y火花 加入手牌。"
-    ]
-  },
-  "GalacticHaloPower": {
-    "NAME": "星晕",
-    "DESCRIPTIONS": [
-      "你每打出一张攻击牌，回合结束时获得 #b",
-      "  #y格挡 。"
-    ]
-  },
-  "ManaRampagePower": {
-    "NAME": "魔力暴走",
-    "DESCRIPTIONS": [
-      "你的下一张攻击牌将被打出 #b",
-      " 次。"
-    ]
-  },
-  "PropBagPower": {
-    "NAME": "便携道具包",
-    "DESCRIPTIONS": [
-      "战斗结束时，失去  #y",
-      " 。"
-    ]
-  },
-  "UltraShortWavePower": {
-    "NAME": "极超短波",
-    "DESCRIPTIONS": [
-      "你的 #y极超短波 的效果被加强了 #b",
-      " 次。"
-    ]
-  },
-  "DarkSparkPower": {
-    "NAME": "暗色火花",
-    "DESCRIPTIONS": [
-      "这一回合，你打出的每一张名字有‘火花’的牌都会给你  #b",
-      " 点额外的 #y蓄力 。"
-    ]
-  },
-  "MagicChantPower": {
-    "NAME": "咏唱",
-    "DESCRIPTIONS": [
-      "下一回合，使 #y",
-      " 的费用减1。"
-    ]
-  },
-  "SatelIllusPower": {
-    "NAME": "卫星幻觉",
-    "DESCRIPTIONS": [
-      "在你的回合内，当你抽卡堆里的卡牌数量增加时，获得  #b",
-      " 点能量。"
-    ]
-  },
-  "GrandCrossPower": {
-    "NAME": "增幅",
-    "DESCRIPTIONS": [
-      "你在这回合已发动了 #y增幅 效果。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "Diaspora": {
-    "NAME": "散灭",
-    "DESCRIPTIONS": [
-      "在其回合结束时，如果该生物的生命值低于 #b",
-      " 则会被立即杀死。"
-    ]
-  },
-  "GiftOfLife": {
-    "NAME": "生命恩赐",
-    "DESCRIPTIONS": [
-      "在回合结束时恢复 #b",
-      " 点生命值。"
-    ]
-  },
-  "TalismanPower": {
-    "NAME": "五色魔符",
-    "DESCRIPTIONS": [
-      "在你的回合开始时，将 #b",
-      " 张随机 #y技能 加入手牌。"
-    ]
-  },
-  "Wraith": {
-    "NAME": "怨灵",
-    "DESCRIPTIONS": [
-      "在你的回合开始后，随机 #y消耗 你的一张手牌。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "LimboContact": {
-    "NAME": "死灵之触",
-    "DESCRIPTIONS": [
-      "每当这个敌人攻击你，你会获得一层 #y怨灵 。 NL 在死亡时，给与你 #b1 层 #y怨灵 。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "Nebula": {
-    "NAME": "星云",
-    "DESCRIPTIONS": [
-      "每当你因敌人或卡牌损失 格挡 ，获得 ",
-      " 层 多层护甲 。"
-    ]
-  },
+  
   "InfernoClaw": {
     "NAME": "地狱之爪",
     "DESCRIPTIONS": [
       "每当这个敌人对你造成伤害，在你的弃牌堆里增加一张 #y灼伤 。",
-      "WWWWWWWWWWW"
-    ]
-  },
-  "WWWWWWWWWWWWWWW": {
-    "NAME": "WWWWWWWWWWW",
-    "DESCRIPTIONS": [
-      "WWWWWWWWWWW",
       "WWWWWWWWWWW"
     ]
   }

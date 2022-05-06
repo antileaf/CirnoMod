@@ -36,7 +36,7 @@ public class ColdBeer extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		
