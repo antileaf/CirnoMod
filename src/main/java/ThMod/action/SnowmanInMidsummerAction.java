@@ -18,7 +18,7 @@ public class SnowmanInMidsummerAction extends AbstractGameAction {
 	}
 	
 	public void update() {
-		ArrayList<AbstractCard> oldcards = new ArrayList(), newcards = new ArrayList<>();
+		ArrayList<AbstractCard> oldcards = new ArrayList<>(), newcards = new ArrayList<>();
 		
 		for (AbstractCard card : AbstractDungeon.player.hand.group)
 			if (card.type != AbstractCard.CardType.ATTACK) {

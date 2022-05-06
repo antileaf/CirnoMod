@@ -25,7 +25,7 @@ public abstract class AbstractCirnoCard extends CustomCard {
 		super(
 				id,
 				name,
-				img,
+				"img/cards/Cirno/Th123Cirno.png",
 				cost,
 				rawDescription,
 				type,

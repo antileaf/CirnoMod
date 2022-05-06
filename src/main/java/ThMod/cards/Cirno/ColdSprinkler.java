@@ -1,33 +1,35 @@
 package ThMod.cards.Cirno;
 
+import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.UpgradeRandomCardAction;
+import com.megacrit.cardcrawl.actions.unique.ArmamentsAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class IceSpear extends AbstractCirnoCard {
+public class ColdSprinkler extends AbstractCirnoCard {
 	
-	public static final String ID = "IceSpear";
-	public static final String IMG_PATH = "img/cards/IceSpear.png";
+	public static final String ID = "ColdSprinkler";
+	public static final String IMG_PATH = "img/cards/ColdSprinkler.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
 	
-	private static final int ATTACK_DMG = 8;
-	private static final int AMPLIFIED_ATTACK_DMG = 11;
+	private static final int ATTACK_DMG = 7;
 	private static final int UPGRADE_PLUS_DMG = 3;
-	private static final int UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG = 4;
+	private static final int MOTIVATION_COST = 1;
 	
-	public IceSpear() {
+	public ColdSprinkler() {
 		super(
 			ID,
 			NAME,
@@ -36,36 +38,38 @@ public class IceSpear extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.UNCOMMON,
 			CardTarget.ENEMY
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
-		this.magicNumber = this.baseMagicNumber = AMPLIFIED_ATTACK_DMG;
-	}
-	
-	@Override
-	public void applyPowers() {
-		int tmp_damage = this.baseDamage;
-		this.baseDamage = this.baseMagicNumber;
-		this.calculateCardDamage(null);
-		
-		this.magicNumber = this.damage;
-		this.baseDamage = tmp_damage;
-		this.calculateCardDamage(null);
+		this.isMultiDamage = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		boolean has_debuff = false;
-		for (AbstractPower power : m.powers)
-			has_debuff |= (power.type == AbstractPower.PowerType.DEBUFF);
+		this.setMotivated(ThMod.calcMotivated(this));
 		
-		this.addToBot(new DamageAction(m, new DamageInfo(p, (has_debuff ? this.magicNumber : this.damage),
-				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+		this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage,
+				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+		
+		if (this.isMotivated) {
+			if (this.upgraded)
+				this.addToBot(new ArmamentsAction(true));
+			else {
+				int cnt = 1;
+				if (p.hasPower("ChillPower"))
+					cnt += p.getPower("ChillPower").amount;
+				
+				for (int i = 0; i < cnt; i++)
+					this.addToBot(new UpgradeRandomCardAction());
+			}
+		}
+		else
+			this.addToBot(new UpgradeRandomCardAction());
 	}
 	
 	public AbstractCard makeCopy() {
-		return new IceSpear();
+		return new ColdSprinkler();
 	}
 	
 	public void upgrade() {
@@ -73,7 +77,7 @@ public class IceSpear extends AbstractCirnoCard {
 			upgradeName();
 			
 			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG);
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

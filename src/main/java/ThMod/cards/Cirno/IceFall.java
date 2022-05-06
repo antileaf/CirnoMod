@@ -2,65 +2,69 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.ChillPower;
 import ThMod.powers.Cirno.MotivationPower;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class ShowOff extends AbstractCirnoCard {
+public class IceFall extends AbstractCirnoCard {
 	
-	public static final String ID = "ShowOff";
-	public static final String IMG_PATH = "img/cards/ShowOff.png";
+	public static final String ID = "IceFall";
+	public static final String IMG_PATH = "img/cards/IceFall.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-//	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 0;
-	private static final int CHILL_GAIN = 1;
-	private static final int UPGRADE_PLUS_CHILL_GAIN = 1;
 	private static final int MOTIVATION_GAIN = 1;
 	private static final int UPGRADE_PLUS_MOTIVATION_GAIN = 1;
+	private static final int ATTACK_DMG = 3;
+	private static final int UPGRADE_PLUS_DMG = 2;
 	
-	public ShowOff() {
+	public IceFall() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.SKILL,
+			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.BASIC,
-			CardTarget.SELF
+			CardRarity.UNCOMMON,
+			CardTarget.ALL_ENEMY
 		);
 		
-		this.chillGain = this.damage = this.baseDamage = CHILL_GAIN;
-		this.motivationGain = this.block = this.baseBlock = MOTIVATION_GAIN;
-		this.magicNumber = this.baseMagicNumber = CHILL_GAIN;
+		this.magicNumber = this.baseMagicNumber = MOTIVATION_GAIN;
+		this.damage = this.baseDamage = ATTACK_DMG;
+		this.isMultiDamage = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
-		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
+		this.calculateCardDamage(null);
+		
+		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(
+				this.magicNumber * AbstractDungeon.getCurrRoom().monsters.monsters.size())));
+		
+		this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn,
+				AbstractGameAction.AttackEffect.SLASH_VERTICAL));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new ShowOff();
+		return new IceFall();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			this.chillGain += UPGRADE_PLUS_CHILL_GAIN;
-			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
-			
-//			this.rawDescription = UPGRADE_DESCRIPTION;
+			upgradeMagicNumber(UPGRADE_PLUS_MOTIVATION_GAIN);
+			upgradeDamage(UPGRADE_PLUS_DMG);
 			initializeDescription();
 		}
 	}

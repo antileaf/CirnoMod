@@ -11,7 +11,6 @@ import basemod.BaseMod;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -22,6 +21,7 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +29,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import static ThMod.patches.AbstractCardEnum.CIRNO_CHOICE_COLOR;
+import static ThMod.patches.AbstractCardEnum.CIRNO_COLOR;
 import static ThMod.patches.ThModClassEnum.CIRNO;
 
 @SuppressWarnings("Duplicates")
@@ -62,11 +64,11 @@ public class ThMod implements PostExhaustSubscriber,
 	private static final String POWER_CC_PORTRAIT = "img/1024/bg_power_cirno.png";
 	private static final String ENERGY_ORB_CC_PORTRAIT = "img/1024/cardOrb.png";
 	
-	public static final Color CHILLED = CardHelper.getColor(100, 100, 125);
+	public static final Color CHILLED = CardHelper.getColor(0, 191, 255);
 	public static final String CARD_ENERGY_ORB = "img/UI/energyOrb.png";
 	
-	private static final String MY_CHARACTER_BUTTON = "img/charSelect/ThModButton.png";
-	private static final String CIRNO_PORTRAIT = "img/charSelect/ThModPortrait.jpg";
+	private static final String MY_CHARACTER_BUTTON = "img/charSelect/CirnoButton.png";
+	private static final String CIRNO_PORTRAIT = "img/charSelect/CirnoPortrait.jpg";
 	
 	private static final String CARD_STRING = "localization/ThMod_Fnh_cards.json";
 	private static final String CARD_STRING_ZH = "localization/ThMod_Fnh_cards-zh.json";
@@ -74,14 +76,12 @@ public class ThMod implements PostExhaustSubscriber,
 	private static final String RELIC_STRING_ZH = "localization/ThMod_Fnh_relics-zh.json";
 	private static final String POWER_STRING = "localization/ThMod_Fnh_powers.json";
 	private static final String POWER_STRING_ZH = "localization/ThMod_Fnh_powers-zh.json";
-	private static final String POTION_STRING = "localization/ThMod_MRS_potions.json";
-	private static final String POTION_STRING_ZH = "localization/ThMod_MRS_potions-zh.json";
-	private static final String KEYWORD_STRING = "localization/ThMod_MRS_keywords.json";
-	
-	private static final String KEYWORD_STRING_ZH = "localization/ThMod_MRS_keywords-zh.json";
-	private static final String EVENT_PATH = "localization/ThMod_MRS_events.json";
-	
-	private static final String EVENT_PATH_ZH = "localization/ThMod_MRS_events-zh.json";
+	private static final String POTION_STRING = "localization/ThMod_Cirno_potions.json";
+	private static final String POTION_STRING_ZH = "localization/ThMod_Cirno_potions-zh.json";
+	private static final String KEYWORD_STRING = "localization/ThMod_Cirno_keywords.json";
+	private static final String KEYWORD_STRING_ZH = "localization/ThMod_Cirno_keywords-zh.json";
+	private static final String EVENT_PATH = "localization/ThMod_Cirno_events.json";
+	private static final String EVENT_PATH_ZH = "localization/ThMod_Cirno_events-zh.json";
 	
 //	public static int typhoonCounter = 0;
 //	public static boolean isCatEventEnabled;
@@ -202,61 +202,74 @@ public class ThMod implements PostExhaustSubscriber,
 //    return res;
 //  }
 	
+	public static void frostKing() {
+		AbstractPlayer p = AbstractDungeon.player;
+		
+		ArrayList<String> powers = new ArrayList<>();
+		powers.add("FrostKingMotivationPower");
+		powers.add("FrostKingBlockPower");
+		
+		for (String id : powers)
+			if (p.hasPower(id))
+				p.getPower(id).onSpecificTrigger();
+	}
+	
 	public ThMod() {
 		BaseMod.subscribe(this);
-//		logger.info("creating the color : MARISA_COLOR");
-//		BaseMod.addColor(
-//				MARISA_COLOR,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				ATTACK_CC,
-//				SKILL_CC,
-//				POWER_CC,
-//				ENERGY_ORB_CC,
-//				ATTACK_CC_PORTRAIT,
-//				SKILL_CC_PORTRAIT,
-//				POWER_CC_PORTRAIT,
-//				ENERGY_ORB_CC_PORTRAIT,
-//				CARD_ENERGY_ORB
-//		);
-//		BaseMod.addColor(
-//				AbstractCardEnum.MARISA_DERIVATIONS,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				STARLIGHT,
-//				ATTACK_CC,
-//				SKILL_CC,
-//				POWER_CC,
-//				ENERGY_ORB_CC,
-//				ATTACK_CC_PORTRAIT,
-//				SKILL_CC_PORTRAIT,
-//				POWER_CC_PORTRAIT,
-//				ENERGY_ORB_CC_PORTRAIT,
-//				CARD_ENERGY_ORB
-//		);
-		ThModModDefaultProp.setProperty("isCatEventEnabled", "TRUE");
-		try {
-			final SpireConfig config = new SpireConfig("vexMod", "vexModConfig", ThModModDefaultProp);
-			config.load();
-//			isCatEventEnabled = config.getBool("isCatEventEnabled");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		logger.info("creating the color : CIRNO_COLOR and CIRNO_CHOICE_COLOR");
+		BaseMod.addColor(
+				CIRNO_COLOR,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				ATTACK_CC,
+				SKILL_CC,
+				POWER_CC,
+				ENERGY_ORB_CC,
+				ATTACK_CC_PORTRAIT,
+				SKILL_CC_PORTRAIT,
+				POWER_CC_PORTRAIT,
+				ENERGY_ORB_CC_PORTRAIT,
+				CARD_ENERGY_ORB
+		);
+		BaseMod.addColor(
+				CIRNO_CHOICE_COLOR,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				CHILLED,
+				ATTACK_CC,
+				SKILL_CC,
+				POWER_CC,
+				ENERGY_ORB_CC,
+				ATTACK_CC_PORTRAIT,
+				SKILL_CC_PORTRAIT,
+				POWER_CC_PORTRAIT,
+				ENERGY_ORB_CC_PORTRAIT,
+				CARD_ENERGY_ORB
+		);
+//		ThModModDefaultProp.setProperty("isCatEventEnabled", "TRUE");
+//		try {
+//			final SpireConfig config = new SpireConfig("vexMod", "vexModConfig", ThModModDefaultProp);
+//			config.load();
+////			isCatEventEnabled = config.getBool("isCatEventEnabled");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public void receiveEditCharacters() {
 		logger.info("begin editing characters");
+		logger.warn("What the FUCK is going on?");
 		
-//		logger.info("add " + CIRNO.toString());
+		logger.info("add " + CIRNO.toString());
 		BaseMod.addCharacter(
 				new Cirno("Cirno"),
 				MY_CHARACTER_BUTTON,
@@ -278,16 +291,18 @@ public class ThMod implements PostExhaustSubscriber,
 	
 	public void receiveEditCards() {
 		logger.info("starting editing cards");
-		
+
 		loadCardsToAdd();
-		
+
 		logger.info("adding cards for CIRNO");
-		
+
 		for (AbstractCard card : cardsToAdd) {
 			logger.info("Adding card : " + card.name);
 			BaseMod.addCard(card);
+			
+			UnlockTracker.unlockCard(card.cardID);
 		}
-		
+
 		logger.info("done editing cards");
 	}
 	
@@ -464,22 +479,68 @@ public class ThMod implements PostExhaustSubscriber,
     }
     */
 	}
-	
+//	@Override
+//	public void receiveEditCards() {
+//		// This finds and adds all cards in the same package (or sub-package) as MyAbstractCard
+//		// along with marking all added cards as seen
+//		new AutoAdd("CirnoMod")
+//				.packageFilter(AbstractCirnoCard.class)
+//				.setDefaultSeen(true)
+//				.cards();
+//	}
 	private void loadCardsToAdd() {
 		cardsToAdd.clear();
 		
+		cardsToAdd.add(new AbsoluteZero());
+		cardsToAdd.add(new AchiCirno());
+		cardsToAdd.add(new AssaultArmor());
+		cardsToAdd.add(new ButterflyFairysHelp());
 		cardsToAdd.add(new Chirumiru());
+		cardsToAdd.add(new ColdBeer());
+		cardsToAdd.add(new ColdSprinkler());
+		cardsToAdd.add(new DaiyouseisHelp());
+		cardsToAdd.add(new DiamondBlizzard());
 		cardsToAdd.add(new FairySpin());
 		cardsToAdd.add(new Flee());
+		cardsToAdd.add(new FreezeActress());
+		cardsToAdd.add(new FreezeAtmosphere());
+		cardsToAdd.add(new FreezeDrying());
+		cardsToAdd.add(new FreezeTouchMe());
+		cardsToAdd.add(new FreezingBeams());
+		cardsToAdd.add(new Fridge());
+		cardsToAdd.add(new FrostKing());
+		cardsToAdd.add(new FrostMeteor());
 		cardsToAdd.add(new FrostPillars());
+		cardsToAdd.add(new FrozenFreeze());
+		cardsToAdd.add(new FrozenSpring());
+		cardsToAdd.add(new GiganticIceMagic());
+		cardsToAdd.add(new GreatCrusher());
+		cardsToAdd.add(new Hailstorm());
 		cardsToAdd.add(new HighSpirit());
 		cardsToAdd.add(new IceBarrier());
+		cardsToAdd.add(new IceFall());
+		cardsToAdd.add(new IceFishing());
 		cardsToAdd.add(new IceGrain());
+		cardsToAdd.add(new IceKick());
+		cardsToAdd.add(new IceMachineGun());
+		cardsToAdd.add(new IceSpear());
+		cardsToAdd.add(new IcicleConeCrush());
 		cardsToAdd.add(new IcicleShot());
 		cardsToAdd.add(new ImFunky());
+		cardsToAdd.add(new LunaticFairysHelp());
+		cardsToAdd.add(new MinusK());
+		cardsToAdd.add(new NineMathTextbooks());
 		cardsToAdd.add(new PerfectFreeze());
+		cardsToAdd.add(new PerfectGlacialist());
+		cardsToAdd.add(new PerfectSummerIce());
+		cardsToAdd.add(new SecretSmoothie());
 		cardsToAdd.add(new ShowOff());
+		cardsToAdd.add(new SnowmanInMidsummer());
+		cardsToAdd.add(new Sunbathe());
+		cardsToAdd.add(new SwordFreezer());
+		cardsToAdd.add(new TengusCamera());
 		cardsToAdd.add(new ThreeFairiesHelp());
+		cardsToAdd.add(new WishOfBreeze());
 	}
 	
 	static class Keywords {

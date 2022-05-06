@@ -1,31 +1,32 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
-import ThMod.action.OrbitalAction;
 import ThMod.patches.AbstractCardEnum;
+import ThMod.powers.Cirno.ChillPower;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class DaiyouseisHelp extends AbstractCirnoCard {
+public class IceArmor extends AbstractCirnoCard {
 	
-	public static final String ID = "DaiyouseisHelp";
-	public static final String IMG_PATH = "img/cards/DaiyouseisHelp.png";
+	public static final String ID = "IceArmor";
+	public static final String IMG_PATH = "img/cards/IceArmor.png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 0;
-	private static final int BLOCK = 5;
+	private static final int COST = 1;
+	private static final int BLOCK = 4;
 	private static final int UPGRADE_PLUS_BLOCK = 2;
-	private static final int RETURN_CNT = 1;
-	private static final int UPGRADE_PLUS_RETURN_CNT = 1;
+	private static final int HAND_SIZE = 4;
+	private static final int UPGRADE_PLUS_HAND_SIZE = -1;
+	private static final int CHILL_GAIN = 1;
 	
-	public DaiyouseisHelp() {
+	public IceArmor() {
 		super(
 			ID,
 			NAME,
@@ -34,36 +35,25 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
-			CardTarget.NONE
+			CardRarity.COMMON,
+			CardTarget.SELF
 		);
 		
 		this.block = this.baseBlock = BLOCK;
-		this.magicNumber = this.baseMagicNumber = RETURN_CNT;
-		this.retain = true;
-	}
-	
-	@Override
-	public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-		return false;
+		this.magicNumber = this.baseMagicNumber = HAND_SIZE;
+		this.chillGain = 1;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-	}
-	
-	@Override
-	public void triggerOnEndOfPlayerTurn() {
-		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
-	}
-	
-	@Override
-	public void triggerOnExhaust() {
-		for (int i = 0; i < this.magicNumber; i++)
-			this.addToBot(new OrbitalAction());
+		for (int i = 0; i < 2; i++)
+			this.addToBot(new GainBlockAction(p, this.block));
+		
+		if (p.hand.group.size() >= HAND_SIZE)
+			this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new DaiyouseisHelp();
+		return new IceArmor();
 	}
 	
 	public void upgrade() {
@@ -71,7 +61,7 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 			upgradeName();
 			
 			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			upgradeMagicNumber(UPGRADE_PLUS_RETURN_CNT);
+			upgradeMagicNumber(UPGRADE_PLUS_HAND_SIZE);
 			initializeDescription();
 		}
 	}

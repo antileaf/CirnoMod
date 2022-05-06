@@ -79,10 +79,12 @@ public class Cirno extends CustomPlayer {
 		
 //		loadAnimation(CIRNO_SKELETON_ATLAS, CIRNO_SKELETON_JSON, 2.0F);
 		// if you're using modified versions of base game animations or made animations in spine make sure to include this bit and the following lines
+		/*
 		AnimationState.TrackEntry e = this.state.setAnimation(0, CIRNO_ANIMATION, true);
 		e.setTime(e.getEndTime() * MathUtils.random());
 		this.stateData.setMix("Hit", "Idle", 0.1F);
 		e.setTimeScale(1.0F);
+		 */
 		logger.info("init finish");
 	}
 	
