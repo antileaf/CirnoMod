@@ -37,7 +37,7 @@ public class SnowmanInMidsummerAction extends AbstractGameAction {
 				card.upgrade();
 			card.updateCost(-1);
 			
-			this.addToTop(new MakeTempCardInHandAction(card));
+			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		
 		this.isDone = true;

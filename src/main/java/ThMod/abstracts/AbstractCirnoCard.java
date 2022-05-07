@@ -1,9 +1,12 @@
 package ThMod.abstracts;
 
+import ThMod.ThMod;
 import basemod.abstracts.CustomCard;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
 public abstract class AbstractCirnoCard extends CustomCard {
+	protected static final Color CYAN_COLOR = new Color(0f, 204f / 255f, 0f, 1f);
 	
 	public int motivationCost = 0; // -1 means all
 	public int motivationGain = 0;
@@ -51,5 +54,13 @@ public abstract class AbstractCirnoCard extends CustomCard {
 		card.motivatedCnt = this.motivatedCnt;
 		
 		return card;
+	}
+	
+	@Override
+	public void triggerOnGlowCheck() {
+		this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+		
+		if (ThMod.calcMotivated(this) > 0)
+			this.glowColor = CYAN_COLOR.cpy();
 	}
 }

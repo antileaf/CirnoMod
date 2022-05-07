@@ -48,6 +48,7 @@ public class SnowmanInMidsummer extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			upgradeName();
 			
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

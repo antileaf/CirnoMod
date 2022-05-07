@@ -49,6 +49,20 @@ public class FreezeAtmosphere extends AbstractCirnoCard {
 		this.exhaust = true;
 	}
 	
+	@Override
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		
+		if (ThMod.calcMotivated(this) > 0) {
+			boolean debuff = false;
+			for (AbstractPower p : AbstractDungeon.player.powers)
+				debuff |= (p.type == AbstractPower.PowerType.DEBUFF);
+			
+			if (debuff)
+				this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
+		}
+	}
+	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.setMotivated(ThMod.calcMotivated(this));
 		

@@ -36,6 +36,7 @@ public class AbsoluteZeroPower extends AbstractPower {
 	
 	@Override
 	public void onExhaust(AbstractCard card) {
+		this.flash();
 		this.addToBot(new ApplyPowerAction(this.owner, this.owner, new ChillPower(this.amount)));
 	}
 }

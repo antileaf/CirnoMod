@@ -3,10 +3,7 @@ package ThMod.cards.Cirno;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.MotivationPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.status.Burn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -55,7 +52,7 @@ public class Sunbathe extends AbstractCirnoCard {
 		this.addToBot(new GainBlockAction(p, p, this.block));
 		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
 		this.addToBot(new DrawCardAction(this.magicNumber));
-		this.addToBot(new MakeTempCardInHandAction(new Burn(), this.upgraded ? BURN_CNT : UPGRADED_BURN_CNT));
+		this.addToBot(new MakeTempCardInDiscardAction(new Burn(), this.upgraded ? UPGRADED_BURN_CNT : BURN_CNT));
 	}
 	
 	public AbstractCard makeCopy() {

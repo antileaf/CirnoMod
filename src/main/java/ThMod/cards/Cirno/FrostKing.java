@@ -41,6 +41,12 @@ public class FrostKing extends AbstractCirnoCard {
 		this.block = this.baseBlock = BLOCK;
 	}
 	
+	@Override
+	public void applyPowersToBlock() {
+		this.block = this.baseBlock;
+		this.isBlockModified = false;
+	}
+	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new ApplyPowerAction(p, p, new FrostKingMotivationPower(this.magicNumber)));
 		this.addToBot(new ApplyPowerAction(p, p, new FrostKingBlockPower(this.block)));

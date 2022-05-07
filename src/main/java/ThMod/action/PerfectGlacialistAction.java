@@ -1,6 +1,7 @@
 package ThMod.action;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -41,14 +42,15 @@ public class PerfectGlacialistAction
 			
 			int res;
 			
-			if ((((AbstractMonster) this.target).isDying) || (this.target.currentHealth <= 0))
+			if ((this.target.isDying) || (this.target.currentHealth <= 0))
 				res = tmp;
 			else
 				res = tmp - mon.currentHealth;
 			
 			AbstractPlayer p = AbstractDungeon.player;
 			
-			p.addBlock(this.damage - res);
+//			p.addBlock(this.damage - res);
+			this.addToTop(new GainBlockAction(p, this.damage - res));
 			
 			if (AbstractDungeon.getCurrRoom().monsters.areMonstersBasicallyDead()) {
 				AbstractDungeon.actionManager.clearPostCombatActions();

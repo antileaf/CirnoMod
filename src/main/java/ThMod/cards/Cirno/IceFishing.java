@@ -17,6 +17,7 @@ public class IceFishing extends AbstractCirnoCard {
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
 	
 	public IceFishing() {
@@ -28,7 +29,7 @@ public class IceFishing extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
+			CardRarity.RARE,
 			CardTarget.SELF
 		);
 		
@@ -48,6 +49,7 @@ public class IceFishing extends AbstractCirnoCard {
 			upgradeName();
 			
 			this.exhaust = false;
+			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

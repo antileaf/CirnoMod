@@ -39,12 +39,15 @@
   },
   "FairySpin": {
     "NAME": "妖精旋转",
-    "DESCRIPTION": "对一名随机敌人造成 !D! 点伤害。 NL 将一张 晕眩 放入抽牌堆中。 NL 干劲 X：再重复X次。"
+    "DESCRIPTION": "对一名随机敌人造成 !D! 点伤害。 NL 将一张 晕眩 放入抽牌堆中。 NL 干劲 1：再重复一次。"
   },
   "Flee": {
     "NAME": "落荒而逃",
-    "DESCRIPTION": "!M! 回合后，从当前战斗中逃跑。 NL 干劲 X：提前X回合逃跑。如果所需回合数不多于1，则立刻逃跑。",
-    "UPGRADE_DESCRIPTION": "固有 。!M! 回合后，从当前战斗中逃跑。 NL 干劲 X：提前X回合逃跑。如果所需回合数不多于1，则立刻逃跑。"
+    "DESCRIPTION": "!M! 回合后，从当前战斗中逃跑。 虚无 。 NL 干劲 X：提前X回合逃跑。如果所需回合数不多于1，则立刻逃跑。",
+    "UPGRADE_DESCRIPTION": "固有 。!M! 回合后，从当前战斗中逃跑。 虚无 。 NL 干劲 X：提前X回合逃跑。如果所需回合数不多于1，则立刻逃跑。",
+    "EXTENDED_DESCRIPTION": [
+      "（", "回合后逃跑。）", "立刻逃跑。）", "本场战斗无法逃跑！"
+    ]
   },
   "FreezeActress": {
     "NAME": "冰冻演艺人",
@@ -95,11 +98,17 @@
   },
   "GiganticIceMagic": {
     "NAME": "超大型冰冻魔法",
-    "DESCRIPTION": "造成 !D! 点伤害。你在本回合内每打出过一张其他牌，伤害就减少12点。"
+    "DESCRIPTION": "造成 !D! 点伤害。你在本回合内每打出过一张其他牌，伤害就减少12点。",
+    "EXTENDED_DESCRIPTION": [
+      "（你本回合已打出", "张牌。）"
+    ]
   },
   "GreatCrusher": {
     "NAME": "巨冰破碎",
-    "DESCRIPTION": "随机对敌人造成 !D! 点伤害 !M! 次。 NL 从第二次开始基础伤害比上一次提高 1 点。"
+    "DESCRIPTION": "随机对敌人造成 !D! 点伤害 !M! 次。 NL 从第二次开始基础伤害比上一次提高 1 点。",
+    "EXTENDED_DESCRIPTION": [
+      "（总共造成", "点伤害。）"
+    ]
   },
   "Hailstorm": {
     "NAME": "冰雹暴风",
@@ -114,7 +123,7 @@
   },
   "IceArmor": {
     "NAME": "寒冰铠甲",
-    "DESCRIPTION": "获得 !B! 点格挡两次。如果你的手牌数至少为 !M! ，则获得 1 层 寒冷 。"
+    "DESCRIPTION": "获得 !B! 点 格挡 两次。如果你的手牌数至少为 !M! ，则获得 1 层 寒冷 。"
   },
   "IceBarrier": {
     "NAME": "冰冻屏障",
@@ -160,8 +169,8 @@
   },
   "LunaticFairysHelp": {
     "NAME": "狂气妖精之援",
-    "DESCRIPTION": "每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应种类的一张随机牌。",
-    "UPGRADE_DESCRIPTION": "固有 。每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应种类的一张随机牌。"
+    "DESCRIPTION": "每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的一张随机牌。",
+    "UPGRADE_DESCRIPTION": "固有 。每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的一张随机牌。"
   },
   "MinusK": {
     "NAME": "负K",
@@ -174,10 +183,10 @@
   },
   "PerfectFreeze": {
     "NAME": "完美冻结",
-    "DESCRIPTION": "干劲 3：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数。",
-    "UPGRADE_DESCRIPTION": "干劲 #g2：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数+1。",
+    "DESCRIPTION": "干劲 !M! ：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数。",
+    "UPGRADE_DESCRIPTION": "干劲 !M! ：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数+1。",
     "EXTENDED_DESCRIPTION": [
-      "（造成", "次伤害。）"
+      "（造成", "次伤害。）", "我没有足够的 #b干劲 。"
     ]
   },
   "PerfectGlacialist": {
@@ -186,7 +195,7 @@
   },
   "PerfectSummerIce": {
     "NAME": "完美的夏日之冰",
-    "DESCRIPTION": "每回合开始时，随机将 !M! 张类别与稀有度互不相同的牌加入你的手牌。"
+    "DESCRIPTION": "每回合开始时，随机将 !M! 张 类别 与稀有度互不相同的牌加入你的手牌。"
   },
   "SecretSmoothie": {
     "NAME": "秘制冰沙",
@@ -195,17 +204,17 @@
   },
   "ShowOff": {
     "NAME": "夸耀",
-    "DESCRIPTION": "获得 !M! 层 寒冷 与 !M! 点 干劲。"
+    "DESCRIPTION": "获得 !M! 层 寒冷 与 !M! 点 干劲 。"
   },
   "SnowmanInMidsummer": {
     "NAME": "盛夏的雪人",
-    "DESCRIPTION": "消耗 手牌中的所有非攻击牌。 NL 获得等量的随机攻击牌，并且这些牌在本场战斗中的耗能减少1点。 NL 消耗 。",
-    "UPGRADE_DESCRIPTION": "消耗 手牌中的所有非攻击牌。 NL 获得等量 升级 过的随机攻击牌，并且这些牌在本场战斗中的耗能减少1点。 NL 消耗 。"
+    "DESCRIPTION": "消耗 手牌中的所有非攻击牌。 NL 获得等量的随机攻击牌，这些牌在本场战斗中的耗能减少 [E] 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "消耗 手牌中的所有非攻击牌。 NL 获得等量 升级 过的随机攻击牌，这些牌在本场战斗中的耗能减少 [E] 。 NL 消耗 。"
   },
   "Sunbathe": {
     "NAME": "日光浴",
-    "DESCRIPTION": "获得 !D! 点 格挡 与4点 干劲。 NL 抽 !M! 张牌。 NL 将两张 灼伤 加入你的手牌。",
-    "UPGRADE_DESCRIPTION": "获得 !D! 点 格挡 与5点 干劲。 NL 抽 !M! 张牌。 NL 将三张 灼伤 加入你的手牌。"
+    "DESCRIPTION": "获得 !B! 点 格挡 与4点 干劲。 NL 抽 !M! 张牌。 NL 将两张 灼伤 加入你的弃牌堆。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点 格挡 与5点 干劲。 NL 抽 !M! 张牌。 NL 将三张 灼伤 加入你的弃牌堆。"
   },
   "SwordFreezer": {
     "NAME": "剑式制冰器",
@@ -217,12 +226,12 @@
   },
   "ThreeFairiesHelp": {
     "NAME": "三妖精之援",
-    "DESCRIPTION": "随机选择一种 类别 。获得所选 类别 的一张随机牌，其在本回合的费用为 0。 消耗 。 NL 干劲 1：改为发现一张所选 类别 的牌。",
-    "UPGRADE_DESCRIPTION": "选择一种 类别 。获得所选 类别 的一张随机牌，其在本回合的费用为 0。 消耗 。 NL 干劲 1：改为发现一张所选 类别 的牌。"
+    "DESCRIPTION": "随机选择一种 类别 。获得所选 类别 的一张随机牌，其在本回合的耗能减少 [E] 。 消耗 。 NL 干劲 1：改为发现一张所选 类别 的牌。",
+    "UPGRADE_DESCRIPTION": "选择一种 类别 。获得所选 类别 的一张随机牌，其在本回合的耗能减少 [E] 。 消耗 。 NL 干劲 1：改为发现一张所选 类别 的牌。"
   },
   "WishOfBreeze": {
     "NAME": "微风祈愿",
-    "DESCRIPTION": "每回合结束时，随机将弃牌堆中的 !M! 张牌返回手牌。"
+    "DESCRIPTION": "每回合开始时，随机将弃牌堆中的 !M! 张牌返回手牌。"
   },
   
   "SunnyMilksHelp": {

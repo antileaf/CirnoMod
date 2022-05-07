@@ -48,7 +48,7 @@ public class FreezeActress extends AbstractCirnoCard {
 		this.setMotivated(ThMod.calcMotivated(this));
 		
 		int cnt = 1 + this.motivatedCnt;
-		this.damage = 0;
+		this.baseDamage = 0;
 		
 		for (int i = 0; i < cnt; i++) {
 			AbstractCard card = AbstractDungeon.returnTrulyRandomCardInCombat(CardType.ATTACK);
@@ -71,15 +71,17 @@ public class FreezeActress extends AbstractCirnoCard {
 			card = card.makeCopy();
 			if (this.upgraded)
 				card.upgrade();
-			this.damage = Integer.max(this.damage, card.baseDamage);
+			this.baseDamage = Integer.max(this.baseDamage, card.baseDamage);
 			
 			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		
+		this.calculateCardDamage(m);
+		
 		this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage,
 				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 		
-		this.damage = 0;
+		this.damage = this.baseDamage = 0;
 	}
 	
 	public AbstractCard makeCopy() {

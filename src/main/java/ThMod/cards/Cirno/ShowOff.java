@@ -5,6 +5,7 @@ import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.ChillPower;
 import ThMod.powers.Cirno.MotivationPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -46,6 +47,7 @@ public class ShowOff extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
+		this.addToBot(new WaitAction(0.1F));
 		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
 	}
 	
@@ -59,7 +61,7 @@ public class ShowOff extends AbstractCirnoCard {
 			
 			this.chillGain += UPGRADE_PLUS_CHILL_GAIN;
 			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
-			
+			upgradeMagicNumber(1);
 //			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}

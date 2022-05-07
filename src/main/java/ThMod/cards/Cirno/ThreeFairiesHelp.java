@@ -6,7 +6,6 @@ import ThMod.cards.CirnoChoiceCards.LunaChildsHelp;
 import ThMod.cards.CirnoChoiceCards.StarSapphiresHelp;
 import ThMod.cards.CirnoChoiceCards.SunnyMilksHelp;
 import ThMod.patches.AbstractCardEnum;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,6 +15,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ThreeFairiesHelp extends AbstractCirnoCard {
 	
@@ -26,7 +26,7 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 1;
+	private static final int COST = 0;
 	private static final int MOTIVATION_COST = 1;
 	
 	public ThreeFairiesHelp() {
@@ -64,7 +64,8 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 		}
 		else {
 			AbstractCard card = choices.get(AbstractDungeon.cardRng.random(0, choices.size() - 1));
-			this.addToBot(new UseCardAction(card));
+			this.addToBot(new ChooseOneAction(new ArrayList<AbstractCard>(
+					Collections.singletonList(card.makeCopy()))));
 //			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		

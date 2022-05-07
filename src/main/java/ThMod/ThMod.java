@@ -109,7 +109,7 @@ public class ThMod implements PostExhaustSubscriber,
 		if (card.motivationCost < 0)
 			return motivation.amount;
 		
-		return Integer.min(motivation.amount, card.motivationCost);
+		return motivation.amount >= card.motivationCost ? card.motivationCost : 0;
 	}
 
   /*
@@ -497,7 +497,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.clear();
 		
 		cardsToAdd.add(new AbsoluteZero());
-		cardsToAdd.add(new AchiCirno());
+//		cardsToAdd.add(new AchiCirno());
 		cardsToAdd.add(new AssaultArmor());
 		cardsToAdd.add(new ButterflyFairysHelp());
 		cardsToAdd.add(new Chirumiru());

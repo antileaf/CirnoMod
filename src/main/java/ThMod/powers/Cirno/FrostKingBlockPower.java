@@ -35,6 +35,7 @@ public class FrostKingBlockPower extends AbstractPower {
 	
 	@Override
 	public void onSpecificTrigger() {
+		this.flash();
 		this.addToBot(new GainBlockAction(this.owner, this.amount));
 	}
 }

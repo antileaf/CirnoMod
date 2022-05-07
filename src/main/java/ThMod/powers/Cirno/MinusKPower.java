@@ -37,9 +37,10 @@ public class MinusKPower extends AbstractPower {
 	
 	@Override
 	public void onExhaust(AbstractCard card) {
-		this.addToBot(new GainEnergyAction(1));
+		if (this.amount > 0)
+			this.addToBot(new GainEnergyAction(1));
 		
-		if (--this.amount == 0)
-			this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+		if (--this.amount <= 0)
+			this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
 	}
 }

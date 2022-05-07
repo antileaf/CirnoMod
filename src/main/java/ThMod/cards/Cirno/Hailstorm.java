@@ -41,13 +41,22 @@ public class Hailstorm extends AbstractCirnoCard {
 	}
 	
 	@Override
+	public void initializeDescription() {
+		this.rawDescription = DESCRIPTION;
+		if (AbstractDungeon.isPlayerInDungeon() && !AbstractDungeon.player.exhaustPile.isEmpty()) {
+			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0];
+		}
+		
+		super.initializeDescription();
+	}
+	
+	@Override
 	public void applyPowers() {
-		super.applyPowers();
 		
 		int cnt = AbstractDungeon.player.exhaustPile.size();
 		this.damage = this.baseDamage = cnt * this.magicNumber;
-		super.applyPowers();
 		
+		super.applyPowers();
 		this.isDamageModified = this.damage != this.baseDamage;
 		
 		initializeDescription();

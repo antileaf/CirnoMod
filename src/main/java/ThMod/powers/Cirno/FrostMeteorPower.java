@@ -37,7 +37,8 @@ public class FrostMeteorPower extends AbstractPower {
 	
 	@Override
 	public void onUseCard(AbstractCard card, UseCardAction action) {
-		if (card.purgeOnUse || !action.exhaustCard)
+		if (card.purgeOnUse || !action.exhaustCard ||
+				(card.type != AbstractCard.CardType.ATTACK && card.type != AbstractCard.CardType.SKILL))
 			return;
 		
 		this.flash();

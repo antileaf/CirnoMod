@@ -44,6 +44,7 @@ public class ColdSprinkler extends AbstractCirnoCard {
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
 		this.isMultiDamage = true;
+		this.motivationCost = MOTIVATION_COST;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

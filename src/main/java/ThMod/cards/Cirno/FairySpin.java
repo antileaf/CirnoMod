@@ -29,7 +29,7 @@ public class FairySpin extends AbstractCirnoCard {
 	
 	private static final int UPGRADE_PLUS_DMG = 3;
 	
-	private static final int MOTIVATION_COST = -1;
+	private static final int MOTIVATION_COST = 1;
 	
 	public FairySpin() {
 		super(
@@ -64,6 +64,8 @@ public class FairySpin extends AbstractCirnoCard {
 		
 		this.addToBot(new MakeTempCardInDrawPileAction(new Dazed(),
 				cnt, true, true)); // 一起洗
+//		for (int i = 0; i < cnt; i++)
+//			ThMod.frostKing();
 		
 //		if (this.isMotivated)
 //			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivatedCnt));

@@ -45,8 +45,8 @@ public class NineMathTextbooks extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		ArrayList<AbstractCard> choices = new ArrayList<>();
 		choices.add(new RedTextbook());
-		choices.add(new BlueTextbook());
 		choices.add(new YellowTextbook());
+		choices.add(new BlueTextbook());
 		
 		if (this.upgraded) {
 			for (AbstractCard c : choices)

@@ -1,7 +1,7 @@
 package ThMod.powers.Cirno;
 
+import ThMod.action.CirnoExhaustSpecificCardAction;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -43,13 +43,18 @@ public class LunaticFairyPower extends AbstractPower {
 	
 	@Override
 	public void onCardDraw(AbstractCard card) {
-		this.addToBot(new ExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
-		
+		this.addToTop(new CirnoExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
+	}
+	
+	@Override
+	public void onExhaust(AbstractCard card) {
 		if (card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL
-			|| card.type == AbstractCard.CardType.POWER) {
-			for (int i = 0; i < this.amount; i++)
+				|| card.type == AbstractCard.CardType.POWER) {
+			for (int i = 0; i < this.amount; i++) {
 				this.addToBot(new MakeTempCardInHandAction(
 						AbstractDungeon.returnTrulyRandomCardInCombat(card.type)));
+//				ThMod.frostKing();
+			}
 		}
 	}
 }

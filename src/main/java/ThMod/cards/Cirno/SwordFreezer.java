@@ -3,14 +3,19 @@ package ThMod.cards.Cirno;
 import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
+import com.badlogic.gdx.math.MathUtils;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.watcher.VigorPower;
+
+import java.util.Iterator;
 
 public class SwordFreezer extends AbstractCirnoCard {
 	
@@ -60,9 +65,54 @@ public class SwordFreezer extends AbstractCirnoCard {
 			this.addToBot(new ApplyPowerAction(p, p,
 					new VigorPower(p, this.magicNumber * attack)));
 		
-		if (this.isMotivated)
-			for (int i = 0; i < skill; i++)
-				this.addToBot(new GainBlockAction(p, this.block));
+		if (this.isMotivated) {
+			int per = BLOCK;
+			if (this.upgraded)
+				per += UPGRADE_PLUS_BLOCK;
+			this.baseBlock = per * skill;
+			this.calculateBlock();
+			this.addToBot(new GainBlockAction(p, this.block));
+			
+			this.resumeBlock();
+		}
+	}
+	
+	@Override
+	protected void applyPowersToBlock() {
+	
+	}
+	
+	void calculateBlock() {
+		this.isBlockModified = false;
+		float tmp = (float)this.baseBlock;
+		
+		Iterator var2;
+		AbstractPower p;
+		for(var2 = AbstractDungeon.player.powers.iterator(); var2.hasNext(); tmp = p.modifyBlock(tmp, this)) {
+			p = (AbstractPower)var2.next();
+		}
+		
+		for(var2 = AbstractDungeon.player.powers.iterator(); var2.hasNext(); tmp = p.modifyBlockLast(tmp)) {
+			p = (AbstractPower)var2.next();
+		}
+		
+		if (this.baseBlock != MathUtils.floor(tmp)) {
+			this.isBlockModified = true;
+		}
+		
+		if (tmp < 0.0F) {
+			tmp = 0.0F;
+		}
+		
+		this.block = MathUtils.floor(tmp);
+	}
+	
+	void resumeBlock() {
+		this.block = this.baseBlock = BLOCK;
+		if (this.upgraded) {
+			this.block += UPGRADE_PLUS_BLOCK;
+			this.baseBlock += UPGRADE_PLUS_BLOCK;
+		}
 	}
 	
 	public AbstractCard makeCopy() {

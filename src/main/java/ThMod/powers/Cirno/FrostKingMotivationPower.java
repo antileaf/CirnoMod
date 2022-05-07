@@ -35,6 +35,7 @@ public class FrostKingMotivationPower extends AbstractPower {
 	
 	@Override
 	public void onSpecificTrigger() {
+		this.flash();
 		this.addToBot(new ApplyPowerAction(this.owner, this.owner, new MotivationPower(this.amount)));
 	}
 }

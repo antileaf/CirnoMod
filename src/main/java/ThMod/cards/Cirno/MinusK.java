@@ -29,18 +29,20 @@ public class MinusK extends AbstractCirnoCard {
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.SKILL,
+			CardType.POWER,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		
-		this.exhaust = true;
+//		this.exhaust = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new ApplyPowerAction(p, p, new MinusKPower(
-				EnergyPanel.totalCount + (this.upgraded ? 1 : 0))));
+		int cnt = EnergyPanel.totalCount + (this.upgraded ? 1 : 0);
+		
+		if (cnt > 0)
+			this.addToBot(new ApplyPowerAction(p, p, new MinusKPower(cnt)));
 		
 		if (!this.freeToPlayOnce)
 			p.energy.use(EnergyPanel.totalCount);

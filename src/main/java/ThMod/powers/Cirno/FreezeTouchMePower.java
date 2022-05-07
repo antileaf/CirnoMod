@@ -36,14 +36,16 @@ public class FreezeTouchMePower extends AbstractPower {
 	}
 	
 	@Override
-	public float atDamageFinalReceive(float damage, DamageInfo.DamageType type) {
-		if (type != DamageInfo.DamageType.HP_LOSS) {
-			float val = Float.min(damage, this.owner.currentBlock);
-			if (val >= 2.0)
-				this.addToBot(new GainBlockAction(this.owner, (int) Math.floor(val / 2)));
+	public int onAttacked(DamageInfo info, int damageAmount) {
+		if (info.type != DamageInfo.DamageType.HP_LOSS) {
+			int val = Integer.min(damageAmount, this.owner.currentBlock) / 2;
+			if (val > 0)
+				this.addToTop(new GainBlockAction(this.owner, val));
+			
+			this.flash();
 		}
 		
-		return damage;
+		return damageAmount;
 	}
 	
 	@Override

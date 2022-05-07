@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
 
 public class PerfectFreeze extends AbstractCirnoCard {
@@ -48,9 +49,31 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		);
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
-		this.magicNumber = this.baseMagicNumber = CNT;
-		this.motivationCost = MOTIVATION_COST;
+		this.magicNumber = this.baseMagicNumber = this.motivationCost = MOTIVATION_COST;
 		this.isMultiDamage = true;
+	}
+	
+	@Override
+	public void initializeDescription() {
+		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
+		
+		if (AbstractDungeon.isPlayerInDungeon()) {
+			int cnt = (this.upgraded ? UPGRADE_PLUS_CNT : CNT);
+			if (AbstractDungeon.player.hasPower("ChillPower"))
+				cnt += AbstractDungeon.player.getPower("ChillPower").amount;
+			
+			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
+					cnt + cardStrings.EXTENDED_DESCRIPTION[1];
+		}
+		
+		super.initializeDescription();
+	}
+	
+	@Override
+	public void applyPowers() {
+		super.applyPowers();
+		
+		this.initializeDescription();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -59,7 +82,7 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		if (this.isMotivated) {
 			this.calculateCardDamage(null);
 			
-			int cnt = this.magicNumber;
+			int cnt = (this.upgraded ? UPGRADE_PLUS_CNT : CNT);
 			if (p.hasPower("ChillPower"))
 				cnt += p.getPower("ChillPower").amount;
 			
@@ -73,6 +96,11 @@ public class PerfectFreeze extends AbstractCirnoCard {
 			}
 			
 //			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivationCost));
+		}
+		else {
+			AbstractDungeon.effectList.add(new ThoughtBubble(
+					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F,
+					cardStrings.EXTENDED_DESCRIPTION[2], true));
 		}
 	}
 	

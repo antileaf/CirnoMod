@@ -1,9 +1,10 @@
 package ThMod.cards.CirnoChoiceCards;
 
+import ThMod.ThMod;
+import ThMod.action.CirnoDiscoveryAction;
 import ThMod.patches.AbstractCardEnum;
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
-import com.megacrit.cardcrawl.actions.unique.DiscoveryAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -25,7 +26,7 @@ public class SanyouseisHelp extends CustomCard {
 			"img/cards/Cirno/Th123Cirno.png",
 			COST,
 			rawDescription,
-			CardType.POWER,
+			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE
@@ -36,12 +37,18 @@ public class SanyouseisHelp extends CustomCard {
 	public void onChoseThisOption() {
 		if (!this.upgraded) {
 			AbstractCard card = AbstractDungeon.returnTrulyRandomCardInCombat(this.cardType).makeCopy();
-			card.setCostForTurn(0);
+			if (card.cost > 0)
+				card.setCostForTurn(card.cost - 1);
 			this.addToBot(new MakeTempCardInHandAction(card));
+			
+			ThMod.logger.info("GENERATED A NEW CARD: " + card.cardID);
 		}
 		else {
-			this.addToBot(new DiscoveryAction(this.cardType, 1));
+			this.addToBot(new CirnoDiscoveryAction(this.cardType, 1));
+			ThMod.logger.info("CIRNO DISCOVERY");
 		}
+		
+//		ThMod.frostKing();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

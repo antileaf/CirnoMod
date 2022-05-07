@@ -37,36 +37,34 @@ public class WishOfBreezePower extends AbstractPower {
 	}
 	
 	@Override
-	public void atEndOfTurn(boolean isPlayer) {
-		if (isPlayer) {
-			AbstractPlayer p = AbstractDungeon.player;
+	public void atStartOfTurn() {
+		AbstractPlayer p = AbstractDungeon.player;
+		
+		if (p.discardPile.isEmpty())
+			return;
+		
+		int cnt = Integer.min(this.amount, p.discardPile.size());
+		
+		ArrayList<Integer> array = new ArrayList<>();
+		for (int i = 0; i < cnt; i++) {
+			int x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
 			
-			if (p.discardPile.isEmpty())
-				return;
+			while (array.contains(x))
+				x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
 			
-			int cnt = Integer.min(this.amount, p.discardPile.size());
-			
-			ArrayList<Integer> array = new ArrayList<>();
-			for (int i = 0; i < cnt; i++) {
-				int x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
-				
-				while (array.contains(x))
-					x = AbstractDungeon.miscRng.random(0, p.discardPile.size() - 1);
-				
-				array.add(x);
-			}
-			
-			ArrayList<AbstractCard> cards = new ArrayList<>();
-			for (int i : array)
-				cards.add(p.discardPile.group.get(i));
-			
-			for (AbstractCard card : cards) {
-				p.discardPile.removeCard(card);
-				p.hand.addToHand(card);
-				card.lighten(false);
-			}
-			
-			p.hand.refreshHandLayout();
+			array.add(x);
 		}
+		
+		ArrayList<AbstractCard> cards = new ArrayList<>();
+		for (int i : array)
+			cards.add(p.discardPile.group.get(i));
+		
+		for (AbstractCard card : cards) {
+			p.discardPile.removeCard(card);
+			p.hand.addToHand(card);
+			card.lighten(false);
+		}
+		
+		p.hand.refreshHandLayout();
 	}
 }

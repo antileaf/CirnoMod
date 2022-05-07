@@ -48,10 +48,15 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 		
 		int cnt = 0;
 		for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisTurn)
-			if (!c.cardID.equals(this.cardID))
+			if (c != this)
 				cnt++;
 		this.magicNumber = cnt;
-		this.damage = this.baseDamage - 12 * cnt;
+		
+		int tmp = this.baseDamage;
+		
+		this.baseDamage -= 12 * cnt;
+		this.calculateCardDamage(null);
+		this.baseDamage = tmp;
 		
 		initializeDescription();
 	}
@@ -73,7 +78,8 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 	public void initializeDescription() {
 		this.rawDescription = DESCRIPTION;
 		if (this.magicNumber >= 0)
-			this.rawDescription += cardStrings.EXTENDED_DESCRIPTION;
+			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
+					this.magicNumber + cardStrings.EXTENDED_DESCRIPTION[1];
 		
 		super.initializeDescription();
 	}

@@ -41,13 +41,34 @@ public class GreatCrusher extends AbstractCirnoCard {
 		
 		this.damage = this.baseDamage = ATTACK_DMG;
 		this.magicNumber = this.baseMagicNumber = CNT;
+		
+		this.initializeDescription();
+	}
+	
+	@Override
+	public void initializeDescription() {
+		int res = 0;
+		for (int i = 0; i < this.magicNumber; i++)
+			res += this.damage + i;
+		
+		this.rawDescription = DESCRIPTION + " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
+			res + cardStrings.EXTENDED_DESCRIPTION[1];
+		
+		super.initializeDescription();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		for (int i = 1; i <= this.magicNumber; i++)
+		for (int i = 0; i < this.magicNumber; i++) {
+			this.baseDamage = ATTACK_DMG + i;
+			this.calculateCardDamage(m);
+			
 			this.addToBot(new DamageRandomEnemyAction(
-					new DamageInfo(p, i, this.damageTypeForTurn),
+					new DamageInfo(p, this.damage, this.damageTypeForTurn),
 					AbstractGameAction.AttackEffect.SLASH_HEAVY));
+		}
+		
+		this.baseDamage = ATTACK_DMG;
+		this.calculateCardDamage(m);
 	}
 	
 	public AbstractCard makeCopy() {

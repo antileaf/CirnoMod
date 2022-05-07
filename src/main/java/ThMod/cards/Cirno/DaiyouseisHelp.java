@@ -51,15 +51,28 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 	}
 	
+//	@Override
+//	public void triggerOnEndOfPlayerTurn() {
+//		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
+//	}
+	
 	@Override
-	public void triggerOnEndOfPlayerTurn() {
-		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
+	public void applyPowers() {
+		super.applyPowers();
+		
+		this.retain = true;
 	}
 	
 	@Override
 	public void triggerOnExhaust() {
 		for (int i = 0; i < this.magicNumber; i++)
 			this.addToBot(new OrbitalAction());
+	}
+	
+	@Override
+	public void onRetained() {
+		applyPowers();
+		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
 	}
 	
 	public AbstractCard makeCopy() {

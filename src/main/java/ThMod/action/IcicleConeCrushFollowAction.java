@@ -36,7 +36,7 @@ public class IcicleConeCrushFollowAction extends AbstractGameAction {
 				if (card.type == AbstractCard.CardType.ATTACK) {
 					if (target != null)
 						this.addToBot(new DamageAction(target, new DamageInfo(
-								p, this.damage), AttackEffect.SMASH));
+								p, this.damage), AttackEffect.SLASH_VERTICAL));
 				}
 				else if (card.type == AbstractCard.CardType.SKILL)
 					this.addToBot(new GainBlockAction(p, this.block));

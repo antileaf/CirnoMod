@@ -8,9 +8,11 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.SmokeBomb;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 public class Flee extends AbstractCirnoCard {
 	
@@ -40,11 +42,38 @@ public class Flee extends AbstractCirnoCard {
 		
 		this.magicNumber = this.baseMagicNumber = ROUND_CNT;
 		this.motivationCost = MOTIVATION_COST;
+		this.isEthereal = true;
+	}
+	
+	@Override
+	public void initializeDescription() {
+		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
+		
+		if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player.hand.group.contains(this)) {
+			int cnt = this.magicNumber;
+			
+			AbstractPlayer p = AbstractDungeon.player;
+			if (p.hasPower("MotivationPower"))
+				cnt -= p.getPower("MotivationPower").amount;
+			
+			this.rawDescription += " NL ";
+			
+			if (cnt > 1)
+				this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
+						cnt + cardStrings.EXTENDED_DESCRIPTION[1];
+			else
+				this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
+						cardStrings.EXTENDED_DESCRIPTION[2];
+		}
+		
+		super.initializeDescription();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		if (!(new SmokeBomb().canUse())) {
-			// TODO: 输出一个额外信息，比如 "在 Boss 战中不能逃跑！"
+			AbstractDungeon.effectList.add(new ThoughtBubble(
+					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F,
+					cardStrings.EXTENDED_DESCRIPTION[3], true));
 			
 			return;
 		}

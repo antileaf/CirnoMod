@@ -42,11 +42,15 @@ public class TengusCamera extends AbstractCirnoCard {
 		ArrayList<AbstractCard> cards = new ArrayList<>();
 		
 		for (AbstractCard card : p.hand.group)
-			cards.add(card.makeStatEquivalentCopy());
+			if (card != this)
+				cards.add(card.makeStatEquivalentCopy());
 		
-		for (AbstractCard card : cards)
+		for (AbstractCard card : cards) {
 			this.addToBot(new MakeTempCardInDrawPileAction(card,
 					1, true, true));
+			
+//			ThMod.frostKing();
+		}
 	}
 	
 	public AbstractCard makeCopy() {

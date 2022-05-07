@@ -24,7 +24,7 @@ public class MathTextbook extends CustomCard {
 			"img/cards/Cirno/Th123Cirno.png",
 			COST,
 			rawDescription,
-			CardType.POWER,
+			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE

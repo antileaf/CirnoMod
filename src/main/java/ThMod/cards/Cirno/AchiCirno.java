@@ -26,6 +26,7 @@ public class AchiCirno extends AbstractCirnoCard {
 	private static final int SELF_DAMAGE = 9;
 	private static final int CNT = 2;
 	private static final int MOTIVATED_CNT = 1;
+	private static final int MOTIVATION_COST = 1;
 	
 	public AchiCirno() {
 		super(
@@ -41,6 +42,7 @@ public class AchiCirno extends AbstractCirnoCard {
 		);
 		
 		this.magicNumber = this.baseMagicNumber = SELF_DAMAGE;
+		this.motivationCost = MOTIVATION_COST;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

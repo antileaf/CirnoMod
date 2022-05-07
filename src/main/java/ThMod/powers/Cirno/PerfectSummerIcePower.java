@@ -1,6 +1,5 @@
 package ThMod.powers.Cirno;
 
-import ThMod.ThMod;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -68,7 +67,7 @@ public class PerfectSummerIcePower extends AbstractPower {
 		
 		for (AbstractCard card : res) {
 			this.addToBot(new MakeTempCardInHandAction(card));
-			ThMod.frostKing();
+//			ThMod.frostKing();
 		}
 	}
 }

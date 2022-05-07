@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -48,11 +49,33 @@ public class IceSpear extends AbstractCirnoCard {
 	public void applyPowers() {
 		int tmp_damage = this.baseDamage;
 		this.baseDamage = this.baseMagicNumber;
-		this.calculateCardDamage(null);
+		super.applyPowers();
+		
+		this.initializeDescription();
 		
 		this.magicNumber = this.damage;
 		this.baseDamage = tmp_damage;
-		this.calculateCardDamage(null);
+		super.applyPowers();
+	}
+	
+	@Override
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		
+		boolean debuff = false;
+		for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+			for (AbstractPower p : m.powers)
+				if (p.type == AbstractPower.PowerType.DEBUFF) {
+					debuff = true;
+					break;
+				}
+			
+			if (debuff)
+				break;
+		}
+		
+		if (debuff)
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

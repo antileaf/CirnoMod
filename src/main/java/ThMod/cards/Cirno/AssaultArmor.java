@@ -6,6 +6,7 @@ import ThMod.powers.Cirno.CirnoOverloadPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -44,6 +45,11 @@ public class AssaultArmor extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.calculateCardDamage(null);
+		
+		if (p.hasPower("ChillPower"))
+			this.addToBot(new RemoveSpecificPowerAction(p, p, "ChillPower"));
+		if (p.hasPower("MotivationPower"))
+			this.addToBot(new RemoveSpecificPowerAction(p, p, "MotivationPower"));
 		
 		this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn,
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));
