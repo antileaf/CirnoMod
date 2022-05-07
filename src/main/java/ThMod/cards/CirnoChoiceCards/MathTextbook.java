@@ -25,7 +25,7 @@ public class MathTextbook extends CustomCard {
 			COST,
 			rawDescription,
 			CardType.SKILL,
-			AbstractCardEnum.CIRNO_COLOR,
+			AbstractCardEnum.CIRNO_CHOICE_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE
 		);

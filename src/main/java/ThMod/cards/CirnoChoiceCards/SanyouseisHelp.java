@@ -1,6 +1,5 @@
 package ThMod.cards.CirnoChoiceCards;
 
-import ThMod.ThMod;
 import ThMod.action.CirnoDiscoveryAction;
 import ThMod.patches.AbstractCardEnum;
 import basemod.abstracts.CustomCard;
@@ -27,7 +26,7 @@ public class SanyouseisHelp extends CustomCard {
 			COST,
 			rawDescription,
 			CardType.SKILL,
-			AbstractCardEnum.CIRNO_COLOR,
+			AbstractCardEnum.CIRNO_CHOICE_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE
 		);
@@ -41,11 +40,11 @@ public class SanyouseisHelp extends CustomCard {
 				card.setCostForTurn(card.cost - 1);
 			this.addToBot(new MakeTempCardInHandAction(card));
 			
-			ThMod.logger.info("GENERATED A NEW CARD: " + card.cardID);
+//			ThMod.logger.info("GENERATED A NEW CARD: " + card.cardID);
 		}
 		else {
 			this.addToBot(new CirnoDiscoveryAction(this.cardType, 1));
-			ThMod.logger.info("CIRNO DISCOVERY");
+//			ThMod.logger.info("CIRNO DISCOVERY");
 		}
 		
 //		ThMod.frostKing();

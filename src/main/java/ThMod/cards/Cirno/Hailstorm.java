@@ -3,9 +3,8 @@ package ThMod.cards.Cirno;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -52,7 +51,6 @@ public class Hailstorm extends AbstractCirnoCard {
 	
 	@Override
 	public void applyPowers() {
-		
 		int cnt = AbstractDungeon.player.exhaustPile.size();
 		this.damage = this.baseDamage = cnt * this.magicNumber;
 		
@@ -63,9 +61,12 @@ public class Hailstorm extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.applyPowers();
-		this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage,
-				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+		int cnt = AbstractDungeon.player.exhaustPile.size();
+		this.damage = this.baseDamage = cnt * this.magicNumber;
+		this.calculateCardDamage(null);
+		
+		this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage,
+				this.damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
 	}
 	
 	public AbstractCard makeCopy() {
