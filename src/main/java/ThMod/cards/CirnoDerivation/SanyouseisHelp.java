@@ -1,4 +1,4 @@
-package ThMod.cards.CirnoChoiceCards;
+package ThMod.cards.CirnoDerivation;
 
 import ThMod.action.CirnoDiscoveryAction;
 import ThMod.patches.AbstractCardEnum;
@@ -26,7 +26,7 @@ public class SanyouseisHelp extends CustomCard {
 			COST,
 			rawDescription,
 			CardType.SKILL,
-			AbstractCardEnum.CIRNO_CHOICE_COLOR,
+			AbstractCardEnum.CIRNO_DERIVATION_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE
 		);

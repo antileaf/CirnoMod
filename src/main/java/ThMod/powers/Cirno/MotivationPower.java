@@ -12,7 +12,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class MotivationPower extends AbstractPower {
 	
-	public static final String POWER_ID = "MotivationPower";
+	public static final String POWER_ID = MotivationPower.class.getSimpleName();
+	public static final String IMG_PATH = "img/powers/" + POWER_ID + ".png";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -23,17 +24,17 @@ public class MotivationPower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = (this.owner.hasPower("CirnoOverloadPower") ? 0 : amount);
+		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
 		
 		this.type = AbstractPower.PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/Nineball32.png");
+		this.img = new Texture(IMG_PATH);
 //		this.img = new Texture("img/powers/Motivation.png");
 	}
 	
 	@Override
 	public void stackPower(int stackAmount) {
-		if (!this.owner.hasPower("CirnoOverloadPower")) {
+		if (!this.owner.hasPower(CirnoOverloadPower.POWER_ID)) {
 			this.fontScale = 8.0F;
 			this.amount += stackAmount;
 		}

@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FridgePower extends AbstractPower {
 	
-	public static final String POWER_ID = "FridgePower";
+	public static final String POWER_ID = FridgePower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -39,7 +39,7 @@ public class FridgePower extends AbstractPower {
 	}
 	
 	@Override
-	public void onDeath() {
+	public void onDeath() { // TODO: 目前有问题，无法阻止死亡
 		if (!this.used) {
 			int healAmt = (int)(AbstractDungeon.player.maxHealth * 0.3);
 			if (healAmt < 1)

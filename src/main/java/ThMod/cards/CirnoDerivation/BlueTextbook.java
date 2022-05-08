@@ -1,31 +1,31 @@
-package ThMod.cards.CirnoChoiceCards;
+package ThMod.cards.CirnoDerivation;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 
-public class LunaChildsHelp extends SanyouseisHelp {
+public class BlueTextbook extends MathTextbook {
 	
-	public static final String ID = "LunaChildsHelp";
-	public static final String IMG_PATH = "img/cards/LunaChildsHelp.png";
+	public static final String ID = BlueTextbook.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	
-	public LunaChildsHelp() {
+	public BlueTextbook() {
 		super(
-			ID,
-			NAME,
-			IMG_PATH,
-			DESCRIPTION
+				ID,
+				NAME,
+				IMG_PATH,
+				DESCRIPTION
 		);
 		
-		this.cardType = CardType.SKILL;
+		this.cardType = CardType.POWER;
 	}
 	
 	@Override
 	public AbstractCard makeCopy() {
-		return new LunaChildsHelp();
+		return new BlueTextbook();
 	}
 }

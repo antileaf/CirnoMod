@@ -9,5 +9,5 @@ public class AbstractCardEnum {
   public static AbstractCard.CardColor CIRNO_COLOR;
   
   @SpireEnum
-  public static AbstractCard.CardColor CIRNO_CHOICE_COLOR;
+  public static AbstractCard.CardColor CIRNO_DERIVATION_COLOR;
 }

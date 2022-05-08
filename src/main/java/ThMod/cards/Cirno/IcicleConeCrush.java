@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class IcicleConeCrush extends AbstractCirnoCard {
 	
-	public static final String ID = "IcicleConeCrush";
-	public static final String IMG_PATH = "img/cards/IcicleConeCrush.png";
+	public static final String ID = IcicleConeCrush.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

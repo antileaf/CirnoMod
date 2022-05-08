@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FrostMeteorPower extends AbstractPower {
 	
-	public static final String POWER_ID = "FrostMeteorPower";
+	public static final String POWER_ID = FrostMeteorPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -42,9 +42,9 @@ public class FrostMeteorPower extends AbstractPower {
 			return;
 		
 		this.flash();
-		action.exhaustCard = false; // TODO: 但愿是这样
+		action.exhaustCard = false;
 		
-		if (--this.amount == 0)
-			this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+		if (--this.amount <= 0)
+			this.addToTop(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
 	}
 }

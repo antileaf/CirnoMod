@@ -20,7 +20,7 @@ public class SecretSmoothie extends AbstractCirnoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
-	private static final int CNT = 1;
+	private static final int CNT = 2;
 	
 	public SecretSmoothie() {
 		super(

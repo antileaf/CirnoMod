@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class CirnoOverloadPower extends AbstractPower {
 	
-	public static final String POWER_ID = "CirnoOverloadPower";
+	public static final String POWER_ID = CirnoOverloadPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;

@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FleeingPower extends AbstractPower {
 	
-	public static final String POWER_ID = "FleeingPower";
+	public static final String POWER_ID = FleeingPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -33,7 +33,7 @@ public class FleeingPower extends AbstractPower {
 	
 	@Override
 	public void stackPower(int stackAmount) {
-		// 不能堆叠
+		this.amount = Integer.min(this.amount, stackAmount);
 	}
 	
 	@Override
@@ -49,6 +49,6 @@ public class FleeingPower extends AbstractPower {
 			return;
 		}
 		
-		this.addToBot(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
+		this.addToTop(new ReducePowerAction(this.owner, this.owner, this.ID, 1));
 	}
 }

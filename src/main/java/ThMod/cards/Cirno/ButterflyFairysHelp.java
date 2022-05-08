@@ -1,9 +1,8 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
+import ThMod.action.ButterflyFairysHelpSingleAction;
 import ThMod.patches.AbstractCardEnum;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.DamageRandomEnemyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -13,8 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class ButterflyFairysHelp extends AbstractCirnoCard {
 	
-	public static final String ID = "ButterflyFairysHelp";
-	public static final String IMG_PATH = "img/cards/ButterflyFairysHelp.png";
+	public static final String ID = ButterflyFairysHelp.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -23,8 +22,8 @@ public class ButterflyFairysHelp extends AbstractCirnoCard {
 	
 	private static final int ATTACK_DMG = 1;
 	
-	private static final int CNT = 6;
-	private static final int UPGRADE_PLUS_CNT = 2;
+	private static final int CNT = 3;
+//	private static final int UPGRADE_PLUS_CNT = 2;
 	
 	public ButterflyFairysHelp() {
 		super(
@@ -48,9 +47,13 @@ public class ButterflyFairysHelp extends AbstractCirnoCard {
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		for (int i = 0; i < this.magicNumber; i++) {
-			this.addToBot(new DamageRandomEnemyAction(
+			this.addToBot(new ButterflyFairysHelpSingleAction(
 					new DamageInfo(p, this.damage, this.damageTypeForTurn),
-					AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+					this.upgraded));
+			
+//			this.addToBot(new DamageRandomEnemyAction(
+//					new DamageInfo(p, this.damage, this.damageTypeForTurn),
+//					AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 		}
 	}
 	
@@ -63,7 +66,8 @@ public class ButterflyFairysHelp extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
+//			upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}
 	}

@@ -1,9 +1,9 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
-import ThMod.cards.CirnoChoiceCards.BlueTextbook;
-import ThMod.cards.CirnoChoiceCards.RedTextbook;
-import ThMod.cards.CirnoChoiceCards.YellowTextbook;
+import ThMod.cards.CirnoDerivation.BlueTextbook;
+import ThMod.cards.CirnoDerivation.RedTextbook;
+import ThMod.cards.CirnoDerivation.YellowTextbook;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class NineMathTextbooks extends AbstractCirnoCard {
 	
-	public static final String ID = "NineMathTextbooks";
-	public static final String IMG_PATH = "img/cards/NineMathTextbooks.png";
+	public static final String ID = NineMathTextbooks.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -35,7 +35,7 @@ public class NineMathTextbooks extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
+			CardRarity.COMMON,
 			CardTarget.SELF
 		);
 		

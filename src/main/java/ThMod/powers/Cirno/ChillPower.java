@@ -1,7 +1,6 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -13,7 +12,8 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ChillPower extends AbstractPower {
 	
-	public static final String POWER_ID = "ChillPower";
+	public static final String POWER_ID = ChillPower.class.getSimpleName();
+	public static final String IMG_PATH = "img/powers/" + POWER_ID + ".png";
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -24,25 +24,23 @@ public class ChillPower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = (this.owner.hasPower("CirnoOverloadPower") ? 0 : amount);
+		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
 		
 		this.type = AbstractPower.PowerType.BUFF;
 		updateDescription();
-		this.img = new Texture("img/powers/Nineball32.png");
-//		this.img = new Texture("img/powers/Chill.png");
+		this.img = new Texture(IMG_PATH);
 	}
 	
 	@Override
 	public void stackPower(int stackAmount) {
-		if (this.owner.hasPower("CirnoOverloadPower"))
+		if (this.owner.hasPower(CirnoOverloadPower.POWER_ID))
 			return;
 		
 		// 大号蝴蝶结：每当获得寒冷时获得 1 点干劲
-		if (stackAmount > 0 && AbstractDungeon.player.hasRelic("BigBowknot")) {
-			// TODO: Flash
-			this.addToBot(new ApplyPowerAction(
-					AbstractDungeon.player, AbstractDungeon.player, new MotivationPower(1)));
-		}
+//		if (stackAmount > 0 && AbstractDungeon.player.hasRelic("BigBowknot")) {
+//			this.addToBot(new ApplyPowerAction(
+//					AbstractDungeon.player, AbstractDungeon.player, new MotivationPower(1)));
+//		}
 		
 		this.amount += stackAmount;
 	}

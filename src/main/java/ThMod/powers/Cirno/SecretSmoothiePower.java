@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class SecretSmoothiePower extends AbstractPower {
 	
-	public static final String POWER_ID = "SecretSmoothiePower";
+	public static final String POWER_ID = SecretSmoothiePower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -37,8 +37,8 @@ public class SecretSmoothiePower extends AbstractPower {
 	@Override
 	public void atEndOfTurn(boolean isPlayer) {
 		if (isPlayer) {
-			if (this.owner.hasPower("ChillPower")) {
-				int chill = this.owner.getPower("ChillPower").amount;
+			if (this.owner.hasPower(ChillPower.POWER_ID)) {
+				int chill = this.owner.getPower(ChillPower.POWER_ID).amount;
 				if (chill > 0)
 					this.addToBot(new HealAction(this.owner, this.owner, this.amount * chill));
 			}

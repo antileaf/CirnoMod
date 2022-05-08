@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class FrostKingMotivationPower extends AbstractPower {
 	
-	public static final String POWER_ID = "FrostKingMotivationPower";
+	public static final String POWER_ID = FrostKingMotivationPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;

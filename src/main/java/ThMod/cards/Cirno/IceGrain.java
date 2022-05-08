@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class IceGrain extends AbstractCirnoCard {
 	
-	public static final String ID = "IceGrain";
-	public static final String IMG_PATH = "img/cards/IceGrain.png";
+	public static final String ID = IceGrain.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

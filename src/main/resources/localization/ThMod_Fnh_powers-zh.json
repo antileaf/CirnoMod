@@ -17,6 +17,12 @@
       "琪露诺累了。即使开高达的妖精也是需要休息的！ NL 你在本回合无法再获得 寒冷 或 干劲 。"
     ]
   },
+  "FairyPunchPower": {
+    "NAME": "妖精拳",
+    "DESCRIPTIONS": [
+      "本回合内，若你打出的下", "张牌是攻击牌，其耗能减少 [E] 。"
+    ]
+  },
   "FleeingPower": {
     "NAME": "溜了溜了",
     "DESCRIPTIONS": [
@@ -75,6 +81,12 @@
     "NAME": "贫民区舞后",
     "DESCRIPTIONS": [
       "每抽一张牌，获得", "层 寒冷 。"
+    ]
+  },
+  "IceWavePower": {
+    "NAME": "冰斩波",
+    "DESCRIPTIONS": [
+      "你的冰斩波的基础伤害与格挡增加", "点。"
     ]
   },
   "LunaticFairyPower": {

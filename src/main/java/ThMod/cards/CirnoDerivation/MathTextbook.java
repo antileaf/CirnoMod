@@ -1,4 +1,4 @@
-package ThMod.cards.CirnoChoiceCards;
+package ThMod.cards.CirnoDerivation;
 
 import ThMod.action.MathTextbookFollowAction;
 import ThMod.patches.AbstractCardEnum;
@@ -25,7 +25,7 @@ public class MathTextbook extends CustomCard {
 			COST,
 			rawDescription,
 			CardType.SKILL,
-			AbstractCardEnum.CIRNO_CHOICE_COLOR,
+			AbstractCardEnum.CIRNO_DERIVATION_COLOR,
 			CardRarity.SPECIAL,
 			CardTarget.NONE
 		);
@@ -35,6 +35,9 @@ public class MathTextbook extends CustomCard {
 	
 	@Override
 	public void onChoseThisOption() {
+//		for (int i = 0; i < this.magicNumber; i++)
+//			this.addToBot(new DrawCardAction(1, new MathTextbookFollowAction(this.cardType)));
+		
 		this.addToBot(new DrawCardAction(this.magicNumber, new MathTextbookFollowAction(this.cardType)));
 	}
 	

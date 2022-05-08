@@ -15,8 +15,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Chirumiru extends AbstractCirnoCard {
 	
-	public static final String ID = "Chirumiru";
-	public static final String IMG_PATH = "img/cards/Chirumiru.png";
+	public static final String ID = Chirumiru.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

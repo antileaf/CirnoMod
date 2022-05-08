@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class PerfectSummerIcePower extends AbstractPower {
 	
-	public static final String POWER_ID = "PerfectSummerIcePower";
+	public static final String POWER_ID = PerfectSummerIcePower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -46,12 +46,12 @@ public class PerfectSummerIcePower extends AbstractPower {
 	public void atStartOfTurn() {
 		assert(this.amount <= 3);
 		
-		ArrayList<AbstractCard> res = new ArrayList<>();
+		ArrayList<AbstractCard> res;
 		
 		while (true) {
 			ArrayList<AbstractCard> cards = new ArrayList<>();
 			for (int i = 0; i < this.amount; i++)
-				cards.add(AbstractDungeon.returnTrulyRandomCardInCombat());
+				cards.add(AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy());
 			
 			boolean bad = false;
 			for (int i = 0; i < cards.size(); i++)

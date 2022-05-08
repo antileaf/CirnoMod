@@ -64,7 +64,7 @@ public class Cirno extends CustomPlayer {
 		this.dialogX = (this.drawX + 0.0F * Settings.scale); // set location for text bubbles
 		this.dialogY = (this.drawY + 220.0F * Settings.scale); // you can just copy these values
 		
-		logger.info("init Marisa");
+		logger.info("init Cirno");
 		
 		initializeClass(
 				"img/char/Cirno/cirno.png",
@@ -90,10 +90,10 @@ public class Cirno extends CustomPlayer {
 	public ArrayList<String> getStartingDeck() { // 初始卡组
 		ArrayList<String> ret = new ArrayList<>();
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++)
 			ret.add("IceGrain");
+		for (int i = 0; i < 5; i++)
 			ret.add("IceBarrier");
-		}
 		
 		ret.add("IcicleShot");
 		ret.add("ShowOff");

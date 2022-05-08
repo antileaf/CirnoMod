@@ -4,6 +4,7 @@ import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.FleeingPower;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -16,8 +17,8 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 public class Flee extends AbstractCirnoCard {
 	
-	public static final String ID = "Flee";
-	public static final String IMG_PATH = "img/cards/Flee.png";
+	public static final String ID = Flee.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -67,6 +68,20 @@ public class Flee extends AbstractCirnoCard {
 		}
 		
 		super.initializeDescription();
+	}
+	
+	@Override
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		
+		if (!(new SmokeBomb().canUse()))
+			this.glowColor = Color.DARK_GRAY.cpy();
+		else {
+			int cnt = this.magicNumber - this.motivatedCnt;
+			
+			if (cnt <= 1)
+				this.glowColor = GOLD_BORDER_GLOW_COLOR;
+		}
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {

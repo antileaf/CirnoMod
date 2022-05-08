@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class LunaticFairyPower extends AbstractPower {
 	
-	public static final String POWER_ID = "LunaticFairyPower";
+	public static final String POWER_ID = LunaticFairyPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;
@@ -52,7 +52,7 @@ public class LunaticFairyPower extends AbstractPower {
 				|| card.type == AbstractCard.CardType.POWER) {
 			for (int i = 0; i < this.amount; i++) {
 				this.addToBot(new MakeTempCardInHandAction(
-						AbstractDungeon.returnTrulyRandomCardInCombat(card.type)));
+						AbstractDungeon.returnTrulyRandomCardInCombat(card.type).makeCopy()));
 //				ThMod.frostKing();
 			}
 		}

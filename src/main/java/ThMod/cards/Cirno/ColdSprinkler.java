@@ -16,8 +16,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class ColdSprinkler extends AbstractCirnoCard {
 	
-	public static final String ID = "ColdSprinkler";
-	public static final String IMG_PATH = "img/cards/ColdSprinkler.png";
+	public static final String ID = ColdSprinkler.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

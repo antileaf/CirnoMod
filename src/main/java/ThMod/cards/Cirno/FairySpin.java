@@ -16,8 +16,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class FairySpin extends AbstractCirnoCard {
 	
-	public static final String ID = "FairySpin";
-	public static final String IMG_PATH = "img/cards/FairySpin.png";
+	public static final String ID = FairySpin.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

@@ -3,6 +3,8 @@ package ThMod.cards.Cirno;
 import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
+import ThMod.powers.Cirno.ChillPower;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -17,8 +19,8 @@ import com.megacrit.cardcrawl.vfx.combat.BlizzardEffect;
 
 public class PerfectFreeze extends AbstractCirnoCard {
 	
-	public static final String ID = "PerfectFreeze";
-	public static final String IMG_PATH = "img/cards/PerfectFreeze.png";
+	public static final String ID = PerfectFreeze.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -59,8 +61,8 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		
 		if (AbstractDungeon.isPlayerInDungeon()) {
 			int cnt = (this.upgraded ? UPGRADE_PLUS_CNT : CNT);
-			if (AbstractDungeon.player.hasPower("ChillPower"))
-				cnt += AbstractDungeon.player.getPower("ChillPower").amount;
+			if (AbstractDungeon.player.hasPower(ChillPower.POWER_ID))
+				cnt += AbstractDungeon.player.getPower(ChillPower.POWER_ID).amount;
 			
 			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
 					cnt + cardStrings.EXTENDED_DESCRIPTION[1];
@@ -76,6 +78,14 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		this.initializeDescription();
 	}
 	
+	@Override
+	public void triggerOnGlowCheck() {
+		if (ThMod.calcMotivated(this) > 0)
+			this.glowColor = CYAN_COLOR.cpy();
+		else
+			this.glowColor = Color.DARK_GRAY.cpy();
+	}
+	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.setMotivated(ThMod.calcMotivated(this));
 		
@@ -83,8 +93,8 @@ public class PerfectFreeze extends AbstractCirnoCard {
 			this.calculateCardDamage(null);
 			
 			int cnt = (this.upgraded ? UPGRADE_PLUS_CNT : CNT);
-			if (p.hasPower("ChillPower"))
-				cnt += p.getPower("ChillPower").amount;
+			if (p.hasPower(ChillPower.POWER_ID))
+				cnt += p.getPower(ChillPower.POWER_ID).amount;
 			
 			if (cnt > 0) {
 				this.addToBot(new VFXAction(new BlizzardEffect(cnt - 5, AbstractDungeon.getMonsters().shouldFlipVfx()), 0.25F));
@@ -112,7 +122,7 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			upgradeName();
 			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			upgradeMagicNumber(UPGRADED_MOTIVATION_COST - MOTIVATION_COST);
 			this.motivationCost = UPGRADED_MOTIVATION_COST;
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;

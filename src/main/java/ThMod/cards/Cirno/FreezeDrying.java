@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class FreezeDrying extends AbstractCirnoCard {
 	
-	public static final String ID = "FreezeDrying";
-	public static final String IMG_PATH = "img/cards/FreezeDrying.png";
+	public static final String ID = FreezeDrying.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

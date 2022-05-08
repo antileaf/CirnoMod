@@ -11,13 +11,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.VulnerablePower;
 
 import java.util.ArrayList;
 
 public class FreezingBeams extends AbstractCirnoCard {
 	
-	public static final String ID = "FreezingBeams";
-	public static final String IMG_PATH = "img/cards/FreezingBeams.png";
+	public static final String ID = FreezingBeams.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -52,7 +53,7 @@ public class FreezingBeams extends AbstractCirnoCard {
 				res = new ArrayList<>();
 		
 		for (AbstractMonster o : AbstractDungeon.getMonsters().monsters)
-			(o.hasPower("Vulnerable") ? vul : other).add(o);
+			(o.hasPower(VulnerablePower.POWER_ID) ? vul : other).add(o);
 		
 		if (vul.size() >= this.magicNumber) {
 			for (int i = 0; i < this.magicNumber; i++) {

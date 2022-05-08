@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class FreezeAtmosphere extends AbstractCirnoCard {
 	
-	public static final String ID = "FreezeAtmosphere";
-	public static final String IMG_PATH = "img/cards/FreezeAtmosphere.png";
+	public static final String ID = FreezeAtmosphere.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

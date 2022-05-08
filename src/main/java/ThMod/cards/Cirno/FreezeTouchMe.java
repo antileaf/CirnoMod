@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class FreezeTouchMe extends AbstractCirnoCard {
 	
-	public static final String ID = "FreezeTouchMe";
-	public static final String IMG_PATH = "img/cards/FreezeTouchMe.png";
+	public static final String ID = FreezeTouchMe.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

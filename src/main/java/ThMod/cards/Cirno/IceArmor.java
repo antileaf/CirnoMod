@@ -8,13 +8,14 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class IceArmor extends AbstractCirnoCard {
 	
-	public static final String ID = "IceArmor";
-	public static final String IMG_PATH = "img/cards/IceArmor.png";
+	public static final String ID = IceArmor.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
@@ -22,7 +23,7 @@ public class IceArmor extends AbstractCirnoCard {
 	private static final int COST = 1;
 	private static final int BLOCK = 4;
 	private static final int UPGRADE_PLUS_BLOCK = 2;
-	private static final int HAND_SIZE = 4;
+	private static final int HAND_SIZE = 5;
 	private static final int UPGRADE_PLUS_HAND_SIZE = -1;
 	private static final int CHILL_GAIN = 1;
 	
@@ -41,14 +42,26 @@ public class IceArmor extends AbstractCirnoCard {
 		
 		this.block = this.baseBlock = BLOCK;
 		this.magicNumber = this.baseMagicNumber = HAND_SIZE;
-		this.chillGain = 1;
+		this.chillGain = CHILL_GAIN;
+	}
+	
+	@Override
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		
+		if (AbstractDungeon.player.hand.size() >= this.magicNumber)
+			this.glowColor = GOLD_BORDER_GLOW_COLOR.cpy();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		for (int i = 0; i < 2; i++)
 			this.addToBot(new GainBlockAction(p, this.block));
 		
-		if (p.hand.group.size() >= HAND_SIZE)
+		int size = p.hand.group.size();
+		if (!p.hand.group.contains(this))
+			size++;
+		
+		if (size >= this.magicNumber)
 			this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
 	}
 	

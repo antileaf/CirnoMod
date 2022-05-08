@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class MinusKPower extends AbstractPower {
 	
-	public static final String POWER_ID = "MinusKPower";
+	public static final String POWER_ID = MinusKPower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;

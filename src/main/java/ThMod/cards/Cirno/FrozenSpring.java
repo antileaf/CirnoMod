@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class FrozenSpring extends AbstractCirnoCard {
 	
-	public static final String ID = "FrozenSpring";
-	public static final String IMG_PATH = "img/cards/FrozenSpring.png";
+	public static final String ID = FrozenSpring.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

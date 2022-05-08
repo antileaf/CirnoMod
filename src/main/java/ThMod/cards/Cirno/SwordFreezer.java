@@ -19,8 +19,8 @@ import java.util.Iterator;
 
 public class SwordFreezer extends AbstractCirnoCard {
 	
-	public static final String ID = "SwordFreezer";
-	public static final String IMG_PATH = "img/cards/SwordFreezer.png";
+	public static final String ID = SwordFreezer.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

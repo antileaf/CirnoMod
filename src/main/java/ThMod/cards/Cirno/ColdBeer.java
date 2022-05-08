@@ -15,8 +15,8 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class ColdBeer extends AbstractCirnoCard {
 	
-	public static final String ID = "ColdBeer";
-	public static final String IMG_PATH = "img/cards/ColdBeer.png";
+	public static final String ID = ColdBeer.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

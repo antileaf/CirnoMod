@@ -18,8 +18,8 @@ import java.util.Objects;
 
 public class FreezeActress extends AbstractCirnoCard {
 	
-	public static final String ID = "FreezeActress";
-	public static final String IMG_PATH = "img/cards/FreezeActress.png";
+	public static final String ID = FreezeActress.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

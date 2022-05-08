@@ -6,8 +6,9 @@ package ThMod;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.Cirno.*;
-import ThMod.cards.CirnoChoiceCards.*;
+import ThMod.cards.CirnoDerivation.*;
 import ThMod.characters.Cirno;
+import ThMod.powers.Cirno.*;
 import ThMod.relics.CrystalWings;
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -31,7 +33,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static ThMod.patches.AbstractCardEnum.*;
+import static ThMod.patches.AbstractCardEnum.CIRNO_COLOR;
+import static ThMod.patches.AbstractCardEnum.CIRNO_DERIVATION_COLOR;
 import static ThMod.patches.ThModClassEnum.CIRNO;
 
 @SuppressWarnings("Duplicates")
@@ -48,7 +51,9 @@ public class ThMod implements PostExhaustSubscriber,
 		EditKeywordsSubscriber,
 		OnPowersModifiedSubscriber,
 		PostDrawSubscriber,
-		PostEnergyRechargeSubscriber {
+		PostEnergyRechargeSubscriber,
+		OnPlayerLoseBlockSubscriber,
+		OnPlayerDamagedSubscriber {
 	
 	public static final Logger logger = LogManager.getLogger(ThMod.class.getName());
 	
@@ -83,7 +88,7 @@ public class ThMod implements PostExhaustSubscriber,
 	private static final String KEYWORD_STRING_ZH = "localization/ThMod_Cirno_keywords-zh.json";
 	private static final String EVENT_PATH = "localization/ThMod_Cirno_events.json";
 	private static final String EVENT_PATH_ZH = "localization/ThMod_Cirno_events-zh.json";
-	
+
 //	public static int typhoonCounter = 0;
 //	public static boolean isCatEventEnabled;
 //	public static boolean isDeadBranchEnabled;
@@ -98,10 +103,10 @@ public class ThMod implements PostExhaustSubscriber,
 	public static int calcMotivated(AbstractCirnoCard card) { // 只计算 不修改
 		AbstractPlayer p = AbstractDungeon.player;
 		
-		if (!p.hasPower("MotivationPower"))
+		if (!p.hasPower(MotivationPower.POWER_ID))
 			return 0;
 		
-		AbstractPower motivation = p.getPower("MotivationPower");
+		AbstractPower motivation = p.getPower(MotivationPower.POWER_ID);
 		
 		if (motivation.amount <= 0)
 			return 0;
@@ -111,113 +116,69 @@ public class ThMod implements PostExhaustSubscriber,
 		
 		return motivation.amount >= card.motivationCost ? card.motivationCost : 0;
 	}
-
-  /*
-  //For Spark Themed cards
-  public static boolean isSpark(AbstractCard card) {
-    return (
-        (card.cardID.equals("Spark")) ||
-            (card.cardID.equals("DarkSpark")) ||
-            (card.cardID.equals("Strike_MRS")) ||
-            (card.cardID.equals("FinalSpark")) ||
-            (card.cardID.equals("DoubleSpark")) ||
-            (card.cardID.equals("RefractionSpark")) ||
-            (card.cardID.equals("MachineGunSpark")) ||
-            (card.cardID.equals("MasterSpark"))
-    );
-  }*/
-	
-	//For the FXXKING Exhaustion curse
-  /*
-  public static boolean ExhaustionCheck() {
-    boolean res = false;
-    for (AbstractCard c : AbstractDungeon.player.hand.group) {
-      if (c instanceof Exhaustion_MRS) {
-        res = true;
-      }
-    }
-    return res;
-  }
-*/
-	//For Amplify cards
-//  public static boolean Amplified(AbstractCard card, int AMP) {
-//    logger.info(
-//        "ThMod.Amplified : card to check : "
-//            + card.cardID
-//            + " ; costForTurn : "
-//            + card.costForTurn
-//    );
-//    AbstractPlayer p = AbstractDungeon.player;
-//    if ((p.hasPower("OneTimeOffPlusPower")) || (p.hasPower("OneTimeOffPower"))) {
-//      logger.info("ThMod.Amplified :OneTimeOff detected,returning false.");
-//      return false;
-//    }
-//
-//    boolean res = false;
-//    if ((p.hasPower("MilliPulsaPower")) || (p.hasPower("PulseMagicPower"))
-//        || (card.freeToPlayOnce) || (card.purgeOnUse)) {
-//      logger.info(
-//          "ThMod.Amplified :Free Amplify tag detected,returning true : Milli :"
-//              + (p.hasPower("MilliPulsaPower"))
-//              + " ; Pulse :"
-//              + (p.hasPower("PulseMagicPower"))
-//              + " ; Free2Play :"
-//              + card.freeToPlayOnce
-//              + " ; purge on use :"
-//              + card.purgeOnUse
-//      );
-//      res = true;
-//    } else {
-//      if (EnergyPanel.totalCount >= (card.costForTurn + AMP)) {
-//        logger.info("ThMod.Amplified : Sufficient energy ,adding and returning true;");
-//        card.costForTurn += AMP;
-//        res = true;
-//        if (card.costForTurn > 0) {
-//          logger
-//              .info("ThMod.Amplified : False instance of 0 cost card,decreasing typhoon counter.");
-//          typhoonCounter--;
-//          logger.info("current Typhoon Counter : " + typhoonCounter);
-//        }
-//      }
-//    }
-//
-//    if (res) {
-//      AbstractDungeon.actionManager.addToTop(
-//          new ApplyPowerAction(
-//              p,
-//              p,
-//              new GrandCrossPower(p)
-//          )
-//      );
-//      if (p.hasPower("EventHorizonPower")) {
-//        p.getPower("EventHorizonPower").onSpecificTrigger();
-//      }
-//      if (p.hasRelic("AmplifyWand")) {
-//        AbstractRelic r = p.getRelic("AmplifyWand");
-//        r.onTrigger();
-//      }
-//    }
-//    logger.info(
-//        "ThMod.Amplified : card : " + card.cardID + " ; Amplify : " + res + " ; costForTurn : "
-//            + card.costForTurn);
-//    return res;
-//  }
 	
 	public static void frostKing() {
 		AbstractPlayer p = AbstractDungeon.player;
 		
 		ArrayList<String> powers = new ArrayList<>();
-		powers.add("FrostKingMotivationPower");
-		powers.add("FrostKingBlockPower");
+		powers.add(FrostKingMotivationPower.POWER_ID);
+		powers.add(FrostKingBlockPower.POWER_ID);
 		
 		for (String id : powers)
 			if (p.hasPower(id))
 				p.getPower(id).onSpecificTrigger();
 	}
 	
+	private static int iceWaveCounter = 0;
+	
+	public static void iceWaveClear() {
+		iceWaveCounter = 0;
+	}
+	
+	public static void iceWaveAdd(int amount) {
+		iceWaveCounter += amount;
+		
+		logger.info("CirnoMod : iceWaveAdd, counter += " + amount +
+				", and now counter = " + iceWaveCounter);
+	}
+	
+	public static int iceWaveGet() {
+		return iceWaveCounter;
+	}
+	
+	private static ArrayList<AbstractCard> fairyPunchList = new ArrayList<>();
+	
+	private static void fairyPunchAdd(AbstractCard card) {
+		fairyPunchList.add(card);
+	}
+	
+	private static boolean fairyPunchCheck(AbstractCard card) {
+		return fairyPunchList.contains(card);
+	}
+	
+	public static void fairyPunch(AbstractCard card) {
+		if (AbstractDungeon.player.hasPower(FairyPunchPower.POWER_ID) &&
+				card.type == AbstractCard.CardType.ATTACK && card.cost > 0) {
+			
+			if (!fairyPunchCheck(card)) {
+				fairyPunchAdd(card);
+				card.updateCost(-1);
+			}
+		}
+	}
+	
+	public static void fairyPunchClear() {
+		for (AbstractCard card : fairyPunchList) {
+			card.updateCost(1);
+			card.isCostModified = (card.cost != card.costForTurn);
+		}
+		
+		fairyPunchList.clear();
+	}
+	
 	public ThMod() {
 		BaseMod.subscribe(this);
-		logger.info("creating the color : CIRNO_COLOR and CIRNO_CHOICE_COLOR");
+		logger.info("creating the color : CIRNO_COLOR and CIRNO_DERIVATION_COLOR");
 		BaseMod.addColor(
 				CIRNO_COLOR,
 				CHILLED,
@@ -238,7 +199,7 @@ public class ThMod implements PostExhaustSubscriber,
 				CARD_ENERGY_ORB
 		);
 		BaseMod.addColor(
-				CIRNO_CHOICE_COLOR,
+				CIRNO_DERIVATION_COLOR,
 				CHILLED,
 				CHILLED,
 				CHILLED,
@@ -296,18 +257,18 @@ public class ThMod implements PostExhaustSubscriber,
 	
 	public void receiveEditCards() {
 		logger.info("starting editing cards");
-
+		
 		loadCardsToAdd();
-
+		
 		logger.info("adding cards for CIRNO");
-
+		
 		for (AbstractCard card : cardsToAdd) {
 			logger.info("Adding card : " + card.name);
 			BaseMod.addCard(card);
 			
 			UnlockTracker.unlockCard(card.cardID);
 		}
-
+		
 		logger.info("done editing cards");
 	}
 	
@@ -322,6 +283,11 @@ public class ThMod implements PostExhaustSubscriber,
 	
 	@Override
 	public void receivePostBattle(AbstractRoom r) {
+		iceWaveClear();
+		logger.info("CirnoMod : iceWaveCounter reset");
+		
+		fairyPunchList.clear();
+
 //		typhoonCounter = 0;
 //		logger.info("ThMod : PostBattle ; typhoon-counter reset");
 	}
@@ -337,9 +303,9 @@ public class ThMod implements PostExhaustSubscriber,
 //			typhoonCounter++;
 //			ThMod.logger.info("typhoon-counter increased , now :" + typhoonCounter);
 		}
-		if (card.retain) {
-			card.retain = false;
-		}
+//		if (card.retain) {
+//			card.retain = false;
+//		}
 //		if (card.hasTag(SPARK)) {
 //			AbstractDungeon.actionManager.addToTop(
 //					new SparkCostAction()
@@ -375,6 +341,33 @@ public class ThMod implements PostExhaustSubscriber,
 	@Override
 	public void receivePostDraw(AbstractCard arg0) {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public int receiveOnPlayerDamaged(int amount, DamageInfo damageInfo) { // 已经转移到patch了
+//		AbstractPlayer p = AbstractDungeon.player;
+//
+//		if (damageInfo.type != DamageInfo.DamageType.HP_LOSS &&
+//			p.hasPower(FreezeTouchMePower.POWER_ID)) {
+//			int val = Integer.min(p.currentBlock, amount) / 2;
+//
+//			((FreezeTouchMePower) p.getPower(FreezeTouchMePower.POWER_ID)).triggerOnce(val);
+//		}
+		
+		return amount;
+	}
+	
+	@Override
+	public int receiveOnPlayerLoseBlock(int amount) {
+//		if (AbstractDungeon.player.hasPower(FreezeTouchMePower.POWER_ID) &&
+//				amount / 2 > 0) {
+//			AbstractDungeon.actionManager.addToTop(new GainBlockAction(
+//					AbstractDungeon.player, amount / 2));
+//
+//			logger.info("DEBUG: amount = " + amount);
+//		}
+		
+		return amount;
 	}
 	
 	private static String loadJson(String jsonPath) {
@@ -428,8 +421,7 @@ public class ThMod implements PostExhaustSubscriber,
 			power = POWER_STRING_ZH;
 			potion = POTION_STRING_ZH;
 			event = EVENT_PATH_ZH;
-		}
-		else {
+		} else {
 			logger.info("lang == eng");
 			card = CARD_STRING;
 			relic = RELIC_STRING;
@@ -484,7 +476,8 @@ public class ThMod implements PostExhaustSubscriber,
     }
     */
 	}
-//	@Override
+	
+	//	@Override
 //	public void receiveEditCards() {
 //		// This finds and adds all cards in the same package (or sub-package) as MyAbstractCard
 //		// along with marking all added cards as seen
@@ -505,6 +498,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new ColdSprinkler());
 		cardsToAdd.add(new DaiyouseisHelp());
 		cardsToAdd.add(new DiamondBlizzard());
+		cardsToAdd.add(new FairyPunch());
 		cardsToAdd.add(new FairySpin());
 		cardsToAdd.add(new Flee());
 		cardsToAdd.add(new FreezeActress());
@@ -512,7 +506,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new FreezeDrying());
 		cardsToAdd.add(new FreezeTouchMe());
 		cardsToAdd.add(new FreezingBeams());
-		cardsToAdd.add(new Fridge());
+//		cardsToAdd.add(new Fridge()); // 这张卡暂时没有效果，先删掉
 		cardsToAdd.add(new FrostKing());
 		cardsToAdd.add(new FrostMeteor());
 		cardsToAdd.add(new FrostPillars());
@@ -522,6 +516,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new GreatCrusher());
 		cardsToAdd.add(new Hailstorm());
 		cardsToAdd.add(new HighSpirit());
+		cardsToAdd.add(new IceArmor());
 		cardsToAdd.add(new IceBarrier());
 		cardsToAdd.add(new IceFall());
 		cardsToAdd.add(new IceFishing());
@@ -529,6 +524,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new IceKick());
 		cardsToAdd.add(new IceMachineGun());
 		cardsToAdd.add(new IceSpear());
+		cardsToAdd.add(new IceWave());
 		cardsToAdd.add(new IcicleConeCrush());
 		cardsToAdd.add(new IcicleShot());
 		cardsToAdd.add(new ImFunky());
@@ -556,6 +552,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new StarSapphiresHelp());
 	}
 	
+	
 	static class Keywords {
 		
 		Keyword[] keywords;
@@ -564,5 +561,72 @@ public class ThMod implements PostExhaustSubscriber,
 	public static AbstractCard getRandomCirnoCard() {
 		return AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
 	}
-	
 }
+
+/*
+                                                                                                    #W&888888888&&88888&W
+                                                    88888&W                                 W88W*abdqmZ0QQLCCCJJJJJJCQ0ZqdaM8%
+                                                  8WwUUJQOmb*8&                        &8Madm0CYzvvuuuuuuvvvvvvvvvvvvvuuuuvXw&8
+                                 8               8aYuvXJCCJccJZkW8888&#ohkkhaa*##8%%%&bZCXvuuuvvvvvvvvvvvvvvvvvvvvvvvvvvzJZqb&8
+                                 88             8kcuuOaooooaqJYYJCccYzvnjjf/\)}[[{(tnvzUCLLCYcvvvvvvvvvvvvvvvvvvvvvvucCmbhkkW8
+                                 %88bk@        8#cXJCOLzurrxcQvjjjjncvvvvcc)})||}+>iii><+?1tvC0QUYC00LYvvvvvvvvvvvuz0dhhkkkW8
+                                   8kJnncCZqqqwpLux(]~>iiiii>|rxxxxxrrjf/(}<>>><_]_<<<<<<>>>i<-|vZa*ohk0vvvvvvvvvvCdhkkkkkW8
+                                    $8wX\?_?][_<>>>>><<<<<<<<<+-]]]?-_+~<>><<<<<<<<<<<<<<<<<<<<>i<?fLk#quvvvzzvvuYhkkkkkkW8
+                                       $%WbOx|_><<<<<>~<<<<<<<<>>>>>><<<<<<<<<<<<<<~_>><<<<<<<<<<<>i>-rZZCwdkdpwLXphhkkkM8
+                                     $%kLn)_>><<<<<<>)(><<<<<<<<<<<<<<<<<<<<<<<<<<<<\j}~<>><<<<<<<<<<>i<|0#okkkhhqcCZqoW8
+                                  $%pX/?>i><<<<<<<<i/j<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>]cLj([+>><<<<<<<<<<>>}JookhhwvvuUo88
+                                BoJ\+ii><<<<<<<<<<>(ci<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>i\mXrr|[~><<<<<<<<<<>i}0omJcvvvvcCb88
+                              %hc]i><<<<<<<<<<<<<<<Q_><<<<<<<<<<<<<<<<<<<<<<<><<<<<<<<<i?ZJjxxf{+>><<<<<<<<<>>/wXvvvvvvvuJh88
+                            %ac+__<<<<<<<<<<<<<<<>)Ci<<<<<<<<<<<<<<<<<<<<<<<<]<<<<<<<<<<>+wUjxxxj(->><<<<<<<<<!(hzvvvvvvvvv0#8
+                          BWU-l\Y+<<<<<<<<<<<<<<<ixci<<<<<<<<<<<<<<<<<<>><<<~C><<<i><<<<~>]dzrxxxxx|_><<<<<<<<<irkcvvvvvvvvuX#88
+                        $8p)i!xC~><<<<<<<<<<<<<<<invi<<l"";<<<>ll<<<<<i''!>ick<<<` 'i<<>,":/krxxxxxxr1~><<<<<<<<!UhvvvvvvvvvXk*88
+                       %Z|<!iu0<<<<<<<<<<I^`l<>::lnJ!~!    i<<i^"><>><_])/xmppci<!I!<<<>"^;>pUrxxxxxxnf?><<<<<<<>{bwuvvvvvvuQhb*88
+                      %J>!>/mb!":i<><<<<i.  :~<;:1bm><i"`^I<<<<<<<<]\xj/{(qJ|/p{i<<<<>><<<>?pdjxxxxxxxxx{><<<<<<>}v*UvvvvvvXbkkb*8B
+                     %m>![Z%8+   l>`^><<<>!i<<<>{hjm\i<<<<<<<<<<<>~)]~ii/mu-!]jp(_-[|X(_+~>tm#nrxxxxxxxxn)><<<<<>\r0huvvvvXdkkkkbM8
+                    %o-!f*B%nl;;i<<>><<<<<<~+_~?bv)jq+><<<<<<<>><])?--/QL)!`'':[mJrrUMbxjftUOMzrxxxxxxxxxn1><<<>]xrcMXvvuUbkkkkkkh88
+                    %cIf&B%p><<<<<<<<<>><<<{|tcoqYvi10+>>>>>><_{frXQvmmx~``,Ill;>zOckuYbcjuQQ#Xrxxxxxxxxxxx]><>}rxrx#CucOkkkkkkkkk&8
+                   %W]\M% %ji<<<<<<<><}[><~_}|wm(_>;.{mf{}}{(fxxrJCqCr)jX0ZmqpbhhbW@@JfupLUQQ#crxxxxxxxxxxxf<~(xxxxro0JpkkkkkkkkkkM8
+                   8#fh8 %W-><<<<<>>-v0pC/fxxcM/:,!l;"<QQnxxxxxrXQ1;>XapYrUZwbaa*hkbh@$kYQkw0#urxxxxxxxxxxxx|jxxxxxroaaaaaaahkkkkkM8
+                   8Mu#8 8o[+<<<<+]\xLQQhaYxfQd-(vcuxfI^|QUxrrxjZf:._v{;<OhOCZqqqboWkXO@8mzLhoxrxxxxxxxxxxxxxxxxxxrvW*aaaaaao#okka88
+                   %&Q#8 8axrf//fjxxxLQLa0XJJkBMdZp*Mp<.':|JJvxjm+'^,` `<I;XpaM#MZQwo8\/bWd_cpjxxxxxxxxxxxxxxxxxxxr0MbbkkkkkkkMhk&8
+                    %8&8$8#nxxxxxxxxxCLq#1.}88C/0#bbo#a('`'"-xJXd?'^^. vQ/}!|Bbwa#||rqk:10/;pXrxxxxxxxxxxxrxxxxxxx(tMoahkkkkkbkaW8
+                      888880jxxxxxxxrX0WL!]&Mt>UQfJdhdp8\'^`'':_{:`^^' Co{{_v8oa#8/+Ir#.!l.)oCcrxxxxxrrrxuvuxxxxrf<]&&8&MMM###M8&
+                          8WUjrxxxxxxxC%U{p8U!(/;<xohWqjo+'^^^`''`^^^^.+a/}}{fzvx]_-1k)..'>bmujxxxrrxuzULQ0CrxxjCJIf%       bb
+                           8W0xjrxxxxjU8#jOMx'v$x{!Qah@_Jz.^^^^^^^^^^^^.-w0u/)>::l[UC-.,?uz1:"ifxxuYCQ0QQQ0XrrrQ8r~h%
+                            8WpQcxxxxj0ohq-t['!Wz[{rzX/|*{'^^^^^^^^^^^`^':}uUUcjrnf[~]jcx]>i"^+rcJQ0QQQQQQYrrXpMQ1b&&
+                            8Y(nCLxxxrJp08m"^` ~mU/]:i/bj'^^^^^```'''`"`'`''`""I])fvu/?>i<+?{/cCQQQQQQQQCurzq**bLoadOb*88&Mb
+                           %*!.^<1xxxxxCa&aI`^^`,}rnuJc+'`^^`''^;i+}(t\f~'^^^`'_JpUx//f(\fjxcCQQQQQQQCXuvCb*ooMaakkkOuzJ0mwpbbkhahka&88
+                           %mi><>_xrrrrjcov.',>~~>>:"^''^^^'+xnLn\(}?+~?z_'^^^^``:>)jbQxxxvJQQQQQLJYXXCpaohkhhkkkkkkhZvuuuuuuuuuvJmh&8%
+                           %0<~+?txvcccvnuZY~";lllI"``^^^^^'<bq\<<<<~~~<?X`^^^^^^`''JJfxvULQQQLQ0ZmdhaohkkkkkkkkkkkkkkqYuvczYLOmpW8*
+                           8*jfvujcQQQZqpoqCv:'`````^^^^^^^^']Z]<<~~~~~<+C^`^^^`''._oxcLmpbh*hhaaaahkkkkkkkkkkkkhaoo*#M#bha*&88b
+                           $8wjZ#wQ00QLLL0pc?:'.'```^^^^^^^^^';\t([-___?f}'`'.`;~(zk*mho*&& 8Mkbbkkkkkkkkkkhao#M&88&WMb
+                             8bC8W8&M*aahkk*8bX/?l"`'..''''''`'.:~})((\vt;"I+fx|Xb*##ahpXCk8 8%Moakkkkkkaapb#@$
+                              &88%      o#MM8 $$%owQXnt|{?<>ii<~~}-+_|ObkhQwhJ;  '>rdWMha8BWX||ru0kaoaaoqt>;!<](xL@
+                                %$               Jn/|nJZwkmOk#qaMkhaMWowc|jab'      ix/jmv[)((/juzJL0OO0x>}j(]<ll>+](rCh
+                                             Cn}+~>+""}}}qhdw*(/aaW*oWhl.-Oqc^".    I)qqLj/frucXUJJJUUYXc|fvxjf(}?~l"`:>-{/nYC
+                                             cr{](fvrnJJU0dhhLZZ0hhk#a#u>wUUQnnmr~"l)\Qc)/Y0CYcxjfjt\|())(())(()1{[]?_++_])fcJ
+                                         %%B%&8$omJznxxnn(1fLc(_C0vwkkCCzqcvvYb%$M\<Od}"..';~]|xY0ZOLUzvvvChbmJXJOW$$$
+                                       $MqQf}<<<!:"^`''""`_rrqkdqncQpwcvccvvzd8   Wm880t?+I.....',>}fcCq88L/+;;xzmMB
+                                 $%#bm0LQCLJf({jUQ0QLCJ0JcncLCd*JmdbqLvvvvccU0whCjfnjjXwdp0v/]i:^'....',+~`.',)v;~zO*%$
+                            $#bkwZJYn((]I `+{)|trcJQZwpp0YzQ0O*OhhbOQQ0QCCCXCddkhw)}trf/\\\(j0obQXuf([_>;,`.`]-I:|vh&8
+                          Bpn}-_<<<<~_]|cc|,    '>/vuuuvczXXU0baaakpZLYzcvvvuYko*8Yr)fYCUYXn{_-|O  $$B%MhbCfnO<wxO&#%
+                         %Q<i><<<<<<<<>}(\vQ/''-jcccccvvvvY0dkbwQYcvvcvvvvvvvu0a*&&wYf1rUJJJU[!;!}ud         %b%$W8
+                         %Q>><<<<<<<<<<}\|(|U0-lI;Ili|cvLdkq0Uvvvczv/[xcvvvczcChkkM8 mc\)nUJU{)v[,"_tL$
+                          %w|>><<<<<<<<+(|||)rq}    `nccQJcf)?xzcj?"  Invvnj)+-1OhkW8  Cx\(((\\\\}l. l}nZ
+                           $BZ)><<<<<<<<?\|||(/w/^  !Xcn(+:.  [/_l!~_--fYt?l"l>!~Cha8$   Lvunxf\){]?~>>?jJY
+                           Bpv{<<<<<<<<<<]\|||)fwz\>-j<^  .:<}cj[])trxrjjfJbvzvj1+Cn#B              $@aQuY~
+                           BJ>!><<<<<<<<<<-)()x0l"{cUznxnLLvndx,'''^;_)||Cmj(|/jXO]-W%
+                            Bpv1~ii>>>>>>>i~/Lw>'`',~}/z0Y\1X/.`^^^``'^/0X((|||(1LQt%
+                              $&qUuf|(((\xXYr\!.``''I|QX/((fL'`^^^^^`!YL\)|||||\(/ck@
+                                 $$BB%%BBdr?_-+l:"~xXv/(||(x0"'````^`{{cJj(||\|{~~ZB
+                                      B#n__-???_]nu]>+}(|\\|vJf`;lI^^`'`~uY\1[+!]pB
+                                     %&t+-???__rdd}ii><~-]{1{(cn}l;^^^^^''?O{!]zoB
+                                     %L+???-_\ZB $WQj[~>ii>><<>_jn~'`^^^^^.~w0*B
+                                     BU~__+]J&$    $@*qQv/{]?___+)0c:.`^^^^.]%$
+                                     $MY/fXb@          $@B&*abdbh#&Bp{''^^^^.X%
+                                       $B@$                         $%Ul'`'''<&%
+                                                                      @k["_?l"o%
+                                                                       $a:;I"_oB
+                                                                        8XtfYM@
+                                                                         $$$
+*/

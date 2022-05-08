@@ -13,8 +13,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class GreatCrusher extends AbstractCirnoCard {
 	
-	public static final String ID = "GreatCrusher";
-	public static final String IMG_PATH = "img/cards/GreatCrusher.png";
+	public static final String ID = GreatCrusher.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

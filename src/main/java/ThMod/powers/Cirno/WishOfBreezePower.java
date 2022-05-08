@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class WishOfBreezePower extends AbstractPower {
 	
-	public static final String POWER_ID = "WishOfBreezePower";
+	public static final String POWER_ID = WishOfBreezePower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
 			CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
 	public static final String NAME = powerStrings.NAME;

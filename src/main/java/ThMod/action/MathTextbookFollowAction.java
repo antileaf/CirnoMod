@@ -22,6 +22,8 @@ public class MathTextbookFollowAction extends AbstractGameAction {
 					AbstractDungeon.player.hand.moveToDiscardPile(card);
 					card.triggerOnManualDiscard();
 					GameActionManager.incrementDiscard(false);
+					
+//					this.addToTop(new WaitAction(0.2f));
 				}
 			}
 			

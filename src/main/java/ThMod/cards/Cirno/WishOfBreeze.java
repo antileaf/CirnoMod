@@ -12,8 +12,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class WishOfBreeze extends AbstractCirnoCard {
 	
-	public static final String ID = "WishOfBreeze";
-	public static final String IMG_PATH = "img/cards/WishOfBreeze.png";
+	public static final String ID = WishOfBreeze.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;

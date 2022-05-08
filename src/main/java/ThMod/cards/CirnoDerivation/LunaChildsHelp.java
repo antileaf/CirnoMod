@@ -1,19 +1,19 @@
-package ThMod.cards.CirnoChoiceCards;
+package ThMod.cards.CirnoDerivation;
 
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 
-public class StarSapphiresHelp extends SanyouseisHelp {
+public class LunaChildsHelp extends SanyouseisHelp {
 	
-	public static final String ID = "StarSapphiresHelp";
-	public static final String IMG_PATH = "img/cards/StarSapphiresHelp.png";
+	public static final String ID = LunaChildsHelp.class.getSimpleName();
+	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	
-	public StarSapphiresHelp() {
+	public LunaChildsHelp() {
 		super(
 			ID,
 			NAME,
@@ -21,11 +21,11 @@ public class StarSapphiresHelp extends SanyouseisHelp {
 			DESCRIPTION
 		);
 		
-		this.cardType = CardType.POWER;
+		this.cardType = CardType.SKILL;
 	}
 	
 	@Override
 	public AbstractCard makeCopy() {
-		return new StarSapphiresHelp();
+		return new LunaChildsHelp();
 	}
 }
