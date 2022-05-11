@@ -8,6 +8,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 public class FairyPunchUpdateHandAction extends AbstractGameAction {
 	
 	public FairyPunchUpdateHandAction() {
+		this.actionType = ActionType.SPECIAL;
 	}
 	
 	public void update() {

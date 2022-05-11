@@ -8,7 +8,10 @@ import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.Cirno.*;
 import ThMod.cards.CirnoDerivation.*;
 import ThMod.characters.Cirno;
-import ThMod.powers.Cirno.*;
+import ThMod.powers.Cirno.FairyPunchPower;
+import ThMod.powers.Cirno.FrostKingBlockPower;
+import ThMod.powers.Cirno.FrostKingMotivationPower;
+import ThMod.powers.Cirno.MotivationPower;
 import ThMod.relics.CrystalWings;
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -71,6 +74,7 @@ public class ThMod implements PostExhaustSubscriber,
 	private static final String ENERGY_ORB_CC_PORTRAIT = "img/1024/cardOrb.png";
 	
 	public static final Color CHILLED = CardHelper.getColor(0, 191, 255);
+	public static final Color CHILLED_FLAVOR = CardHelper.getColor(204, 255, 255);
 	public static final String CARD_ENERGY_ORB = "img/UI/energyOrb.png";
 	
 	private static final String MY_CHARACTER_BUTTON = "img/charSelect/CirnoButton.png";
@@ -101,6 +105,9 @@ public class ThMod implements PostExhaustSubscriber,
 	//private ArrayList<AbstractRelic> relicsToAdd = new ArrayList<>();
 	
 	public static int calcMotivated(AbstractCirnoCard card) { // 只计算 不修改
+		if (card.motivationCost == 0)
+			return 0;
+		
 		AbstractPlayer p = AbstractDungeon.player;
 		
 		if (!p.hasPower(MotivationPower.POWER_ID))
@@ -293,24 +300,15 @@ public class ThMod implements PostExhaustSubscriber,
 	}
 	
 	@Override
-	public void receiveCardUsed(AbstractCard card) {
-		ThMod.logger.info("ThMod : Card used : " + card.cardID + " ; cost : " + card.costForTurn);
-		if (
-				(card.costForTurn == 0) ||
-						(card.costForTurn <= -2) ||
-						((card.costForTurn == -1) && (AbstractDungeon.player.energy.energy <= 0))
-		) {
-//			typhoonCounter++;
-//			ThMod.logger.info("typhoon-counter increased , now :" + typhoonCounter);
+	public void receiveCardUsed(AbstractCard c) {
+//		ThMod.logger.info("ThMod : Card used : " + card.cardID + " ; cost : " + card.costForTurn);
+		
+		if (c instanceof AbstractCirnoCard) {
+			AbstractCirnoCard card = (AbstractCirnoCard) c;
+			card.setMotivated(ThMod.calcMotivated(card));
+			
+			logger.info("Try to calculateMotivated: " + card.cardID);
 		}
-//		if (card.retain) {
-//			card.retain = false;
-//		}
-//		if (card.hasTag(SPARK)) {
-//			AbstractDungeon.actionManager.addToTop(
-//					new SparkCostAction()
-//			);
-//		}
 	}
 	
 	@Override
@@ -491,7 +489,8 @@ public class ThMod implements PostExhaustSubscriber,
 		
 		cardsToAdd.add(new AbsoluteZero());
 //		cardsToAdd.add(new AchiCirno());
-		cardsToAdd.add(new AssaultArmor());
+		cardsToAdd.add(new AchiForm());
+//		cardsToAdd.add(new AssaultArmor());
 		cardsToAdd.add(new ButterflyFairysHelp());
 		cardsToAdd.add(new Chirumiru());
 		cardsToAdd.add(new ColdBeer());
@@ -501,12 +500,12 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new FairyPunch());
 		cardsToAdd.add(new FairySpin());
 		cardsToAdd.add(new Flee());
-		cardsToAdd.add(new FreezeActress());
+//		cardsToAdd.add(new FreezeActress());
 		cardsToAdd.add(new FreezeAtmosphere());
 		cardsToAdd.add(new FreezeDrying());
 		cardsToAdd.add(new FreezeTouchMe());
 		cardsToAdd.add(new FreezingBeams());
-//		cardsToAdd.add(new Fridge()); // 这张卡暂时没有效果，先删掉
+		cardsToAdd.add(new Fridge());
 		cardsToAdd.add(new FrostKing());
 		cardsToAdd.add(new FrostMeteor());
 		cardsToAdd.add(new FrostPillars());
@@ -518,16 +517,21 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new HighSpirit());
 		cardsToAdd.add(new IceArmor());
 		cardsToAdd.add(new IceBarrier());
+		cardsToAdd.add(new IceDumplings());
+		cardsToAdd.add(new IceDuplicate());
+		cardsToAdd.add(new IceExperience());
 		cardsToAdd.add(new IceFall());
 		cardsToAdd.add(new IceFishing());
 		cardsToAdd.add(new IceGrain());
-		cardsToAdd.add(new IceKick());
+//		cardsToAdd.add(new IceKick());
 		cardsToAdd.add(new IceMachineGun());
 		cardsToAdd.add(new IceSpear());
 		cardsToAdd.add(new IceWave());
 		cardsToAdd.add(new IcicleConeCrush());
 		cardsToAdd.add(new IcicleShot());
 		cardsToAdd.add(new ImFunky());
+		cardsToAdd.add(new KirisameMahouten());
+		cardsToAdd.add(new LilyWhitesHelp());
 		cardsToAdd.add(new LunaticFairysHelp());
 		cardsToAdd.add(new MinusK());
 		cardsToAdd.add(new NineMathTextbooks());
@@ -550,6 +554,8 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new SunnyMilksHelp());
 		cardsToAdd.add(new LunaChildsHelp());
 		cardsToAdd.add(new StarSapphiresHelp());
+		
+		cardsToAdd.add(new MarisasPotion());
 	}
 	
 	

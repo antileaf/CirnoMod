@@ -64,7 +64,7 @@ public class FreezeAtmosphere extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.magicNumber)));
 		for (AbstractMonster o : AbstractDungeon.getCurrRoom().monsters.monsters) {

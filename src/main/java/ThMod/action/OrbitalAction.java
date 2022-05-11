@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+@Deprecated
 public class OrbitalAction
 		extends AbstractGameAction {
 	

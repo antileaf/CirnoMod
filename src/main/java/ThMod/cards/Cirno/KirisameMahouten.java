@@ -1,65 +1,65 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
+import ThMod.cards.CirnoDerivation.MarisasPotion;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FrostKingBlockPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class FrostKing extends AbstractCirnoCard {
+import java.util.ArrayList;
+
+public class KirisameMahouten extends AbstractCirnoCard {
 	
-	public static final String ID = FrostKing.class.getSimpleName();
+	public static final String ID = KirisameMahouten.class.getSimpleName();
 	public static final String IMG_PATH = "img/cards/" + ID + ".png";
 	private static final CardStrings cardStrings =
 			CardCrawlGame.languagePack.getCardStrings(ID);
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-	private static final int COST = 1;
-	private static final int AMOUNT = 1;
-	private static final int BLOCK = 4;
-	private static final int UPGRADE_PLUS_BLOCK = 2;
+//	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+	private static final int COST = 2;
+	private static final int UPGRADED_COST = 1;
+	private static final int CNT = 3;
 	
-	public FrostKing() {
+	public KirisameMahouten() {
 		super(
 			ID,
 			NAME,
 			IMG_PATH,
 			COST,
 			DESCRIPTION,
-			CardType.POWER,
+			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
-			CardTarget.SELF
+			CardRarity.RARE,
+			CardTarget.NONE
 		);
 		
-		this.magicNumber = this.baseMagicNumber = AMOUNT;
-		this.block = this.baseBlock = BLOCK;
-	}
-	
-	@Override
-	public void applyPowersToBlock() {
-		this.block = this.baseBlock;
-		this.isBlockModified = false;
+		this.magicNumber = this.baseMagicNumber = CNT;
+		this.exhaust = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-//		this.addToBot(new ApplyPowerAction(p, p, new FrostKingMotivationPower(this.magicNumber)));
-		this.addToBot(new ApplyPowerAction(p, p, new FrostKingBlockPower(this.block)));
+		ArrayList<AbstractCard> choices = new ArrayList<>();
+		for (int i = 0; i < this.magicNumber; i++)
+			choices.add(new MarisasPotion(AbstractDungeon.returnRandomPotion()));
+		
+		this.addToBot(new ChooseOneAction(choices));
 	}
 	
 	public AbstractCard makeCopy() {
-		return new FrostKing();
+		return new KirisameMahouten();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
+			upgradeBaseCost(UPGRADED_COST);
 			initializeDescription();
 		}
 	}

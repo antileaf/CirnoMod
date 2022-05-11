@@ -1,6 +1,5 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.badlogic.gdx.math.MathUtils;
@@ -51,7 +50,7 @@ public class SwordFreezer extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		int attack = 0, skill = 0;
 		for (AbstractCard card : p.hand.group) {

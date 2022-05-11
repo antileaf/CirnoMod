@@ -9,6 +9,18 @@ import com.megacrit.cardcrawl.actions.unique.DiscoveryAction;
 
 public class FrostKingPatch {
 	
+//	static void work(AbstractGameAction act) throws NoSuchFieldException {
+//		if (act instanceof MakeTempCardInHandAction ||
+//			act instanceof MakeTempCardInDrawPileAction ||
+//			act instanceof MakeTempCardInDiscardAction ||
+//			act instanceof MakeTempCardAtBottomOfDeckAction ||
+//			act instanceof MakeTempCardInDiscardAndDeckAction) {
+//			if (act.isDone) {
+//				if (act.getClass().getDeclaredField("sameUUID").equals(false))
+//			}
+//		}
+//	}
+	
 	@SpirePatch(clz = MakeTempCardInHandAction.class, method = "update")
 	public static class FrostKingHandPatch {
 		@SpirePostfixPatch

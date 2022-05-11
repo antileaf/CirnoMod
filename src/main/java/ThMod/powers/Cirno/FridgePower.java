@@ -1,12 +1,17 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnPlayerDeathPower;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.potions.FairyPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.relics.LizardTail;
 
-public class FridgePower extends AbstractPower {
+public class FridgePower extends AbstractPower implements OnPlayerDeathPower {
 	
 	public static final String POWER_ID = FridgePower.class.getSimpleName();
 	private static final PowerStrings powerStrings =
@@ -38,17 +43,23 @@ public class FridgePower extends AbstractPower {
 			this.description = DESCRIPTIONS[1];
 	}
 	
-	@Override
-	public void onDeath() { // TODO: 目前有问题，无法阻止死亡
+	
+	@Override // interface form stslib
+	public boolean onPlayerDeath(AbstractPlayer p, DamageInfo info) {
+		if ((p.hasRelic(LizardTail.ID) && p.getRelic(LizardTail.ID).counter != -2) ||
+				p.hasPotion(FairyPotion.POTION_ID))
+			return true;
+		
 		if (!this.used) {
-			int healAmt = (int)(AbstractDungeon.player.maxHealth * 0.3);
-			if (healAmt < 1)
-				healAmt = 1;
+			p.currentHealth = 0;
 			
-			AbstractDungeon.player.heal(healAmt, true);
+			int val = Integer.max(1, (int) (0.3 * p.maxHealth));
+			p.heal(val);
 			
 			this.used = true;
-			updateDescription();
+			return false;
 		}
+		else
+			return true;
 	}
 }

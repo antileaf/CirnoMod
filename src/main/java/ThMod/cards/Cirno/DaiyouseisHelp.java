@@ -1,7 +1,7 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
-import ThMod.action.OrbitalAction;
+import ThMod.action.CirnoSelectAndMoveAction;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -40,12 +40,17 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 		
 		this.block = this.baseBlock = BLOCK;
 		this.magicNumber = this.baseMagicNumber = RETURN_CNT;
-		this.retain = true;
+		this.selfRetain = true;
 	}
 	
 	@Override
 	public boolean canUse(AbstractPlayer p, AbstractMonster m) {
 		return false;
+	}
+	
+	@Override
+	public String getCantPlayMessage() {
+		return cardStrings.EXTENDED_DESCRIPTION[0];
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -57,16 +62,17 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 //	}
 	
 	@Override
-	public void applyPowers() {
-		super.applyPowers();
-		
-		this.retain = true;
-	}
-	
-	@Override
 	public void triggerOnExhaust() {
-		for (int i = 0; i < this.magicNumber; i++)
-			this.addToBot(new OrbitalAction());
+//		this.addToBot(new FetchAction(
+//				AbstractDungeon.player.exhaustPile, this.magicNumber));
+		
+		AbstractPlayer p = AbstractDungeon.player;
+		this.addToBot(new CirnoSelectAndMoveAction(p.exhaustPile, p.hand, this.magicNumber,
+				cardStrings.EXTENDED_DESCRIPTION[1] + this.magicNumber +
+						cardStrings.EXTENDED_DESCRIPTION[2] + " (" + this.name + ")"));
+		
+//		for (int i = 0; i < this.magicNumber; i++)
+//			this.addToBot(new OrbitalAction());
 	}
 	
 	@Override

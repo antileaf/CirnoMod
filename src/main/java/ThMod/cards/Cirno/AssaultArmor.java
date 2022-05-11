@@ -2,7 +2,9 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
+import ThMod.powers.Cirno.ChillPower;
 import ThMod.powers.Cirno.CirnoOverloadPower;
+import ThMod.powers.Cirno.MotivationPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
@@ -23,8 +25,8 @@ public class AssaultArmor extends AbstractCirnoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 2;
 	
-	private static final int ATTACK_DMG = 30;
-	private static final int UPGRADE_PLUS_DMG = 10;
+	private static final int ATTACK_DMG = 22;
+	private static final int UPGRADE_PLUS_DMG = 6;
 	
 	public AssaultArmor() {
 		super(
@@ -35,7 +37,7 @@ public class AssaultArmor extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.RARE,
+			CardRarity.UNCOMMON,
 			CardTarget.ALL_ENEMY
 		);
 		
@@ -46,10 +48,10 @@ public class AssaultArmor extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.calculateCardDamage(null);
 		
-		if (p.hasPower("ChillPower"))
-			this.addToBot(new RemoveSpecificPowerAction(p, p, "ChillPower"));
-		if (p.hasPower("MotivationPower"))
-			this.addToBot(new RemoveSpecificPowerAction(p, p, "MotivationPower"));
+		if (p.hasPower(ChillPower.POWER_ID))
+			this.addToBot(new RemoveSpecificPowerAction(p, p, ChillPower.POWER_ID));
+		if (p.hasPower(MotivationPower.POWER_ID))
+			this.addToBot(new RemoveSpecificPowerAction(p, p, MotivationPower.POWER_ID));
 		
 		this.addToBot(new DamageAllEnemiesAction(p, this.multiDamage, this.damageTypeForTurn,
 				AbstractGameAction.AttackEffect.BLUNT_HEAVY));

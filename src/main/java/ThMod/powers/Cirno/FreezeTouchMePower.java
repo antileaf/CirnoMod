@@ -43,6 +43,11 @@ public class FreezeTouchMePower extends AbstractPower {
 	
 	// 相关功能在patch里
 	
+//	@Override // 据说 stslib 相关部分有 bug，没敢用
+//	public int onLoseBlock(DamageInfo damageInfo, int i) {
+//		return 0;
+//	}
+	
 	@Override
 	public void atStartOfTurn() {
 		if (--this.amount <= 0)

@@ -6,7 +6,7 @@
   ],
   "description": "Adds Cirno（チルノ，琪露诺） from Touhou Project as a new playable character.",
   "dependencies": [
-    "basemod"
+    "basemod", "stslib"
   ],
   "version": "0.0.1",
   "sts_version": "12-06-2019v2",

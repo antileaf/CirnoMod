@@ -1,6 +1,5 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -52,7 +51,7 @@ public class FairySpin extends AbstractCirnoCard {
 	
 	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		int cnt = this.magicNumber + this.motivatedCnt;
 		

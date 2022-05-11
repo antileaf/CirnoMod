@@ -3,9 +3,10 @@
     "NAME": "绝对零度",
     "DESCRIPTION": "每当你 消耗 一张牌，获得 !M! 层 寒冷 。"
   },
-  "AchiCirno": {
-    "NAME": "炎之妖精",
-    "DESCRIPTION": "抽⑨张牌。 NL 受到⑨点伤害两次。 NL 干劲 1：改为受到⑨点伤害一次。"
+  "AchiForm": {
+    "NAME": "火焰形态",
+    "DESCRIPTION": "每回合开始时，检视抽牌堆顶的 !M! 张牌。 NL 选择任意张将其打出并 消耗 ，再抽取其余的牌。",
+    "FLAVOR": "打出顺序与你选择的顺序相同。"
   },
   "AssaultArmor": {
     "NAME": "强袭装甲",
@@ -18,8 +19,8 @@
   },
   "Chirumiru": {
     "NAME": "琪露奶粉",
-    "DESCRIPTION": "获得2层 寒冷 与1点 干劲 ，再获得 !B! 点格挡。 NL 抽 !M! 张牌。",
-    "UPGRADE_DESCRIPTION": "获得3层 寒冷 与2点 干劲 ，再获得 !B! 点格挡。 NL 抽 !M! 张牌。"
+    "DESCRIPTION": "获得2层 寒冷 与1点 干劲 。 NL 获得 !B! 点格挡。 NL 抽 !M! 张牌。",
+    "UPGRADE_DESCRIPTION": "获得3层 寒冷 与2点 干劲 。 NL 获得 !B! 点格挡。 NL 抽 !M! 张牌。"
   },
   "ColdBeer": {
     "NAME": "冰镇啤⑨",
@@ -32,7 +33,10 @@
   },
   "DaiyouseisHelp": {
     "NAME": "无名妖精之援",
-    "DESCRIPTION": "不能被打出 。 保留 。 NL 每当该牌被 保留 时，获得 !B! 点格挡。 NL 当这张牌被 消耗 时，选择并获得 !M! 张已 消耗 的牌。"
+    "DESCRIPTION": "不能被打出 。 保留 。 NL 每当该牌被 保留 时，获得 !B! 点格挡。 NL 当这张牌被 消耗 时，选择并获得 !M! 张已 消耗 的牌。",
+    "EXTENDED_DESCRIPTION": [
+      "这张牌不能被打出。", "选择", "张牌移回手牌"
+    ]
   },
   "DiamondBlizzard": {
     "NAME": "钻石风暴",
@@ -78,11 +82,12 @@
   "Fridge": {
     "NAME": "冰箱",
     "DESCRIPTION": "仅在本场战斗中，当你即将死亡时，免死一次并将生命值恢复至30%。 NL 这个效果无法叠加。",
-    "UPGRADE_DESCRIPTION": "固有 。 NL 仅在本场战斗中，当你即将死亡时，免死一次并将生命值恢复至30%。 NL 这个效果无法叠加。"
+    "UPGRADE_DESCRIPTION": "固有 。 NL 仅在本场战斗中，当你即将死亡时，免死一次并将生命值恢复至30%。 NL 这个效果无法叠加。",
+    "FLAVOR": "这个能力的优先级低于蜥蜴尾巴与瓶装精灵。 NL 在你已经拥有这张卡时，这张卡不会出现在随机池中。"
   },
   "FrostKing": {
     "NAME": "霜冻之王",
-    "DESCRIPTION": "每当你在战斗中临时获得一张牌，就获得 !M! 点 干劲 和 !B! 点 格挡 。"
+    "DESCRIPTION": "每当你在战斗中临时获得一张牌，就获得 !B! 点 格挡 。"
   },
   "FrostMeteor": {
     "NAME": "凝结流星",
@@ -134,6 +139,22 @@
     "NAME": "冰冻屏障",
     "DESCRIPTION": "获得 !B! 点 格挡 。"
   },
+  "IceDumplings": {
+    "NAME": "冰团子",
+    "DESCRIPTION": "消耗 你手牌中每种不同的牌各一张。 NL 每 消耗 一张，就获得 !B! 点 格挡 。"
+  },
+  "IceDuplicate": {
+    "NAME": "寒冰复制",
+    "DESCRIPTION": "只有在你的手牌中没有相同的牌时才能打出。 NL 将一张手牌复制 !M! 份。",
+    "EXTENDED_DESCRIPTION": [
+      "我的手牌中含有相同的牌：", "、", "。", "选择一张牌复制", "份"
+    ]
+  },
+  "IceExperience": {
+    "NAME": "寒冰体验",
+    "DESCRIPTION": "将你的手牌替换为等量的随机牌。 NL 回合结束时，将手牌 消耗 ，取回等量的原有手牌，多余的置入弃牌堆。 消耗 。",
+    "UPGRADE_DESCRIPTION": "将你的手牌替换为等量的 升级 过的随机牌。 NL 回合结束时，将手牌 消耗 ，取回等量的原有手牌，多余的置入弃牌堆。 消耗 。"
+  },
   "IceFall": {
     "NAME": "冰瀑",
     "DESCRIPTION": "当前每有一名敌人，获得 !M! 点 干劲 。 NL 对所有敌人造成 !D! 点伤害。"
@@ -173,13 +194,22 @@
   },
   "ImFunky": {
     "NAME": "迷之舞步",
-    "DESCRIPTION": "每抽一张牌，获得 !M! 层 寒冷 。 NL 虚无 。",
-    "UPGRADE_DESCRIPTION": "每抽一张牌，获得 !M! 层 寒冷 。"
+    "DESCRIPTION": "每抽 3 张牌，获得 !M! 层 寒冷 。 NL 虚无 。",
+    "UPGRADE_DESCRIPTION": "每抽 3 张牌，获得 !M! 层 寒冷 。"
+  },
+  "KirisameMahouten": {
+    "NAME": "路过的魔法店",
+    "DESCRIPTION": "从 !M! 瓶随机药水中选择一瓶，将其加入战斗奖励中。 NL 消耗 。"
+  },
+  "LilyWhitesHelp": {
+    "NAME": "报春妖精之援",
+    "DESCRIPTION": "消耗 至多 !M! 张手牌。每 消耗 一张，就随机 消耗 你抽牌堆或弃牌堆中的一张状态牌或诅咒牌。 NL 消耗 。",
+    "EXTENDED_DESCRIPTION": ["选择至多", "张手牌消耗"]
   },
   "LunaticFairysHelp": {
     "NAME": "狂气妖精之援",
-    "DESCRIPTION": "每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的一张随机牌。",
-    "UPGRADE_DESCRIPTION": "固有 。每回合开始时多获得 [E] 。每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的一张随机牌。"
+    "DESCRIPTION": "每回合开始时多获得 [E] 。 NL 每当你抽到一张牌，都将其 消耗 。如果这张牌不是状态牌或者诅咒牌，获得相同 类别 的一张随机牌。",
+    "UPGRADE_DESCRIPTION": "固有 。每回合开始时多获得 [E] 。 NL 每当你抽到一张牌，都将其 消耗 。如果这张牌不是状态牌或者诅咒牌，获得相同 类别 的一张随机牌。"
   },
   "MinusK": {
     "NAME": "负K",
@@ -204,7 +234,8 @@
   },
   "PerfectSummerIce": {
     "NAME": "完美的夏日之冰",
-    "DESCRIPTION": "每回合开始时，随机将 !M! 张 类别 与稀有度互不相同的牌加入你的手牌。"
+    "DESCRIPTION": "每回合开始时，随机将 !M! 张 类别 与稀有度互不相同的牌加入你的手牌。",
+    "FLAVOR": "如果你已拥有 3 层该能力，这张牌就不会出现在随机池中。"
   },
   "SecretSmoothie": {
     "NAME": "秘制冰沙",
@@ -271,6 +302,12 @@
     "NAME": "蓝色的课本",
     "DESCRIPTION": "只保留能力牌。"
   },
+  "MarisasPotion": {
+    "NAME": "魔理沙的药水",
+    "DESCRIPTION": "获得一瓶对应药水。",
+    "FLAVOR": "很抱歉目前描述有一些问题，暂时将就一下。"
+  },
+  
   
   "IceCharge": {
     "NAME": "冰冻冲刺",
@@ -284,19 +321,9 @@
     "NAME": "碎冰龙卷",
     "DESCRIPTION": "消耗 手牌中所有攻击牌。 NL 每 消耗 一张，造成 !D! 张伤害。"
   },
-  "IceExperience": {
-    "NAME": "寒冰体验",
-    "DESCRIPTION": "将你的手牌替换为等量的随机牌。 NL 回合结束时，将手牌 消耗 ，随机取回等量的原有手牌，多余的置入弃牌堆。 消耗 。",
-    "UPGRADE_DESCRIPTION": "将你的手牌替换为等量的 升级 过的随机牌。 NL 回合结束时，将手牌 消耗 ，选择等量的原有手牌取回，多余的置入弃牌堆。 消耗 。"
-  },
-
-  "Occultation": {
-    "NAME": "掩星",
-    "DESCRIPTION": "将抽牌堆的卡全部放入弃牌堆，每一张使你获得1点 格挡 。",
-    "UPGRADE_DESCRIPTION": "将抽牌堆的卡全部放入弃牌堆，每一张使你获得1点 格挡 。 NL 获得3点 格挡 。",
-    "EXTENDED_DESCRIPTION": [
-      "（获得 !B! 点格挡）",
-      ""
-    ]
+  
+  "AchiCirno": {
+    "NAME": "炎之妖精",
+    "DESCRIPTION": "抽⑨张牌。 NL 受到⑨点伤害两次。 NL 干劲 1：改为受到⑨点伤害一次。"
   }
 }

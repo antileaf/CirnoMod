@@ -1,6 +1,5 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -45,7 +44,7 @@ public class FreezeActress extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		int cnt = 1 + this.motivatedCnt;
 		this.baseDamage = 0;

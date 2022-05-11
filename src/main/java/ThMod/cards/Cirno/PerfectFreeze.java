@@ -55,8 +55,17 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		this.isMultiDamage = true;
 	}
 	
+//	@Override
+//	public void initializeDescription() {
+//
+//
+//		super.initializeDescription();
+//	}
+	
 	@Override
-	public void initializeDescription() {
+	public void applyPowers() {
+		super.applyPowers();
+		
 		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
 		
 		if (AbstractDungeon.isPlayerInDungeon()) {
@@ -67,13 +76,6 @@ public class PerfectFreeze extends AbstractCirnoCard {
 			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
 					cnt + cardStrings.EXTENDED_DESCRIPTION[1];
 		}
-		
-		super.initializeDescription();
-	}
-	
-	@Override
-	public void applyPowers() {
-		super.applyPowers();
 		
 		this.initializeDescription();
 	}
@@ -87,7 +89,7 @@ public class PerfectFreeze extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		if (this.isMotivated) {
 			this.calculateCardDamage(null);

@@ -26,8 +26,9 @@ public class Chirumiru extends AbstractCirnoCard {
 	private static final int CHILL = 2;
 	private static final int UPGRADE_PLUS_CHILL = 1;
 	private static final int MOTIVATION_GAIN = 1;
-	private static final int BLOCK = 0;
 	private static final int UPGRADE_PLUS_MOTIVATION_GAIN = 1;
+	private static final int BLOCK = 3;
+	private static final int UPGRADE_PLUS_BLOCK = 1;
 	private static final int DRAW_CNT = 1;
 	
 	public Chirumiru() {
@@ -66,6 +67,7 @@ public class Chirumiru extends AbstractCirnoCard {
 			
 			this.chillGain += UPGRADE_PLUS_CHILL;
 			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
+			upgradeBlock(UPGRADE_PLUS_BLOCK);
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}

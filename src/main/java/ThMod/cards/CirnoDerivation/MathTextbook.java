@@ -1,13 +1,13 @@
 package ThMod.cards.CirnoDerivation;
 
+import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.action.MathTextbookFollowAction;
 import ThMod.patches.AbstractCardEnum;
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class MathTextbook extends CustomCard {
+public class MathTextbook extends AbstractCirnoCard {
 	private static final int COST = -2;
 	private static final int CNT = 4;
 	private static final int UPGRADED_CNT = 6;

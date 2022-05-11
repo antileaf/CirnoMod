@@ -1,6 +1,5 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.CirnoDerivation.LunaChildsHelp;
 import ThMod.cards.CirnoDerivation.StarSapphiresHelp;
@@ -47,7 +46,7 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		ArrayList<AbstractCard> choices = new ArrayList<>();
 		choices.add(new SunnyMilksHelp());
@@ -65,7 +64,7 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 		else {
 			AbstractCard card = choices.get(AbstractDungeon.cardRng.random(0, choices.size() - 1));
 			this.addToBot(new ChooseOneAction(new ArrayList<>(
-					Collections.singletonList(card.makeCopy()))));
+					Collections.singletonList(card))));
 //			this.addToBot(new MakeTempCardInHandAction(card));
 		}
 		

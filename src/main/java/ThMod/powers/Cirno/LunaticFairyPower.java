@@ -44,12 +44,8 @@ public class LunaticFairyPower extends AbstractPower {
 	@Override
 	public void onCardDraw(AbstractCard card) {
 		this.addToTop(new CirnoExhaustSpecificCardAction(card, AbstractDungeon.player.hand));
-	}
-	
-	@Override
-	public void onExhaust(AbstractCard card) {
-		if (card.type == AbstractCard.CardType.ATTACK || card.type == AbstractCard.CardType.SKILL
-				|| card.type == AbstractCard.CardType.POWER) {
+		
+		if (card.type != AbstractCard.CardType.STATUS && card.type != AbstractCard.CardType.CURSE) {
 			for (int i = 0; i < this.amount; i++) {
 				this.addToBot(new MakeTempCardInHandAction(
 						AbstractDungeon.returnTrulyRandomCardInCombat(card.type).makeCopy()));

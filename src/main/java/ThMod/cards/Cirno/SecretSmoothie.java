@@ -52,7 +52,7 @@ public class SecretSmoothie extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			upgradeName();
 			
-			this.retain = true;
+			this.selfRetain = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			initializeDescription();
 		}

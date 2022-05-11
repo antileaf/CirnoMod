@@ -2,13 +2,20 @@
   "AbsoluteZeroPower": {
     "NAME": "绝对零度",
     "DESCRIPTIONS": [
-      "每当你 消耗 一张牌，获得", "层 寒冷 。"
+      "每当你 消耗 一张牌，获得 #b", " 层 寒冷 。"
     ]
   },
+  "AchiFormPower": {
+  "NAME": "火焰形态",
+  "DESCRIPTIONS": [
+    "每回合开始时，检视抽牌堆顶的 #b", " 张牌。 NL 选择任意张打出并 消耗 ，并抽取其余的牌。 NL （打出顺序与你选择的顺序相同。）",
+    "选择任意张牌打出并消耗"
+  ]
+},
   "ChillPower": {
     "NAME": "寒冷",
     "DESCRIPTIONS": [
-      "使你的攻击伤害和从卡牌中获得的格挡增加", "点。 NL 在你的回合开始时，其层数将会减半。"
+      "使你的攻击伤害和从卡牌中获得的格挡增加 #b", " 点。 NL 在你的回合开始时，其层数将会减半。"
     ]
   },
   "CirnoOverloadPower": {
@@ -20,7 +27,7 @@
   "FairyPunchPower": {
     "NAME": "妖精拳",
     "DESCRIPTIONS": [
-      "本回合内，若你打出的下", "张牌是攻击牌，其耗能减少 [E] 。"
+      "本回合内，若你打出的下 #b", " 张牌是攻击牌，其耗能减少 [E] 。"
     ]
   },
   "FleeingPower": {
@@ -38,91 +45,105 @@
   "FridgePower": {
     "NAME": "冰箱",
     "DESCRIPTIONS": [
-      "当你即将死亡时，免死并恢复 #b30% 生命。", "你在本场战斗中已经触发过冰箱效果了。"
+      "当你即将死亡时，免死并恢复 #b30% 生命。 NL （这个效果的优先级低于蜥蜴尾巴与瓶装精灵。）",
+      "冰箱已经被笨蛋琪露诺弄坏了！ NL 你在本场战斗中无法再触发冰箱效果。"
     ]
   },
   "FrostKingBlockPower": {
-    "NAME": "霜冻格挡",
+    "NAME": "霜冻之王",
     "DESCRIPTIONS": [
-      "每当你临时获得一张牌，就获得", "点 格挡 。"
+      "每当你临时获得一张牌，就获得 #b", " 点 格挡 。"
     ]
   },
   "FrostKingMotivationPower": {
-    "NAME": "霜冻之王",
+    "NAME": "霜冻之王-干劲",
     "DESCRIPTIONS": [
-      "每当你临时获得一张牌，就获得", "点 干劲 。"
+      "每当你临时获得一张牌，就获得 #b", " 点 干劲 。"
     ]
   },
   "FrostMeteorPower": {
     "NAME": "凝结流星",
     "DESCRIPTIONS": [
-      "下", "次 消耗 一张攻击牌或技能牌时，改为将其置入弃牌堆。"
+      "下 #b", " 次 消耗 一张攻击牌或技能牌时，改为将其置入弃牌堆。"
     ]
   },
   "FrostPillarsPower": {
     "NAME": "冰柱",
     "DESCRIPTIONS": [
-      "下一名攻击你的敌人将会受到", "点伤害。"
+      "下一名攻击你的敌人将会受到 #b", " 点伤害。"
     ]
   },
   "FrozenSpringHealPower": {
     "NAME": "冰冻温泉",
     "DESCRIPTIONS": [
-      "下", "次 消耗 一张牌时，恢复 #b1 点生命。"
+      "下 #b", " 次 消耗 一张牌时，恢复 #b1 点生命。"
     ]
   },
   "FrozenSpringMotivationPower": {
     "NAME": "冰冻温泉！",
     "DESCRIPTIONS": [
-      "下", "次 消耗 一张牌时，获得 #b1 点 干劲 。"
+      "下 #b", " 次 消耗 一张牌时，获得 #b1 点 干劲 。"
     ]
   },
   "FunkyPower": {
     "NAME": "贫民区舞后",
     "DESCRIPTIONS": [
-      "每抽一张牌，获得", "层 寒冷 。"
+      "再抽 #b", " 张牌，获得 #b", " 层 寒冷 。"
+    ]
+  },
+  "IceExperiencePower": {
+    "NAME": "寒冰体验",
+    "DESCRIPTIONS": [
+      "回合结束时， 消耗 所有手牌，并随机取回等量已存储的牌。 NL 当前已存储的牌有：", "、", "。",
+      "选择", "张牌加入手牌"
     ]
   },
   "IceWavePower": {
     "NAME": "冰斩波",
     "DESCRIPTIONS": [
-      "你的冰斩波的基础伤害与格挡增加", "点。"
+      "你的冰斩波的基础伤害与格挡增加 #b", " 点。"
+    ]
+  },
+  "KirisameMahoutenPower": {
+    "NAME": "路过的魔法店",
+    "DESCRIPTIONS": [
+      "战斗奖励中增加以下药水：", "、", "。"
     ]
   },
   "LunaticFairyPower": {
     "NAME": "狂气",
     "DESCRIPTIONS": [
-      "每回合开始时额外获得", "点 能量 。 NL 每当你抽到一张牌，都将其 消耗 。 NL 每当你 消耗 一张攻击牌、技能牌或能力牌时，获得对应 类别 的", "张随机牌。"
+      "每回合开始时额外获得 #b", " 点 能量 。 NL 每当你抽到一张牌，都将其 消耗 。如果这张牌不是状态牌或诅咒牌，获得对应 类别 的 #b", " 张随机牌。"
     ]
   },
   "MinusKPower": {
     "NAME": "负K",
     "DESCRIPTIONS": [
-      "下", "次 消耗 一张牌时，获得 [E] 。"
+      "下 #b", " 次 消耗 一张牌时，获得 [E] 。"
     ]
   },
   "MotivationPower": {
     "NAME": "干劲",
     "DESCRIPTIONS": [
-      "你当前拥有", "点 干劲 。"
+      "你当前拥有 #b", " 点 干劲 。"
     ]
   },
   "PerfectSummerIcePower": {
     "NAME": "完美的夏日之冰",
     "DESCRIPTIONS": [
-      "每回合开始时，随机将", "张 类别 与稀有度互不相同的牌加入你的手牌。"
+      "每回合开始时，随机将 #b", " 张 类别 与稀有度互不相同的牌加入你的手牌。"
     ]
   },
   "SecretSmoothiePower": {
     "NAME": "刨冰！",
     "DESCRIPTIONS": [
-      "回合结束时，恢复相当于你的 寒冷 层数", "倍的生命值。"
+      "回合结束时，恢复相当于你的 寒冷 层数 #b", " 倍的生命值。"
     ]
   },
   "WishOfBreezePower": {
     "NAME": "微风祈愿",
     "DESCRIPTIONS": [
-      "每回合结束时，随机将弃牌堆中的", "张牌返回手牌。"
+      "每回合结束时，随机将弃牌堆中的 #b", " 张牌返回手牌。"
     ]
   },
   

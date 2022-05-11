@@ -24,7 +24,7 @@ public class ColdBeer extends AbstractCirnoCard {
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 2;
 	private static final int MOTIVATION_GAIN = 5;
-	private static final int UPGRADE_PLUS_MOTIVATION_GAIN = 1;
+	private static final int UPGRADE_PLUS_MOTIVATION_GAIN = 2;
 	private static final int STRENGTH_LOSE = 99;
 	
 	public ColdBeer() {

@@ -22,8 +22,8 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 2;
 	
-	private static final int ATTACK_DMG = 24;
-	private static final int UPGRADE_PLUS_DMG = 6;
+	private static final int ATTACK_DMG = 30;
+	private static final int UPGRADE_PLUS_DMG = 10;
 	
 	public GiganticIceMagic() {
 		super(

@@ -1,8 +1,8 @@
 package ThMod.cards.CirnoDerivation;
 
+import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.action.CirnoDiscoveryAction;
 import ThMod.patches.AbstractCardEnum;
-import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class SanyouseisHelp extends CustomCard {
+public class SanyouseisHelp extends AbstractCirnoCard {
 	private static final int COST = -2;
 	protected CardType cardType;
 	

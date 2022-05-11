@@ -3,9 +3,13 @@ package ThMod.abstracts;
 import ThMod.ThMod;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.SpawnModificationCard;
+import com.evacipated.cardcrawl.mod.stslib.patches.FlavorText;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
-public abstract class AbstractCirnoCard extends CustomCard {
+import static ThMod.ThMod.CHILLED_FLAVOR;
+
+public abstract class AbstractCirnoCard extends CustomCard implements SpawnModificationCard {
 	protected static final Color CYAN_COLOR = new Color(0f, 204f / 255f, 0f, 1f);
 	
 	public int motivationCost = 0; // -1 means all
@@ -13,6 +17,8 @@ public abstract class AbstractCirnoCard extends CustomCard {
 	public int chillGain = 0;
 	public boolean isMotivated = false;
 	public int motivatedCnt = 0;
+	
+	public boolean dontUsePatch = false;
 	
 	public AbstractCirnoCard(
 			String id,
@@ -36,6 +42,14 @@ public abstract class AbstractCirnoCard extends CustomCard {
 				rarity,
 				target
 		);
+		
+//		FlavorText.AbstractCardFlavorFields.textColor.set(this, CHILLED);
+		FlavorText.AbstractCardFlavorFields.boxColor.set(this, CHILLED_FLAVOR);
+		
+//		this.Abstract = new SpireField(var10002::cpy);
+//		var10002 = Color.BLACK;
+//		var10002.getClass();
+//		textColor = new SpireField(var10002::cpy);
 	}
 	
 	public void setMotivated(int motivatedCnt) {

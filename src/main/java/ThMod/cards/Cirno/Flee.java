@@ -43,7 +43,10 @@ public class Flee extends AbstractCirnoCard {
 		
 		this.magicNumber = this.baseMagicNumber = ROUND_CNT;
 		this.motivationCost = MOTIVATION_COST;
+//		this.exhaust = true;
 		this.isEthereal = true;
+		
+		this.dontUsePatch = true;
 	}
 	
 	@Override

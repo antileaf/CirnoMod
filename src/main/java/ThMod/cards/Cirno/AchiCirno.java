@@ -1,6 +1,5 @@
 package ThMod.cards.Cirno;
 
-import ThMod.ThMod;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -39,7 +38,7 @@ public class AchiCirno extends AbstractCirnoCard {
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
 			CardRarity.UNCOMMON,
-			CardTarget.SELF
+			CardTarget.NONE
 		);
 		
 		this.magicNumber = this.baseMagicNumber = SELF_DAMAGE;
@@ -47,7 +46,7 @@ public class AchiCirno extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.setMotivated(ThMod.calcMotivated(this));
+//		this.setMotivated(ThMod.calcMotivated(this));
 		
 		this.addToBot(new DrawCardAction(DRAW_CNT));
 		
