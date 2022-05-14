@@ -48,16 +48,17 @@ public class MinusK extends AbstractCirnoCard {
 			p.energy.use(EnergyPanel.totalCount);
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new MinusK();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

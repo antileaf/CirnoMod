@@ -43,18 +43,19 @@ public class ImFunky extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new FunkyPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new ImFunky();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 //			upgradeBaseCost(UPGRADED_COST);
 			this.isEthereal = false;
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

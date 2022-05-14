@@ -46,16 +46,17 @@ public class IceGrain extends AbstractCirnoCard {
 				AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceGrain();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
+			this.initializeDescription();
 		}
 	}
 }

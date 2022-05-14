@@ -22,7 +22,7 @@ public class ColdBeer extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 2;
+	private static final int COST = 1;
 	private static final int MOTIVATION_GAIN = 5;
 	private static final int UPGRADE_PLUS_MOTIVATION_GAIN = 2;
 	private static final int STRENGTH_LOSE = 99;
@@ -36,7 +36,7 @@ public class ColdBeer extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
+			CardRarity.COMMON,
 			CardTarget.SELF
 		);
 		
@@ -54,16 +54,17 @@ public class ColdBeer extends AbstractCirnoCard {
 					new GainStrengthPower(p, STRENGTH_LOSE)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new ColdBeer();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_MOTIVATION_GAIN);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_MOTIVATION_GAIN);
+			this.initializeDescription();
 		}
 	}
 }

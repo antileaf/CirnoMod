@@ -40,16 +40,17 @@ public class IceExperience extends AbstractCirnoCard {
 		this.addToBot(new IceExperienceAction(this.upgraded));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceExperience();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

@@ -63,9 +63,9 @@ public class MarisasPotion extends AbstractCirnoCard {
 	
 	public void upgrade() {
 		if (!this.upgraded) { // 正常不应该升级
-			upgradeName();
+			this.upgradeName();
 			
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

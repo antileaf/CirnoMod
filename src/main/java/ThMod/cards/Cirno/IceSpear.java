@@ -87,17 +87,18 @@ public class IceSpear extends AbstractCirnoCard {
 				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceSpear();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeMagicNumber(UPGRADE_PLUS_AMPLIFIED_ATTACK_DMG);
+			this.initializeDescription();
 		}
 	}
 }

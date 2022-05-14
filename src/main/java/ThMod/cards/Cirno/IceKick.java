@@ -44,7 +44,6 @@ public class IceKick extends AbstractCirnoCard {
 //		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
-	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new DamageAction(p, new DamageInfo(p,
 				this.magicNumber, DamageInfo.DamageType.THORNS)));
@@ -52,18 +51,18 @@ public class IceKick extends AbstractCirnoCard {
 				this.damage, this.damageTypeForTurn)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceKick();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_RETURN_DAMAGE);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
+			this.upgradeMagicNumber(UPGRADE_PLUS_RETURN_DAMAGE);
+			this.initializeDescription();
 		}
 	}
 }

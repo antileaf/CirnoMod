@@ -50,30 +50,6 @@ public class Flee extends AbstractCirnoCard {
 	}
 	
 	@Override
-	public void initializeDescription() {
-		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
-		
-		if (AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player.hand.group.contains(this)) {
-			int cnt = this.magicNumber;
-			
-			AbstractPlayer p = AbstractDungeon.player;
-			if (p.hasPower("MotivationPower"))
-				cnt -= p.getPower("MotivationPower").amount;
-			
-			this.rawDescription += " NL ";
-			
-			if (cnt > 1)
-				this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
-						cnt + cardStrings.EXTENDED_DESCRIPTION[1];
-			else
-				this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
-						cardStrings.EXTENDED_DESCRIPTION[2];
-		}
-		
-		super.initializeDescription();
-	}
-	
-	@Override
 	public void triggerOnGlowCheck() {
 		super.triggerOnGlowCheck();
 		
@@ -85,6 +61,33 @@ public class Flee extends AbstractCirnoCard {
 			if (cnt <= 1)
 				this.glowColor = GOLD_BORDER_GLOW_COLOR;
 		}
+	}
+	
+	@Override
+	public void applyPowers() {
+		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
+		int cnt = this.magicNumber;
+		
+		AbstractPlayer p = AbstractDungeon.player;
+		if (p.hasPower("MotivationPower"))
+			cnt -= p.getPower("MotivationPower").amount;
+		
+		this.rawDescription += " NL ";
+		
+		if (cnt > 1)
+			this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
+					cnt + cardStrings.EXTENDED_DESCRIPTION[1];
+		else
+			this.rawDescription += cardStrings.EXTENDED_DESCRIPTION[0] +
+					cardStrings.EXTENDED_DESCRIPTION[2];
+		
+		this.initializeDescription();
+	}
+	
+	@Override
+	public void onMoveToDiscard() {
+		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
+		this.initializeDescription();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -115,11 +118,11 @@ public class Flee extends AbstractCirnoCard {
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.isInnate = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

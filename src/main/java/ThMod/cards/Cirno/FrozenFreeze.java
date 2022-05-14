@@ -19,7 +19,7 @@ public class FrozenFreeze extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 1;
-	private static final int BLOCK = 10;
+	private static final int BLOCK = 11;
 	private static final int UPGRADE_PLUS_BLOCK = 3;
 	
 	public FrozenFreeze() {
@@ -31,7 +31,7 @@ public class FrozenFreeze extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.COMMON,
+			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		
@@ -43,16 +43,17 @@ public class FrozenFreeze extends AbstractCirnoCard {
 		this.addToBot(new GainBlockAction(p, this.block));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FrozenFreeze();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			initializeDescription();
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.initializeDescription();
 		}
 	}
 }

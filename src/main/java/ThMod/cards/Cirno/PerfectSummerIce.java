@@ -42,16 +42,17 @@ public class PerfectSummerIce extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new PerfectSummerIcePower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new PerfectSummerIce();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_AMOUNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_AMOUNT);
+			this.initializeDescription();
 		}
 	}
 }

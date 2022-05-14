@@ -47,17 +47,18 @@ public class FrostPillars extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new FrostPillarsPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FrostPillars();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			upgradeMagicNumber(UPGRADE_RETURN_DAMAGE);
-			initializeDescription();
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeMagicNumber(UPGRADE_RETURN_DAMAGE);
+			this.initializeDescription();
 		}
 	}
 }

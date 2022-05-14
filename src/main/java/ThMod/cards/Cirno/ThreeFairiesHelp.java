@@ -79,10 +79,10 @@ public class ThreeFairiesHelp extends AbstractCirnoCard {
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

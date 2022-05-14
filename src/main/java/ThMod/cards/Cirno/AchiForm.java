@@ -43,17 +43,18 @@ public class AchiForm extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new AchiFormPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new AchiForm();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 //			upgradeBaseCost(UPGRADED_COST);
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.initializeDescription();
 		}
 	}
 }

@@ -40,16 +40,17 @@ public class SnowmanInMidsummer extends AbstractCirnoCard {
 		this.addToBot(new SnowmanInMidsummerAction(this.upgraded));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new SnowmanInMidsummer();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

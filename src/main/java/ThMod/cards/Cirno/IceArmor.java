@@ -65,17 +65,18 @@ public class IceArmor extends AbstractCirnoCard {
 			this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceArmor();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			upgradeMagicNumber(UPGRADE_PLUS_HAND_SIZE);
-			initializeDescription();
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeMagicNumber(UPGRADE_PLUS_HAND_SIZE);
+			this.initializeDescription();
 		}
 	}
 }

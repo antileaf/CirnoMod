@@ -20,7 +20,7 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = -2;
-	private static final int BLOCK = 5;
+	private static final int BLOCK = 3;
 	private static final int UPGRADE_PLUS_BLOCK = 2;
 	private static final int RETURN_CNT = 1;
 	private static final int UPGRADE_PLUS_RETURN_CNT = 1;
@@ -34,7 +34,7 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.SKILL,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.UNCOMMON,
+			CardRarity.RARE,
 			CardTarget.NONE
 		);
 		
@@ -45,12 +45,8 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 	
 	@Override
 	public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+		this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
 		return false;
-	}
-	
-	@Override
-	public String getCantPlayMessage() {
-		return cardStrings.EXTENDED_DESCRIPTION[0];
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -79,8 +75,11 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 	public void onRetained() {
 		applyPowers();
 		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
+//		AbstractPlayer p = AbstractDungeon.player;
+//		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new DaiyouseisHelp();
 	}

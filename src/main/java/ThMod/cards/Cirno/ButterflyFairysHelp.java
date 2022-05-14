@@ -44,7 +44,6 @@ public class ButterflyFairysHelp extends AbstractCirnoCard {
 //		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
-	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		for (int i = 0; i < this.magicNumber; i++) {
 			this.addToBot(new ButterflyFairysHelpSingleAction(
@@ -57,18 +56,18 @@ public class ButterflyFairysHelp extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new ButterflyFairysHelp();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 //			upgradeMagicNumber(UPGRADE_PLUS_CNT);
 			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

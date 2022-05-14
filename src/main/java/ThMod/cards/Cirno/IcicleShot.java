@@ -63,15 +63,16 @@ public class IcicleShot extends AbstractCirnoCard {
 //		this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivationCost));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IcicleShot();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

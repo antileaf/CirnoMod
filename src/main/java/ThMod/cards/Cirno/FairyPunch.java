@@ -48,24 +48,25 @@ public class FairyPunch extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new DamageAction(m, new DamageInfo(p, this.damage,
-				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SMASH));
+				this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT));
 		
 		this.addToBot(new ApplyPowerAction(p, p, new FairyPunchPower(this.magicNumber)));
 		
 		this.addToBot(new FairyPunchUpdateHandAction());
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FairyPunch();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.initializeDescription();
 		}
 	}
 }

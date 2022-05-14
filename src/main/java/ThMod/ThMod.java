@@ -1,16 +1,11 @@
 package ThMod;
 
-// import static ThMod.patches.AbstractCardEnum.MARISA_COLOR;
-// import static ThMod.patches.CardTagEnum.SPARK;
-// import static ThMod.patches.ThModClassEnum.MARISA;
-
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.cards.Cirno.*;
 import ThMod.cards.CirnoDerivation.*;
 import ThMod.characters.Cirno;
 import ThMod.powers.Cirno.FairyPunchPower;
-import ThMod.powers.Cirno.FrostKingBlockPower;
-import ThMod.powers.Cirno.FrostKingMotivationPower;
+import ThMod.powers.Cirno.FrostKingPower;
 import ThMod.powers.Cirno.MotivationPower;
 import ThMod.relics.CrystalWings;
 import basemod.BaseMod;
@@ -34,7 +29,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import static ThMod.patches.AbstractCardEnum.CIRNO_COLOR;
 import static ThMod.patches.AbstractCardEnum.CIRNO_DERIVATION_COLOR;
@@ -60,7 +54,7 @@ public class ThMod implements PostExhaustSubscriber,
 	
 	public static final Logger logger = LogManager.getLogger(ThMod.class.getName());
 	
-	private static final String MOD_BADGE = "img/UI/badge.png";
+//	private static final String MOD_BADGE = "img/UI/badge.png";
 	
 	//card backgrounds
 	private static final String ATTACK_CC = "img/512/bg_attack_cirno_s.png";
@@ -97,11 +91,11 @@ public class ThMod implements PostExhaustSubscriber,
 //	public static boolean isCatEventEnabled;
 //	public static boolean isDeadBranchEnabled;
 	
-	private Properties ThModModDefaultProp = new Properties();
+//	private Properties ThModModDefaultProp = new Properties();
 	
 	//public static boolean OrinEvent = false;
 	
-	private ArrayList<AbstractCard> cardsToAdd = new ArrayList<>();
+	private final ArrayList<AbstractCard> cardsToAdd = new ArrayList<>();
 	//private ArrayList<AbstractRelic> relicsToAdd = new ArrayList<>();
 	
 	public static int calcMotivated(AbstractCirnoCard card) { // 只计算 不修改
@@ -124,16 +118,24 @@ public class ThMod implements PostExhaustSubscriber,
 		return motivation.amount >= card.motivationCost ? card.motivationCost : 0;
 	}
 	
-	public static void frostKing() {
+//	public static void frostKing(int amount) {
+//		AbstractPlayer p = AbstractDungeon.player;
+//
+//		ArrayList<String> powers = new ArrayList<>();
+//		powers.add(FrostKingMotivationPower.POWER_ID);
+//		powers.add(FrostKingBlockPower.POWER_ID);
+//
+//		for (int i = 0; i < amount; i++)
+//			for (String id : powers)
+//				if (p.hasPower(id))
+//					p.getPower(id).onSpecificTrigger();
+//	}
+	
+	public static void frostKing(AbstractCard card) {
 		AbstractPlayer p = AbstractDungeon.player;
 		
-		ArrayList<String> powers = new ArrayList<>();
-		powers.add(FrostKingMotivationPower.POWER_ID);
-		powers.add(FrostKingBlockPower.POWER_ID);
-		
-		for (String id : powers)
-			if (p.hasPower(id))
-				p.getPower(id).onSpecificTrigger();
+		if (p.hasPower(FrostKingPower.POWER_ID))
+			((FrostKingPower) p.getPower(FrostKingPower.POWER_ID)).trigger(card);
 	}
 	
 	private static int iceWaveCounter = 0;
@@ -153,7 +155,7 @@ public class ThMod implements PostExhaustSubscriber,
 		return iceWaveCounter;
 	}
 	
-	private static ArrayList<AbstractCard> fairyPunchList = new ArrayList<>();
+	private static final ArrayList<AbstractCard> fairyPunchList = new ArrayList<>();
 	
 	private static void fairyPunchAdd(AbstractCard card) {
 		fairyPunchList.add(card);
@@ -224,14 +226,6 @@ public class ThMod implements PostExhaustSubscriber,
 				ENERGY_ORB_CC_PORTRAIT,
 				CARD_ENERGY_ORB
 		);
-//		ThModModDefaultProp.setProperty("isCatEventEnabled", "TRUE");
-//		try {
-//			final SpireConfig config = new SpireConfig("vexMod", "vexModConfig", ThModModDefaultProp);
-//			config.load();
-////			isCatEventEnabled = config.getBool("isCatEventEnabled");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public void receiveEditCharacters() {
@@ -254,10 +248,6 @@ public class ThMod implements PostExhaustSubscriber,
 				new CrystalWings(),
 				CIRNO_COLOR
 		);
-//		BaseMod.addRelicToCustomPool(
-//				new BigShroomBag(),
-//				MARISA_COLOR
-//		);
 		
 		logger.info("Relics editing finished.");
 	}
@@ -279,92 +269,57 @@ public class ThMod implements PostExhaustSubscriber,
 		logger.info("done editing cards");
 	}
 	
-	public static void initialize() {
-		new ThMod();
-	}
+//	public static void initialize() {
+//		new ThMod();
+//	}
 	
-	@Override
 	public void receivePostExhaust(AbstractCard c) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 	}
 	
-	@Override
 	public void receivePostBattle(AbstractRoom r) {
 		iceWaveClear();
 		logger.info("CirnoMod : iceWaveCounter reset");
 		
 		fairyPunchList.clear();
-
-//		typhoonCounter = 0;
-//		logger.info("ThMod : PostBattle ; typhoon-counter reset");
 	}
 	
-	@Override
 	public void receiveCardUsed(AbstractCard c) {
-//		ThMod.logger.info("ThMod : Card used : " + card.cardID + " ; cost : " + card.costForTurn);
-		
 		if (c instanceof AbstractCirnoCard) {
 			AbstractCirnoCard card = (AbstractCirnoCard) c;
-			card.setMotivated(ThMod.calcMotivated(card));
-			
-			logger.info("Try to calculateMotivated: " + card.cardID);
+			if (!card.dontUsePatch) {
+				card.setMotivated(ThMod.calcMotivated(card));
+				
+				logger.info("Try to calculateMotivated: " + card.cardID);
+			}
+			else
+				card.setMotivated(0);
 		}
 	}
 	
-	@Override
 	public void receivePostEnergyRecharge() {
-//		if (!AbstractDungeon.player.hand.isEmpty()) {
-//			for (AbstractCard c : AbstractDungeon.player.hand.group) {
-//				if (c instanceof GuidingStar) {
-//					AbstractDungeon.actionManager.addToBottom(
-//							new GainEnergyAction(1)
-//					);
-//					c.flash();
-//				}
-//			}
-//		}
+	
 	}
 	
-	@Override
 	public void receivePowersModified() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		
 	}
 	
-	@Override
 	public void receivePostDungeonInitialize() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 	}
 	
-	@Override
 	public void receivePostDraw(AbstractCard arg0) {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 	}
 	
-	@Override
-	public int receiveOnPlayerDamaged(int amount, DamageInfo damageInfo) { // 已经转移到patch了
-//		AbstractPlayer p = AbstractDungeon.player;
-//
-//		if (damageInfo.type != DamageInfo.DamageType.HP_LOSS &&
-//			p.hasPower(FreezeTouchMePower.POWER_ID)) {
-//			int val = Integer.min(p.currentBlock, amount) / 2;
-//
-//			((FreezeTouchMePower) p.getPower(FreezeTouchMePower.POWER_ID)).triggerOnce(val);
-//		}
-		
-		return amount;
+	public int receiveOnPlayerDamaged(int amount, DamageInfo damageInfo) {
+		return amount; // 已经转移到patch了
 	}
 	
 	@Override
 	public int receiveOnPlayerLoseBlock(int amount) {
-//		if (AbstractDungeon.player.hasPower(FreezeTouchMePower.POWER_ID) &&
-//				amount / 2 > 0) {
-//			AbstractDungeon.actionManager.addToTop(new GainBlockAction(
-//					AbstractDungeon.player, amount / 2));
-//
-//			logger.info("DEBUG: amount = " + amount);
-//		}
-		
 		return amount;
 	}
 	
@@ -372,7 +327,6 @@ public class ThMod implements PostExhaustSubscriber,
 		return Gdx.files.internal(jsonPath).readString(String.valueOf(StandardCharsets.UTF_8));
 	}
 	
-	@Override
 	public void receiveEditKeywords() {
 		logger.info("Setting up custom keywords");
 		
@@ -451,39 +405,10 @@ public class ThMod implements PostExhaustSubscriber,
 		logger.info("done editing strings");
 	}
 	
-	@Override
 	public void receivePostInitialize() {
 		// Nothing
-/*
-    //BaseMod.addEvent(TestEvent.ID, TestEvent.class);
-    BaseMod.addEvent(TestEvent.ID, TestEvent.class, Exordium.ID);
-    BaseMod.addEvent(TestEvent.ID, TestEvent.class, TheBeyond.ID);
-    BaseMod.addEvent(TestEvent.ID, TestEvent.class, TheCity.ID);
-*/
-    /*
-    String orin, zombieFairy;
-    switch (Settings.language) {
-      case ZHS:
-        orin = ORIN_ENCOUNTER_ZHS;
-        zombieFairy = ZOMBIE_FAIRY_ENC_ZHS;
-        break;
-      default:
-        orin = ORIN_ENCOUNTER;
-        zombieFairy = ZOMBIE_FAIRY_ENC;
-        break;
-    }
-    */
 	}
 	
-	//	@Override
-//	public void receiveEditCards() {
-//		// This finds and adds all cards in the same package (or sub-package) as MyAbstractCard
-//		// along with marking all added cards as seen
-//		new AutoAdd("CirnoMod")
-//				.packageFilter(AbstractCirnoCard.class)
-//				.setDefaultSeen(true)
-//				.cards();
-//	}
 	private void loadCardsToAdd() {
 		cardsToAdd.clear();
 		
@@ -495,8 +420,10 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new Chirumiru());
 		cardsToAdd.add(new ColdBeer());
 		cardsToAdd.add(new ColdSprinkler());
+		cardsToAdd.add(new ColdWind());
 		cardsToAdd.add(new DaiyouseisHelp());
 		cardsToAdd.add(new DiamondBlizzard());
+		cardsToAdd.add(new FairyInSpring());
 		cardsToAdd.add(new FairyPunch());
 		cardsToAdd.add(new FairySpin());
 		cardsToAdd.add(new Flee());
@@ -510,6 +437,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new FrostMeteor());
 		cardsToAdd.add(new FrostPillars());
 		cardsToAdd.add(new FrozenFreeze());
+		cardsToAdd.add(new FrozenFrog());
 		cardsToAdd.add(new FrozenSpring());
 		cardsToAdd.add(new GiganticIceMagic());
 		cardsToAdd.add(new GreatCrusher());
@@ -517,6 +445,8 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new HighSpirit());
 		cardsToAdd.add(new IceArmor());
 		cardsToAdd.add(new IceBarrier());
+		cardsToAdd.add(new IceCharge());
+		cardsToAdd.add(new IceCreamMachine());
 		cardsToAdd.add(new IceDumplings());
 		cardsToAdd.add(new IceDuplicate());
 		cardsToAdd.add(new IceExperience());
@@ -526,6 +456,7 @@ public class ThMod implements PostExhaustSubscriber,
 //		cardsToAdd.add(new IceKick());
 		cardsToAdd.add(new IceMachineGun());
 		cardsToAdd.add(new IceSpear());
+		cardsToAdd.add(new IceTornado());
 		cardsToAdd.add(new IceWave());
 		cardsToAdd.add(new IcicleConeCrush());
 		cardsToAdd.add(new IcicleShot());
@@ -542,10 +473,12 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new ShowOff());
 		cardsToAdd.add(new SnowmanInMidsummer());
 		cardsToAdd.add(new Sunbathe());
+		cardsToAdd.add(new SuperIceKick());
 		cardsToAdd.add(new SwordFreezer());
 		cardsToAdd.add(new TengusCamera());
 		cardsToAdd.add(new ThreeFairiesHelp());
 		cardsToAdd.add(new WishOfBreeze());
+		cardsToAdd.add(new ZettaiRyoiki());
 		
 		cardsToAdd.add(new RedTextbook());
 		cardsToAdd.add(new YellowTextbook());
@@ -554,6 +487,9 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new SunnyMilksHelp());
 		cardsToAdd.add(new LunaChildsHelp());
 		cardsToAdd.add(new StarSapphiresHelp());
+		
+		cardsToAdd.add(new IceConical());
+		cardsToAdd.add(new IceCube());
 		
 		cardsToAdd.add(new MarisasPotion());
 	}
@@ -564,9 +500,9 @@ public class ThMod implements PostExhaustSubscriber,
 		Keyword[] keywords;
 	}
 	
-	public static AbstractCard getRandomCirnoCard() {
-		return AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
-	}
+//	public static AbstractCard getRandomCirnoCard() {
+//		return AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
+//	}
 }
 
 /*

@@ -45,7 +45,6 @@ public class IceMachineGun extends AbstractCirnoCard {
 //		this.damageType = DamageInfo.DamageType.NORMAL;
 	}
 	
-	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		for (int i = 0; i < this.magicNumber; i++) {
 			this.addToBot(new DamageRandomEnemyAction(
@@ -54,16 +53,16 @@ public class IceMachineGun extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceMachineGun();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

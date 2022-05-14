@@ -46,8 +46,10 @@ public class IceDuplicate extends AbstractCirnoCard {
 		HashSet<String> set = new HashSet<>();
 		
 		for (AbstractCard card : p.hand.group) {
-			if (set.contains(card.cardID))
+			if (set.contains(card.cardID)) {
+				this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
 				return false;
+			}
 			else
 				set.add(card.cardID);
 		}
@@ -93,16 +95,17 @@ public class IceDuplicate extends AbstractCirnoCard {
 		));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceDuplicate();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.initializeDescription();
 		}
 	}
 }

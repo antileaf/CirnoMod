@@ -25,11 +25,12 @@ public class AchiFormPower extends AbstractPower {
 		this.amount = amount;
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FunkyPower.png");
 	}
 	
+	@Override
 	public void updateDescription() {
 		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}

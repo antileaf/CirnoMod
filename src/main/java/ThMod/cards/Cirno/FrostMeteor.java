@@ -51,16 +51,17 @@ public class FrostMeteor extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new FrostMeteorPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FrostMeteor();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
+			this.initializeDescription();
 		}
 	}
 }

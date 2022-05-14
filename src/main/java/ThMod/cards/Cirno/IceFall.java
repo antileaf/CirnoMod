@@ -55,17 +55,18 @@ public class IceFall extends AbstractCirnoCard {
 				AbstractGameAction.AttackEffect.SLASH_VERTICAL));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceFall();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_MOTIVATION_GAIN);
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_MOTIVATION_GAIN);
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

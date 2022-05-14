@@ -19,6 +19,8 @@ public class IceFishing extends AbstractCirnoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
+	private static final int MAX_CNT = 7;
+	private static final int UPGRADE_PLUS_MAX_CNT = 1;
 	
 	public IceFishing() {
 		super(
@@ -33,24 +35,25 @@ public class IceFishing extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
+		this.magicNumber = this.baseMagicNumber = MAX_CNT;
 		this.exhaust = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new IceFishingAction());
+		this.addToBot(new IceFishingAction(this.magicNumber));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceFishing();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			this.exhaust = false;
-			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_MAX_CNT);
+			this.initializeDescription();
 		}
 	}
 }

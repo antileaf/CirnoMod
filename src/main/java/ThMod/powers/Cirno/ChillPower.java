@@ -24,17 +24,18 @@ public class ChillPower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
+//		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
+		this.amount = amount;
 		
 		this.type = AbstractPower.PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture(IMG_PATH);
 	}
 	
 	@Override
 	public void stackPower(int stackAmount) {
-		if (this.owner.hasPower(CirnoOverloadPower.POWER_ID))
-			return;
+//		if (this.owner.hasPower(CirnoOverloadPower.POWER_ID))
+//			return;
 		
 		// 大号蝴蝶结：每当获得寒冷时获得 1 点干劲
 //		if (stackAmount > 0 && AbstractDungeon.player.hasRelic("BigBowknot")) {
@@ -45,6 +46,7 @@ public class ChillPower extends AbstractPower {
 		this.amount += stackAmount;
 	}
 	
+	@Override
 	public void updateDescription() {
 		this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]);
 	}
@@ -59,6 +61,7 @@ public class ChillPower extends AbstractPower {
 		return blockAmount + this.amount;
 	}
 	// 只有从卡牌获得的格挡才能增幅
+	
 	@Override
 	public void atStartOfTurn() {
 		if (this.amount > 0) {

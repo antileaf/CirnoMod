@@ -42,17 +42,18 @@ public class LunaticFairysHelp extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new LunaticFairyPower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new LunaticFairysHelp();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.isInnate = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+@Deprecated
 public class AssaultArmor extends AbstractCirnoCard {
 	
 	public static final String ID = AssaultArmor.class.getSimpleName();
@@ -59,6 +60,7 @@ public class AssaultArmor extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new CirnoOverloadPower()));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new AssaultArmor();
 	}

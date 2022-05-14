@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+@Deprecated
 public class FrostKingMotivationPower extends AbstractPower {
 	
 	public static final String POWER_ID = FrostKingMotivationPower.class.getSimpleName();
@@ -23,7 +24,7 @@ public class FrostKingMotivationPower extends AbstractPower {
 		this.amount = amount;
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FrostKingMotivationPower.png");
 	}

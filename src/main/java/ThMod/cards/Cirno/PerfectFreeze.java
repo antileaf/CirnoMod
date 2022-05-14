@@ -81,6 +81,12 @@ public class PerfectFreeze extends AbstractCirnoCard {
 	}
 	
 	@Override
+	public void onMoveToDiscard() {
+		this.rawDescription = (this.upgraded ? UPGRADE_DESCRIPTION : DESCRIPTION);
+		this.initializeDescription();
+	}
+	
+	@Override
 	public void triggerOnGlowCheck() {
 		if (ThMod.calcMotivated(this) > 0)
 			this.glowColor = CYAN_COLOR.cpy();
@@ -116,19 +122,20 @@ public class PerfectFreeze extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new PerfectFreeze();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADED_MOTIVATION_COST - MOTIVATION_COST);
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeMagicNumber(UPGRADED_MOTIVATION_COST - MOTIVATION_COST);
 			this.motivationCost = UPGRADED_MOTIVATION_COST;
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

@@ -30,7 +30,7 @@ public class FridgePower extends AbstractPower implements OnPlayerDeathPower {
 		this.used = false;
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FridgePower.png");
 	}
@@ -44,7 +44,7 @@ public class FridgePower extends AbstractPower implements OnPlayerDeathPower {
 	}
 	
 	
-	@Override // interface form stslib
+	// interface form stslib
 	public boolean onPlayerDeath(AbstractPlayer p, DamageInfo info) {
 		if ((p.hasRelic(LizardTail.ID) && p.getRelic(LizardTail.ID).counter != -2) ||
 				p.hasPotion(FairyPotion.POTION_ID))

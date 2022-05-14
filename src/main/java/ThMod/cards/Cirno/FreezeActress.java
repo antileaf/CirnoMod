@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.util.Objects;
 
+@Deprecated
 public class FreezeActress extends AbstractCirnoCard {
 	
 	public static final String ID = FreezeActress.class.getSimpleName();
@@ -83,6 +84,7 @@ public class FreezeActress extends AbstractCirnoCard {
 		this.damage = this.baseDamage = 0;
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FreezeActress();
 	}

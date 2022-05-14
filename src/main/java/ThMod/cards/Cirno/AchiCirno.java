@@ -56,6 +56,7 @@ public class AchiCirno extends AbstractCirnoCard {
 					this.magicNumber, DamageInfo.DamageType.THORNS)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new AchiCirno();
 	}

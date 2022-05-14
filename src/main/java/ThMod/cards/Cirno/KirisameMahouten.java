@@ -41,6 +41,7 @@ public class KirisameMahouten extends AbstractCirnoCard {
 		
 		this.magicNumber = this.baseMagicNumber = CNT;
 		this.exhaust = true;
+		this.tags.add(CardTags.HEALING);
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -51,16 +52,17 @@ public class KirisameMahouten extends AbstractCirnoCard {
 		this.addToBot(new ChooseOneAction(choices));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new KirisameMahouten();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBaseCost(UPGRADED_COST);
-			initializeDescription();
+			this.upgradeBaseCost(UPGRADED_COST);
+			this.initializeDescription();
 		}
 	}
 }

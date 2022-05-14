@@ -24,7 +24,7 @@ public class SecretSmoothiePower extends AbstractPower {
 		this.amount = amount;
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/SecretSmoothiePower.png");
 	}

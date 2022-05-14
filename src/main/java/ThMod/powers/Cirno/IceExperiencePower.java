@@ -42,7 +42,7 @@ public class IceExperiencePower extends AbstractPower {
 		this.amount = this.group.size();
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FunkyPower.png");
 	}

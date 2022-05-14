@@ -24,22 +24,16 @@ public class MotivationPower extends AbstractPower {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
-		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
+//		this.amount = (this.owner.hasPower(CirnoOverloadPower.POWER_ID) ? 0 : amount);
+		this.amount = amount;
 		
 		this.type = AbstractPower.PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture(IMG_PATH);
 //		this.img = new Texture("img/powers/Motivation.png");
 	}
 	
 	@Override
-	public void stackPower(int stackAmount) {
-		if (!this.owner.hasPower(CirnoOverloadPower.POWER_ID)) {
-			this.fontScale = 8.0F;
-			this.amount += stackAmount;
-		}
-	}
-	
 	public void updateDescription() {
 		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1];
 	}

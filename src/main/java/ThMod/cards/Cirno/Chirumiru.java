@@ -57,19 +57,20 @@ public class Chirumiru extends AbstractCirnoCard {
 		this.addToBot(new DrawCardAction(this.magicNumber));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new Chirumiru();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.chillGain += UPGRADE_PLUS_CHILL;
 			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

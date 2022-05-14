@@ -77,16 +77,17 @@ public class IceWave extends AbstractCirnoCard {
 //		this.addToBot(new ApplyPowerAction(p, p, new IceWavePower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceWave();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_BONUS);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_BONUS);
+			this.initializeDescription();
 		}
 	}
 }

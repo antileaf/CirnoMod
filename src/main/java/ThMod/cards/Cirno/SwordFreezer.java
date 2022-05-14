@@ -114,17 +114,18 @@ public class SwordFreezer extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new SwordFreezer();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_MULTIPLIER);
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_MULTIPLIER);
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.initializeDescription();
 		}
 	}
 }

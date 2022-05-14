@@ -44,15 +44,16 @@ public class FreezeDrying extends AbstractCirnoCard {
 				new DamageInfo(p, this.damage, this.damageTypeForTurn)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FreezeDrying();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

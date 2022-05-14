@@ -59,16 +59,17 @@ public class DiamondBlizzard extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new DiamondBlizzard();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			upgradeMagicNumber(UPGRADE_PLUS_DEBUFF_CNT);
-			initializeDescription();
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeMagicNumber(UPGRADE_PLUS_DEBUFF_CNT);
+			this.initializeDescription();
 		}
 	}
 }

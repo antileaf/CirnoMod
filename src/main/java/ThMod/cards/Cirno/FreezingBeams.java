@@ -28,7 +28,7 @@ public class FreezingBeams extends AbstractCirnoCard {
 	private static final int ATTACK_DMG = 6;
 	private static final int CNT = 3;
 	
-	private static final int UPGRADE_PLUS_DMG = 2;
+	private static final int UPGRADE_PLUS_DMG = 3;
 	
 	public FreezingBeams() {
 		super(
@@ -47,7 +47,6 @@ public class FreezingBeams extends AbstractCirnoCard {
 		this.magicNumber = this.baseMagicNumber = CNT;
 	}
 	
-	@Override
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		ArrayList<AbstractMonster> vul = new ArrayList<>(), other = new ArrayList<>(),
 				res = new ArrayList<>();
@@ -79,11 +78,11 @@ public class FreezingBeams extends AbstractCirnoCard {
 					AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FreezingBeams();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
 			upgradeName();

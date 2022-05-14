@@ -43,27 +43,28 @@ public class HighSpirit extends AbstractCirnoCard {
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		if (p.hasPower("MotivationPower") && p.getPower("MotivationPower").amount > 0)
+		if (p.hasPower(MotivationPower.POWER_ID) && p.getPower(MotivationPower.POWER_ID).amount > 0)
 			this.addToBot(new DrawCardAction(this.magicNumber));
 		else
 			this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
 		
-		if (p.hasPower("ChillPower") && p.getPower("ChillPower").amount > 0)
+		if (p.hasPower(ChillPower.POWER_ID) && p.getPower(ChillPower.POWER_ID).amount > 0)
 			this.addToBot(new DrawCardAction(this.magicNumber));
 		else
 			this.addToBot(new ApplyPowerAction(p, p, new ChillPower(this.chillGain)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new HighSpirit();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
+			this.initializeDescription();
 		}
 	}
 }

@@ -1,8 +1,10 @@
 package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
-import ThMod.action.PerfectGlacialistAction;
 import ThMod.patches.AbstractCardEnum;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.DamageCallbackAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -40,21 +42,28 @@ public class PerfectGlacialist extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.calculateCardDamage(m);
-		this.addToBot(new PerfectGlacialistAction(m,
-				new DamageInfo(p, this.damage, this.damageTypeForTurn),
-				this.damage));
+//		this.addToBot(new PerfectGlacialistAction(m,
+//				new DamageInfo(p, this.damage, this.damageTypeForTurn),
+//				this.damage));
+		this.addToBot(new DamageCallbackAction(m, new DamageInfo(p, this.damage,
+				this.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_LIGHT,
+				(Integer damage) -> {
+					if (damage < this.damage)
+						this.addToTop(new GainBlockAction(p, this.damage - damage));
+				}));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new PerfectGlacialist();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_ATTACK_DMG);
+			this.initializeDescription();
 		}
 	}
 }

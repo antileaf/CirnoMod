@@ -47,16 +47,17 @@ public class FrozenSpring extends AbstractCirnoCard {
 			this.addToBot(new ApplyPowerAction(p, p, new FrozenSpringMotivationPower(CNT)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FrozenSpring();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

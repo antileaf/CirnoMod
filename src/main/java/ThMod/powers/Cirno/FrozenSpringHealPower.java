@@ -25,7 +25,7 @@ public class FrozenSpringHealPower extends AbstractPower {
 		this.amount = amount;
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FrozenSpringHealPower.png");
 	}
@@ -41,5 +41,9 @@ public class FrozenSpringHealPower extends AbstractPower {
 		
 		if (--this.amount <= 0)
 			this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));
+		else {
+			this.fontScale = 8F;
+			this.updateDescription();
+		}
 	}
 }

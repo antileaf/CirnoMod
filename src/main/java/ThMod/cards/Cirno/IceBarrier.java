@@ -42,16 +42,17 @@ public class IceBarrier extends AbstractCirnoCard {
 		this.addToBot(new GainBlockAction(p, this.block));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IceBarrier();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			initializeDescription();
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.initializeDescription();
 		}
 	}
 }

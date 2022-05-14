@@ -43,16 +43,17 @@ public class FreezeTouchMe extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new FreezeTouchMePower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FreezeTouchMe();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBaseCost(UPGRADED_COST);
-			initializeDescription();
+			this.upgradeBaseCost(UPGRADED_COST);
+			this.initializeDescription();
 		}
 	}
 }

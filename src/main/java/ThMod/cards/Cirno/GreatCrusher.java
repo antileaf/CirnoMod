@@ -71,16 +71,17 @@ public class GreatCrusher extends AbstractCirnoCard {
 		this.calculateCardDamage(m);
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new GreatCrusher();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.initializeDescription();
 		}
 	}
 }

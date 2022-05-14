@@ -68,17 +68,18 @@ public class ColdSprinkler extends AbstractCirnoCard {
 			this.addToBot(new UpgradeRandomCardAction());
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new ColdSprinkler();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_DMG);
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

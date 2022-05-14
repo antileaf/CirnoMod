@@ -28,7 +28,7 @@ public class CirnoSelectSomeAndMoveAction extends AbstractGameAction {
 		this.amount = amount;
 		this.selected = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 		
-		this.act = new SelectCardsAction(new ArrayList<>(cardList), amount, text, (cards) -> {
+		this.act = new SelectCardsAction(cardList, amount, text, (cards) -> {
 			for (AbstractCard card : cards) {
 				this.src.removeCard(card);
 				

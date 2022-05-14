@@ -62,6 +62,11 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 	}
 	
 	@Override
+	public void triggerOnCardPlayed(AbstractCard c) {
+		this.applyPowers();
+	}
+	
+	@Override
 	public void onMoveToDiscard() {
 		this.magicNumber = -1;
 		initializeDescription();
@@ -84,16 +89,17 @@ public class GiganticIceMagic extends AbstractCirnoCard {
 		super.initializeDescription();
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new GiganticIceMagic();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

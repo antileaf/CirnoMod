@@ -47,6 +47,8 @@ public class FairySpin extends AbstractCirnoCard {
 		this.magicNumber = this.baseMagicNumber = CNT;
 		this.motivationCost = MOTIVATION_COST;
 //		this.damageType = DamageInfo.DamageType.NORMAL;
+		
+		this.cardsToPreview = new Dazed();
 	}
 	
 	@Override
@@ -70,16 +72,16 @@ public class FairySpin extends AbstractCirnoCard {
 //			this.addToTop(new ReducePowerAction(p, p, "MotivationPower", this.motivatedCnt));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FairySpin();
 	}
 	
-	@Override
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
-			upgradeDamage(UPGRADE_PLUS_DMG);
-			initializeDescription();
+			this.upgradeName();
+			this.upgradeDamage(UPGRADE_PLUS_DMG);
+			this.initializeDescription();
 		}
 	}
 }

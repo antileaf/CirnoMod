@@ -5,6 +5,7 @@
 
 package ThMod.action;
 
+import ThMod.ThMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -60,6 +61,8 @@ public class CirnoDiscoveryAction extends AbstractGameAction {
 		} else {
 			if (!this.retrieveCard) {
 				if (AbstractDungeon.cardRewardScreen.discoveryCard != null) {
+					ThMod.frostKing(AbstractDungeon.cardRewardScreen.discoveryCard);
+					
 					AbstractCard disCard = AbstractDungeon.cardRewardScreen.
 							discoveryCard.makeStatEquivalentCopy();
 					AbstractCard disCard2 = AbstractDungeon.cardRewardScreen.

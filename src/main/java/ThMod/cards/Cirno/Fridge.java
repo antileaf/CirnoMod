@@ -3,6 +3,7 @@ package ThMod.cards.Cirno;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.FridgePower;
+import com.badlogic.gdx.graphics.Color;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,20 @@ public class Fridge extends AbstractCirnoCard {
 		return true;
 	}
 	
+	@Override
+	public void triggerOnGlowCheck() {
+		super.triggerOnGlowCheck();
+		
+		if (AbstractDungeon.player.hasPower(FridgePower.POWER_ID))
+			this.glowColor = Color.DARK_GRAY.cpy();
+	}
+	
 	public void use(AbstractPlayer p, AbstractMonster m) {
+		if (p.hasPower(FridgePower.POWER_ID))
+			AbstractDungeon.effectList.add(new ThoughtBubble(
+					AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 3.0F,
+					cardStrings.EXTENDED_DESCRIPTION[3], true));
+		
 		this.addToBot(new ApplyPowerAction(p, p, new FridgePower()));
 	}
 	
@@ -61,10 +76,10 @@ public class Fridge extends AbstractCirnoCard {
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.isInnate = true;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

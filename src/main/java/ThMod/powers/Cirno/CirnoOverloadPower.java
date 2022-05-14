@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+@Deprecated
 public class CirnoOverloadPower extends AbstractPower {
 	
 	public static final String POWER_ID = CirnoOverloadPower.class.getSimpleName();
@@ -23,7 +24,7 @@ public class CirnoOverloadPower extends AbstractPower {
 		this.amount = -1;
 		
 		this.type = PowerType.BUFF; // 不应当被防止或去除
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/CirnoOverloadPower.png");
 	}

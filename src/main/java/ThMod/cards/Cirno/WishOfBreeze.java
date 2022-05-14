@@ -42,16 +42,17 @@ public class WishOfBreeze extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new WishOfBreezePower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new WishOfBreeze();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.initializeDescription();
 		}
 	}
 }

@@ -51,19 +51,20 @@ public class ShowOff extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.motivationGain)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new ShowOff();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.chillGain += UPGRADE_PLUS_CHILL_GAIN;
 			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
-			upgradeMagicNumber(1);
+			this.upgradeMagicNumber(1);
 //			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

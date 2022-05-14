@@ -45,7 +45,18 @@ public class Sunbathe extends AbstractCirnoCard {
 		
 		this.motivationGain = MOTIVATION_GAIN;
 		this.block = this.baseBlock = BLOCK;
+		this.damage = this.baseDamage = MOTIVATION_GAIN;
 		this.magicNumber = this.baseMagicNumber = DRAW_CNT;
+		
+		this.cardsToPreview = new Burn();
+	}
+	
+	@Override
+	public void calculateCardDamage(AbstractMonster m) {
+		this.applyPowersToBlock();
+		
+		this.damage = this.baseDamage = MOTIVATION_GAIN +
+				(this.upgraded ? UPGRADE_PLUS_MOTIVATION_GAIN : 0);
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -55,19 +66,20 @@ public class Sunbathe extends AbstractCirnoCard {
 		this.addToBot(new MakeTempCardInDiscardAction(new Burn(), this.upgraded ? UPGRADED_BURN_CNT : BURN_CNT));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new Sunbathe();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			this.motivationGain += UPGRADE_PLUS_MOTIVATION_GAIN;
-			upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeDamage(UPGRADE_PLUS_MOTIVATION_GAIN);
+			this.upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
 			
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

@@ -2,7 +2,7 @@ package ThMod.cards.Cirno;
 
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
-import ThMod.powers.Cirno.FrostKingBlockPower;
+import ThMod.powers.Cirno.FrostKingPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -19,9 +19,8 @@ public class FrostKing extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 1;
-	private static final int AMOUNT = 1;
-	private static final int BLOCK = 4;
-	private static final int UPGRADE_PLUS_BLOCK = 2;
+	private static final int BLOCK = 2;
+	private static final int UPGRADE_PLUS_BLOCK = 1;
 	
 	public FrostKing() {
 		super(
@@ -36,8 +35,8 @@ public class FrostKing extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.magicNumber = this.baseMagicNumber = AMOUNT;
 		this.block = this.baseBlock = BLOCK;
+		this.magicNumber = this.baseMagicNumber = this.block * 2;
 	}
 	
 	@Override
@@ -48,19 +47,21 @@ public class FrostKing extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 //		this.addToBot(new ApplyPowerAction(p, p, new FrostKingMotivationPower(this.magicNumber)));
-		this.addToBot(new ApplyPowerAction(p, p, new FrostKingBlockPower(this.block)));
+		this.addToBot(new ApplyPowerAction(p, p, new FrostKingPower(this.block)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new FrostKing();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBlock(UPGRADE_PLUS_BLOCK);
-			initializeDescription();
+			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeMagicNumber(UPGRADE_PLUS_BLOCK * 2);
+			this.initializeDescription();
 		}
 	}
 }

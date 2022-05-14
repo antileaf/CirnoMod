@@ -44,17 +44,18 @@ public class SecretSmoothie extends AbstractCirnoCard {
 		this.addToBot(new ApplyPowerAction(p, p, new SecretSmoothiePower(this.magicNumber)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new SecretSmoothie();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
 			this.selfRetain = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
-			initializeDescription();
+			this.initializeDescription();
 		}
 	}
 }

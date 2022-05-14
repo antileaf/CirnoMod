@@ -51,16 +51,17 @@ public class IcicleConeCrush extends AbstractCirnoCard {
 				m, this.damage, this.block, this.chillGain, this.motivationGain)));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new IcicleConeCrush();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_DRAW_CNT);
+			this.initializeDescription();
 		}
 	}
 }

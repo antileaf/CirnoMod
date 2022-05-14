@@ -24,6 +24,12 @@
       "琪露诺累了。即使开高达的妖精也是需要休息的！ NL 你在本回合无法再获得 寒冷 或 干劲 。"
     ]
   },
+  "ColdWindPower": {
+    "NAME": "冷风",
+    "DESCRIPTIONS": [
+      "在回合开始时，依次执行：", "获得一张 ", "从 ", " 和 ", " 中选择一张", " ；", " 。"
+    ]
+  },
   "FairyPunchPower": {
     "NAME": "妖精拳",
     "DESCRIPTIONS": [
@@ -49,10 +55,11 @@
       "冰箱已经被笨蛋琪露诺弄坏了！ NL 你在本场战斗中无法再触发冰箱效果。"
     ]
   },
-  "FrostKingBlockPower": {
+  "FrostKingPower": {
     "NAME": "霜冻之王",
     "DESCRIPTIONS": [
-      "每当你临时获得一张牌，就获得 #b", " 点 格挡 。"
+      "每当你临时获得一张牌，就获得 #b", " 点 格挡 ； NL 如果这是本场战斗中第一次临时获得那张牌，则改为获得 #b", " 点格挡。",
+      "你在本场战斗中已临时获得过 #b", " 张不同的牌。"
     ]
   },
   "FrostKingMotivationPower": {
@@ -73,6 +80,12 @@
       "下一名攻击你的敌人将会受到 #b", " 点伤害。"
     ]
   },
+  "FrozenFrog": {
+    "NAME": "冻青蛙",
+    "DESCRIPTIONS": [
+      "每当你打出一张能力牌，获得 #b", " 层 寒冷 与 #b", "点 干劲 。"
+    ]
+  },
   "FrozenSpringHealPower": {
     "NAME": "冰冻温泉",
     "DESCRIPTIONS": [
@@ -89,6 +102,12 @@
     "NAME": "贫民区舞后",
     "DESCRIPTIONS": [
       "再抽 #b", " 张牌，获得 #b", " 层 寒冷 。"
+    ]
+  },
+  "IceCreamMachinePower": {
+    "NAME": "冰淇淋机",
+    "DESCRIPTIONS": [
+      "战斗结束时，失去 冰淇淋 。"
     ]
   },
   "IceExperiencePower": {
@@ -119,7 +138,8 @@
   "MinusKPower": {
     "NAME": "负K",
     "DESCRIPTIONS": [
-      "下 #b", " 次 消耗 一张牌时，获得 [E] 。"
+      "接下来 #b", " 次，当你于一回合中第一次 消耗 一张牌时，获得 [E] [E] 。",
+      "你本回合尚未触发此效果。", "你本回合已触发过了此效果。"
     ]
   },
   "MotivationPower": {
@@ -144,14 +164,6 @@
     "NAME": "微风祈愿",
     "DESCRIPTIONS": [
       "每回合结束时，随机将弃牌堆中的 #b", " 张牌返回手牌。"
-    ]
-  },
-  
-  "InfernoClaw": {
-    "NAME": "地狱之爪",
-    "DESCRIPTIONS": [
-      "每当这个敌人对你造成伤害，在你的弃牌堆里增加一张 #y灼伤 。",
-      "WWWWWWWWWWW"
     ]
   }
 }

@@ -47,10 +47,10 @@ public class MathTextbook extends AbstractCirnoCard {
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADED_CNT - CNT);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADED_CNT - CNT);
+			this.initializeDescription();
 		}
 	}
 }

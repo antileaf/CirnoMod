@@ -40,16 +40,6 @@ public class Hailstorm extends AbstractCirnoCard {
 	}
 	
 	@Override
-	public void initializeDescription() {
-		this.rawDescription = DESCRIPTION;
-		if (AbstractDungeon.isPlayerInDungeon() && !AbstractDungeon.player.exhaustPile.isEmpty()) {
-			this.rawDescription += " NL " + cardStrings.EXTENDED_DESCRIPTION[0];
-		}
-		
-		super.initializeDescription();
-	}
-	
-	@Override
 	public void applyPowers() {
 		int cnt = AbstractDungeon.player.exhaustPile.size();
 		this.damage = this.baseDamage = cnt * this.magicNumber;
@@ -57,7 +47,14 @@ public class Hailstorm extends AbstractCirnoCard {
 		super.applyPowers();
 		this.isDamageModified = this.damage != this.baseDamage;
 		
-		initializeDescription();
+		this.rawDescription = DESCRIPTION + " NL " + cardStrings.EXTENDED_DESCRIPTION[0];
+		this.initializeDescription();
+	}
+	
+	@Override
+	public void onMoveToDiscard() {
+		this.rawDescription = DESCRIPTION;
+		this.initializeDescription();
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -69,16 +66,17 @@ public class Hailstorm extends AbstractCirnoCard {
 				this.damageTypeForTurn, AbstractGameAction.AttackEffect.SMASH));
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new Hailstorm();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeMagicNumber(UPGRADE_PLUS_MULTIPLIER);
-			initializeDescription();
+			this.upgradeMagicNumber(UPGRADE_PLUS_MULTIPLIER);
+			this.initializeDescription();
 		}
 	}
 }

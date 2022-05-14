@@ -29,7 +29,7 @@ public class KirisameMahoutenPower extends AbstractPower {
 		this.amount = this.names.size();
 		
 		this.type = PowerType.BUFF;
-		updateDescription();
+		this.updateDescription();
 		this.img = new Texture("img/powers/Nineball32.png");
 //		this.img = new Texture("img/powers/FunkyPower.png");
 	}

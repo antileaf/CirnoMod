@@ -53,16 +53,17 @@ public class TengusCamera extends AbstractCirnoCard {
 		}
 	}
 	
+	@Override
 	public AbstractCard makeCopy() {
 		return new TengusCamera();
 	}
 	
 	public void upgrade() {
 		if (!this.upgraded) {
-			upgradeName();
+			this.upgradeName();
 			
-			upgradeBaseCost(UPGRADED_COST);
-			initializeDescription();
+			this.upgradeBaseCost(UPGRADED_COST);
+			this.initializeDescription();
 		}
 	}
 }
