@@ -25,6 +25,7 @@ public class IceCreamMachinePower extends AbstractPower {
 		
 		this.type = PowerType.BUFF;
 		this.updateDescription();
+//		this.img = new Texture("img/powers/Nineball32.png");
 		this.img = new Texture(IMG_PATH);
 	}
 	

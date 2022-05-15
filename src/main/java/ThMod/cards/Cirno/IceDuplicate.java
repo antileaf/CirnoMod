@@ -47,7 +47,7 @@ public class IceDuplicate extends AbstractCirnoCard {
 		
 		for (AbstractCard card : p.hand.group) {
 			if (set.contains(card.cardID)) {
-				this.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[0];
+				this.cantUseMessage = this.getCantPlayMessage();
 				return false;
 			}
 			else
@@ -68,6 +68,7 @@ public class IceDuplicate extends AbstractCirnoCard {
 				if (!dup.contains(card.cardID)) {
 					if (!dup.isEmpty())
 						builder.append(cardStrings.EXTENDED_DESCRIPTION[1]);
+					builder.append(card.name);
 					
 					dup.add(card.cardID);
 				}

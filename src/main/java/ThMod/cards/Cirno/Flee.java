@@ -56,7 +56,11 @@ public class Flee extends AbstractCirnoCard {
 		if (!(new SmokeBomb().canUse()))
 			this.glowColor = Color.DARK_GRAY.cpy();
 		else {
-			int cnt = this.magicNumber - this.motivatedCnt;
+			int cnt = this.magicNumber;
+			
+			AbstractPlayer p = AbstractDungeon.player;
+			if (p.hasPower("MotivationPower"))
+				cnt -= p.getPower("MotivationPower").amount;
 			
 			if (cnt <= 1)
 				this.glowColor = GOLD_BORDER_GLOW_COLOR;

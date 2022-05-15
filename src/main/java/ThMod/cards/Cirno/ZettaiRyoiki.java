@@ -49,7 +49,8 @@ public class ZettaiRyoiki extends AbstractCirnoCard {
 				if (card.type == CardType.POWER)
 					this.cnt++;
 		
-		this.applyPowers();
+		if (AbstractDungeon.player != null)
+			this.applyPowers();
 	}
 	
 	@Override

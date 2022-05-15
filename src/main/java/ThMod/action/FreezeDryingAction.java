@@ -31,7 +31,7 @@ public class FreezeDryingAction
 			this.target.damage(this.info);
 			
 			if (!this.target.isDead && this.target.currentBlock <= 0)
-				this.addToTop(new DamageAction(this.target, info));
+				this.addToTop(new DamageAction(this.target, info, AttackEffect.SLASH_DIAGONAL));
 //				this.target.damage(this.info);
 			
 			this.isDone = true;

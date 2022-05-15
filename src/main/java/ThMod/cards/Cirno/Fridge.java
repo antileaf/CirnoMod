@@ -79,6 +79,7 @@ public class Fridge extends AbstractCirnoCard {
 			this.upgradeName();
 			
 			this.isInnate = true;
+			this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
 			this.initializeDescription();
 		}
 	}

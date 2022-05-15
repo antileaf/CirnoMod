@@ -80,7 +80,7 @@
       "下一名攻击你的敌人将会受到 #b", " 点伤害。"
     ]
   },
-  "FrozenFrog": {
+  "FrozenFrogPower": {
     "NAME": "冻青蛙",
     "DESCRIPTIONS": [
       "每当你打出一张能力牌，获得 #b", " 层 寒冷 与 #b", "点 干劲 。"

@@ -44,7 +44,7 @@ public class IceTornado extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		int cnt = 0;
 		for (AbstractCard card : p.hand.group)
-			if (card.type == CardType.ATTACK) {
+			if (card != this && card.type == CardType.ATTACK) {
 				cnt++;
 				this.addToBot(new CirnoExhaustSpecificCardAction(card, p.hand));
 			}

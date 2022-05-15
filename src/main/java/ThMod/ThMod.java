@@ -269,9 +269,10 @@ public class ThMod implements PostExhaustSubscriber,
 		logger.info("done editing cards");
 	}
 	
-//	public static void initialize() {
-//		new ThMod();
-//	}
+	// 必须有这个函数才能初始化
+	public static void initialize() {
+		new ThMod();
+	}
 	
 	public void receivePostExhaust(AbstractCard c) {
 		// Auto-generated method stub

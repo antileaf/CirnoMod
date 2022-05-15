@@ -161,6 +161,9 @@
     "NAME": "冰淇淋机",
     "DESCRIPTION": "在本场战斗中获得 冰淇淋 。",
     "UPGRADE_DESCRIPTION": "固有 。 NL 在本场战斗中获得 冰淇淋 。",
+    "EXTENDED_DESCRIPTION": [
+      "我已经拥有冰淇淋了。"
+    ],
     "FLAVOR": "如果你已经拥有 冰淇淋 或者这张牌，这张牌就不会出现在随机池中。"
   },
   "IceDumplings": {
@@ -201,7 +204,7 @@
   },
   "IceTornado": {
     "NAME": "碎冰龙卷",
-    "DESCRIPTION": "消耗 手牌中所有攻击牌。 NL 每 消耗 一张，造成 !D! 张伤害。"
+    "DESCRIPTION": "消耗 手牌中所有攻击牌。 NL 每 消耗 一张，造成 !D! 点伤害。"
   },
   "IceWave": {
     "NAME": "冰斩波",

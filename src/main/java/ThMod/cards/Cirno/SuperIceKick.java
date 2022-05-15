@@ -42,7 +42,7 @@ public class SuperIceKick extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.ATTACK,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.BASIC,
+			CardRarity.UNCOMMON,
 			CardTarget.ENEMY
 		);
 		
