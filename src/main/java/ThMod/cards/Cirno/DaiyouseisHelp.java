@@ -74,7 +74,16 @@ public class DaiyouseisHelp extends AbstractCirnoCard {
 	@Override
 	public void onRetained() {
 		applyPowers();
-		this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
+		
+		boolean bad = false;
+		for (AbstractCard c : AbstractDungeon.player.hand.group)
+			if (c != this && c instanceof DaiyouseisHelp) {
+				bad = true;
+				break;
+			}
+		
+		if (!bad)
+			this.addToBot(new GainBlockAction(AbstractDungeon.player, this.block));
 //		AbstractPlayer p = AbstractDungeon.player;
 //		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(this.magicNumber)));
 	}

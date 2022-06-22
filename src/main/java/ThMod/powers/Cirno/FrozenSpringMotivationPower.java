@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
+@Deprecated
 public class FrozenSpringMotivationPower extends AbstractPower {
 	
 	public static final String POWER_ID = FrozenSpringMotivationPower.class.getSimpleName();

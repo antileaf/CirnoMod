@@ -35,8 +35,8 @@ public class FrostKing extends AbstractCirnoCard {
 			CardTarget.SELF
 		);
 		
-		this.block = this.baseBlock = BLOCK;
-		this.magicNumber = this.baseMagicNumber = this.block * 2;
+//		this.block = this.baseBlock = BLOCK;
+		this.magicNumber = this.baseMagicNumber = BLOCK;
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class FrostKing extends AbstractCirnoCard {
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
 //		this.addToBot(new ApplyPowerAction(p, p, new FrostKingMotivationPower(this.magicNumber)));
-		this.addToBot(new ApplyPowerAction(p, p, new FrostKingPower(this.block)));
+		this.addToBot(new ApplyPowerAction(p, p, new FrostKingPower(this.magicNumber)));
 	}
 	
 	@Override
@@ -59,8 +59,8 @@ public class FrostKing extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 			
-			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
-			this.upgradeMagicNumber(UPGRADE_PLUS_BLOCK * 2);
+//			this.upgradeBlock(UPGRADE_PLUS_BLOCK);
+			this.upgradeMagicNumber(UPGRADE_PLUS_BLOCK);
 			this.initializeDescription();
 		}
 	}

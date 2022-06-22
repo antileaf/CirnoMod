@@ -57,6 +57,7 @@ public class FridgePower extends AbstractPower implements OnPlayerDeathPower {
 			p.heal(val);
 			
 			this.used = true;
+			this.updateDescription();
 			return false;
 		}
 		else

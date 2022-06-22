@@ -52,8 +52,9 @@ public class FairyInSpring extends AbstractCirnoCard {
 		for (AbstractCard card : AbstractDungeon.player.hand.group)
 			set.add(card.cardID);
 		
-		this.rawDescription = (this.upgraded ? cardStrings.UPGRADE_DESCRIPTION :  DESCRIPTION) + " NL " + cardStrings.EXTENDED_DESCRIPTION[0] +
-			set.size() + cardStrings.EXTENDED_DESCRIPTION[1];
+		this.rawDescription = (this.upgraded ? cardStrings.UPGRADE_DESCRIPTION :  DESCRIPTION) + " NL " +
+				cardStrings.EXTENDED_DESCRIPTION[0] +
+			set.size() / 3 + cardStrings.EXTENDED_DESCRIPTION[1];
 		this.initializeDescription();
 	}
 	
@@ -72,7 +73,7 @@ public class FairyInSpring extends AbstractCirnoCard {
 		for (AbstractCard card : AbstractDungeon.player.hand.group)
 			set.add(card.cardID);
 		
-		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(set.size())));
+		this.addToBot(new ApplyPowerAction(p, p, new MotivationPower(set.size() / 3)));
 	}
 	
 	@Override

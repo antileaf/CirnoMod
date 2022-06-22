@@ -19,8 +19,8 @@ public class WishOfBreeze extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	private static final int COST = 1;
-	private static final int CNT = 2;
-	private static final int UPGRADE_PLUS_CNT = 1;
+	private static final int UPGRADED_COST = 0;
+	private static final int CNT = 1;
 	
 	public WishOfBreeze() {
 		super(
@@ -31,7 +31,7 @@ public class WishOfBreeze extends AbstractCirnoCard {
 			DESCRIPTION,
 			CardType.POWER,
 			AbstractCardEnum.CIRNO_COLOR,
-			CardRarity.RARE,
+			CardRarity.UNCOMMON,
 			CardTarget.SELF
 		);
 		
@@ -51,7 +51,7 @@ public class WishOfBreeze extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 			
-			this.upgradeMagicNumber(UPGRADE_PLUS_CNT);
+			this.upgradeBaseCost(UPGRADED_COST);
 			this.initializeDescription();
 		}
 	}

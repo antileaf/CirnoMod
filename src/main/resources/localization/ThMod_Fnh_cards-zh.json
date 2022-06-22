@@ -1,7 +1,7 @@
 {
   "AbsoluteZero": {
     "NAME": "绝对零度",
-    "DESCRIPTION": "每当你 消耗 一张牌，获得 !M! 层 寒冷 。"
+    "DESCRIPTION": "本场战斗中 寒冷 在攻击伤害上的增幅额外提高 !M! 倍。"
   },
   "AchiForm": {
     "NAME": "火焰形态",
@@ -32,9 +32,14 @@
     "DESCRIPTION": "每 2 个回合开始时，从 冰锥 与 冰块 中选择一张加入手牌，并在下回合开始时获得另一张。",
     "UPGRADE_DESCRIPTION": "每 2 个回合开始时，从 冰锥+ 与 冰块+ 中选择一张加入手牌，并在下回合开始时获得另一张。"
   },
+  "CoolSunflower": {
+    "NAME": "凉爽的向日葵",
+    "DESCRIPTION": "打出或 消耗 此牌时，选择至多 !M! 张手牌 消耗 ，并抽等量的牌。",
+    "EXTENDED_DESCRIPTION": ["选择至多", "张牌 消耗 ，并抽等量的牌"]
+  },
   "DaiyouseisHelp": {
     "NAME": "无名妖精之援",
-    "DESCRIPTION": "不能被打出 。 保留 。 NL 每当该牌被 保留 时，获得 !B! 点 格挡 。 NL 当这张牌被 消耗 时，选择并获得 !M! 张已 消耗 的牌。",
+    "DESCRIPTION": "不能被打出 。 保留 。 NL 回合结束时，如果你的手牌中有这张牌，获得 !B! 点 格挡 。 NL 当这张牌被 消耗 时，选择并获得 !M! 张已 消耗 的牌。",
     "EXTENDED_DESCRIPTION": [
       "这张牌不能被打出。", "选择", "张牌移回手牌"
     ]
@@ -45,8 +50,8 @@
   },
   "FairyInSpring": {
     "NAME": "春之冰精",
-    "DESCRIPTION": "造成 !D! 点伤害 !M! 次。 NL 你手中每有一张不同的牌（包括此牌），就获得 1 点 干劲 。 NL 消耗 。",
-    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。 NL 你手中每有一张不同的牌（包括此牌），就获得 1 点 干劲 。",
+    "DESCRIPTION": "造成 !D! 点伤害 !M! 次。 NL 你手中每有 3 种不同的牌（包括此牌），就获得 1 点 干劲 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "造成 !D! 点伤害 !M! 次。 NL 你手中每有 3 种不同的牌（包括此牌），就获得 1 点 干劲 。",
     "EXTENDED_DESCRIPTION": ["（获得 ", " 点 干劲 。）"]
   },
   "FairyPunch": {
@@ -95,6 +100,11 @@
     ],
     "FLAVOR": "这个能力的优先级低于蜥蜴尾巴与瓶装精灵。 NL 在你已经拥有这张牌时，这张牌不会出现在随机池中。"
   },
+  "FrostColumns": {
+    "NAME": "冰袭方阵",
+    "DESCRIPTION": "获得 !M! 层 寒冷 。 NL 可被多次 升级 。",
+    "FLAVOR": "第 k 次升级这张牌时，获得的 寒冷 层数增加值等于 k 的一半（向下取整）。"
+  },
   "FrostKing": {
     "NAME": "霜冻之王",
     "DESCRIPTION": "每当你在战斗中临时获得一张牌，就获得 !B! 点格挡；如果这是本场战斗中第一次获取那张牌，则改为获得 !M! 点格挡。"
@@ -109,7 +119,7 @@
   },
   "FrozenFreeze": {
     "NAME": "急速冷冻法",
-    "DESCRIPTION": "失去所有 格挡 ，然后获得 !B! 点 格挡 。"
+    "DESCRIPTION": "失去所有 格挡 ，然后获得 !B! 点 格挡 。 NL 干劲 1：不再失去所有格挡。"
   },
   "FrozenFrog": {
     "NAME": "冻青蛙",
@@ -117,8 +127,8 @@
   },
   "FrozenSpring": {
     "NAME": "冰冻温泉",
-    "DESCRIPTION": "下⑨次 消耗 一张牌时，恢复 !M! 点生命。",
-    "UPGRADE_DESCRIPTION": "下⑨次 消耗 一张牌时，恢复 !M! 点生命并获得 !M! 点 干劲 。"
+    "DESCRIPTION": "下⑨次打出一张牌时，恢复 !M! 点生命。",
+    "UPGRADE_DESCRIPTION": "下⑨次打出一张牌时，恢复 !M! 点生命并获得 !M! 点 干劲 。"
   },
   "GiganticIceMagic": {
     "NAME": "超大型冰冻魔法",
@@ -126,6 +136,11 @@
     "EXTENDED_DESCRIPTION": [
       "（你本回合已打出", "张牌。）"
     ]
+  },
+  "GlacialAugment": {
+    "NAME": "冰川增幅",
+    "DESCRIPTION": "每当你打出一张能力牌，将一张随机牌加入弃牌堆。",
+    "UPGRADE_DESCRIPTION": "固有 。 NL 每当你打出一张能力牌，将一张随机牌加入弃牌堆。"
   },
   "GreatCrusher": {
     "NAME": "巨冰破碎",
@@ -143,7 +158,7 @@
   },
   "HighSpirit": {
     "NAME": "斗志昂扬",
-    "DESCRIPTION": "如果你拥有 寒冷 ，抽 !M! 张牌；否则获得 1 层 寒冷 。 NL 以同样的方法判定 干劲 。"
+    "DESCRIPTION": "如果你拥有 寒冷 ，抽 !M! 张牌；否则获得 2 层 寒冷 。 NL 以同样的方法判定 干劲 。"
   },
   "IceArmor": {
     "NAME": "寒冰铠甲",
@@ -220,8 +235,8 @@
   },
   "ImFunky": {
     "NAME": "迷之舞步",
-    "DESCRIPTION": "每抽 3 张牌，获得 !M! 层 寒冷 。 NL 虚无 。",
-    "UPGRADE_DESCRIPTION": "每抽 3 张牌，获得 !M! 层 寒冷 。"
+    "DESCRIPTION": "每回合第一次打出某种 类别 的牌时，获得 !M! 层 寒冷 。",
+    "UPGRADE_DESCRIPTION": "保留 。每回合第一次打出某种 类别 的牌时，获得 !M! 层 寒冷 。"
   },
   "KirisameMahouten": {
     "NAME": "路过的魔法店",
@@ -239,8 +254,8 @@
   },
   "MinusK": {
     "NAME": "负K",
-    "DESCRIPTION": "接下来X次，当你于一回合中第一次 消耗 一张牌时，获得 [E] [E] 。",
-    "UPGRADE_DESCRIPTION": "接下来X+1次，当你于一回合中第一次 消耗 一张牌时，获得 [E] [E] 。"
+    "DESCRIPTION": "接下来X次，当你 消耗 一张牌时，获得 [E] [E] 。这个效果每回合最多触发一次。",
+    "UPGRADE_DESCRIPTION": "接下来X+1次，当你 消耗 一张牌时，获得 [E] [E] 。这个效果每回合最多触发一次。"
   },
   "NineMathTextbooks": {
     "NAME": "⑨章算术",
@@ -251,7 +266,7 @@
     "DESCRIPTION": "干劲 !M! ：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数。",
     "UPGRADE_DESCRIPTION": "干劲 !M! ：对所有敌人造成若干次 !D! 点伤害，次数等同于你拥有的 寒冷 层数+1。",
     "EXTENDED_DESCRIPTION": [
-      "（造成", "次伤害。）", "我没有足够的 #b干劲 。"
+      "（造成", "次伤害。）", "我没有足够的 干劲 。"
     ]
   },
   "PerfectGlacialist": {
@@ -283,7 +298,7 @@
   },
   "SuperIceKick": {
     "NAME": "超级回旋冰踢",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL 如果你的抽牌堆大小不超过 !B! ，就获得 [E] 并抽 !M! 张牌。"
+    "DESCRIPTION": "干劲 X：对所有敌人造成 !D! 点伤害 X 次。"
   },
   "SwordFreezer": {
     "NAME": "剑式制冰器",

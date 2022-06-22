@@ -53,7 +53,15 @@ public class ChillPower extends AbstractPower {
 	
 	@Override
 	public float atDamageGive(float damage, DamageInfo.DamageType type) {
-		return type == DamageType.NORMAL ? damage + (float)this.amount : damage;
+		if (type == DamageType.NORMAL) {
+			int augment = this.amount;
+			if (this.owner.hasPower(AbsoluteZeroPower.POWER_ID))
+				augment *= 1 + this.owner.getPower(AbsoluteZeroPower.POWER_ID).amount;
+			
+			damage += augment;
+		}
+		
+		return damage;
 	}
 	
 	@Override

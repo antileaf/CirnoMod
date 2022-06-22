@@ -36,8 +36,9 @@ public class FrozenSpringHealPower extends AbstractPower {
 	}
 	
 	@Override
-	public void onExhaust(AbstractCard card) {
+	public void onAfterCardPlayed(AbstractCard card) {
 		this.addToBot(new HealAction(this.owner, this.owner, 1));
+		this.flash();
 		
 		if (--this.amount <= 0)
 			this.addToBot(new RemoveSpecificPowerAction(this.owner, this.owner, this.ID));

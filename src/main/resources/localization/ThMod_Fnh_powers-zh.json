@@ -2,7 +2,7 @@
   "AbsoluteZeroPower": {
     "NAME": "绝对零度",
     "DESCRIPTIONS": [
-      "每当你 消耗 一张牌，获得 #b", " 层 寒冷 。"
+      "寒冷 在攻击伤害上的增幅额外提高 #b", " 倍。"
     ]
   },
   "AchiFormPower": {
@@ -101,7 +101,15 @@
   "FunkyPower": {
     "NAME": "贫民区舞后",
     "DESCRIPTIONS": [
-      "再抽 #b", " 张牌，获得 #b", " 层 寒冷 。"
+      "每回合第一次打出某种 类别 的牌时，获得 #b", " 层 寒冷 。",
+      "本回合尚未打出的 类别 有：", "攻击牌", "技能牌", "能力牌", "、", "。",
+      "你本回合已打出了全部三种 类别 的牌。"
+    ]
+  },
+  "GlacialAugmentPower": {
+    "NAME": "冰川增幅",
+    "DESCRIPTIONS": [
+      "每当你打出一张能力牌，将 #b", " 张随机牌加入弃牌堆。"
     ]
   },
   "IceCreamMachinePower": {

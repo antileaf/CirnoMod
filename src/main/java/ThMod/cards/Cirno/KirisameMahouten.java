@@ -22,8 +22,8 @@ public class KirisameMahouten extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 //	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 2;
-	private static final int UPGRADED_COST = 1;
+	private static final int COST = 1;
+	private static final int UPGRADED_COST = 0;
 	private static final int CNT = 3;
 	
 	public KirisameMahouten() {

@@ -50,7 +50,8 @@ public class ThMod implements PostExhaustSubscriber,
 		PostDrawSubscriber,
 		PostEnergyRechargeSubscriber,
 		OnPlayerLoseBlockSubscriber,
-		OnPlayerDamagedSubscriber {
+		OnPlayerDamagedSubscriber,
+		OnStartBattleSubscriber {
 	
 	public static final Logger logger = LogManager.getLogger(ThMod.class.getName());
 	
@@ -279,6 +280,10 @@ public class ThMod implements PostExhaustSubscriber,
 	}
 	
 	public void receivePostBattle(AbstractRoom r) {
+	
+	}
+	
+	public void receiveOnBattleStart(AbstractRoom abstractRoom) {
 		iceWaveClear();
 		logger.info("CirnoMod : iceWaveCounter reset");
 		
@@ -319,7 +324,6 @@ public class ThMod implements PostExhaustSubscriber,
 		return amount; // 已经转移到patch了
 	}
 	
-	@Override
 	public int receiveOnPlayerLoseBlock(int amount) {
 		return amount;
 	}
@@ -422,6 +426,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new ColdBeer());
 		cardsToAdd.add(new ColdSprinkler());
 		cardsToAdd.add(new ColdWind());
+		cardsToAdd.add(new CoolSunflower());
 		cardsToAdd.add(new DaiyouseisHelp());
 		cardsToAdd.add(new DiamondBlizzard());
 		cardsToAdd.add(new FairyInSpring());
@@ -434,6 +439,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new FreezeTouchMe());
 		cardsToAdd.add(new FreezingBeams());
 		cardsToAdd.add(new Fridge());
+		cardsToAdd.add(new FrostColumns());
 		cardsToAdd.add(new FrostKing());
 		cardsToAdd.add(new FrostMeteor());
 		cardsToAdd.add(new FrostPillars());
@@ -441,6 +447,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new FrozenFrog());
 		cardsToAdd.add(new FrozenSpring());
 		cardsToAdd.add(new GiganticIceMagic());
+		cardsToAdd.add(new GlacialAugment());
 		cardsToAdd.add(new GreatCrusher());
 		cardsToAdd.add(new Hailstorm());
 		cardsToAdd.add(new HighSpirit());
@@ -475,7 +482,7 @@ public class ThMod implements PostExhaustSubscriber,
 		cardsToAdd.add(new SnowmanInMidsummer());
 		cardsToAdd.add(new Sunbathe());
 		cardsToAdd.add(new SuperIceKick());
-		cardsToAdd.add(new SwordFreezer());
+//		cardsToAdd.add(new SwordFreezer());
 		cardsToAdd.add(new TengusCamera());
 		cardsToAdd.add(new ThreeFairiesHelp());
 		cardsToAdd.add(new WishOfBreeze());

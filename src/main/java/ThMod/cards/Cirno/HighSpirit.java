@@ -23,7 +23,7 @@ public class HighSpirit extends AbstractCirnoCard {
 	private static final int COST = 1;
 	private static final int DRAW_CNT = 1;
 	private static final int UPGRADE_PLUS_DRAW_CNT = 1;
-	private static final int MOTIVATION_GAIN = 1;
+	private static final int MOTIVATION_GAIN = 2;
 	
 	public HighSpirit() {
 		super(

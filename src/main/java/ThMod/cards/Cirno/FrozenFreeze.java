@@ -21,6 +21,7 @@ public class FrozenFreeze extends AbstractCirnoCard {
 	private static final int COST = 1;
 	private static final int BLOCK = 11;
 	private static final int UPGRADE_PLUS_BLOCK = 3;
+	private static final int MOTIVATION_COST = 1;
 	
 	public FrozenFreeze() {
 		super(
@@ -36,10 +37,13 @@ public class FrozenFreeze extends AbstractCirnoCard {
 		);
 		
 		this.block = this.baseBlock = BLOCK;
+		this.motivationCost = MOTIVATION_COST;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
-		this.addToBot(new RemoveAllBlockAction(p, p));
+		if (!this.isMotivated)
+			this.addToBot(new RemoveAllBlockAction(p, p));
+		
 		this.addToBot(new GainBlockAction(p, this.block));
 	}
 	

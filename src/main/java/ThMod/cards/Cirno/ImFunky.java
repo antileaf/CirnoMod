@@ -19,7 +19,7 @@ public class ImFunky extends AbstractCirnoCard {
 	public static final String NAME = cardStrings.NAME;
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-	private static final int COST = 3;
+	private static final int COST = 2;
 	private static final int FUNKY_GAIN = 1;
 	
 	public ImFunky() {
@@ -36,7 +36,6 @@ public class ImFunky extends AbstractCirnoCard {
 		);
 		
 		this.magicNumber = this.baseMagicNumber = FUNKY_GAIN;
-		this.isEthereal = true;
 	}
 	
 	public void use(AbstractPlayer p, AbstractMonster m) {
@@ -52,8 +51,7 @@ public class ImFunky extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 			
-//			upgradeBaseCost(UPGRADED_COST);
-			this.isEthereal = false;
+			this.selfRetain = true;
 			this.rawDescription = UPGRADE_DESCRIPTION;
 			this.initializeDescription();
 		}

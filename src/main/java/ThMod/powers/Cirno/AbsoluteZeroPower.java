@@ -1,8 +1,6 @@
 package ThMod.powers.Cirno;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
@@ -32,11 +30,5 @@ public class AbsoluteZeroPower extends AbstractPower {
 	@Override
 	public void updateDescription() {
 		this.description = (DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1]);
-	}
-	
-	@Override
-	public void onExhaust(AbstractCard card) {
-		this.flash();
-		this.addToBot(new ApplyPowerAction(this.owner, this.owner, new ChillPower(this.amount)));
 	}
 }

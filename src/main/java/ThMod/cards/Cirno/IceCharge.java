@@ -24,7 +24,7 @@ public class IceCharge extends AbstractCirnoCard {
 	private static final int COST = 1;
 	private static final int ATTACK_DMG = 6;
 	private static final int UPGRADE_PLUS_ATTACK_DMG = 3;
-	private static final int CNT = 2;
+	private static final int CNT = 5;
 	
 	public IceCharge() {
 		super(
@@ -47,8 +47,9 @@ public class IceCharge extends AbstractCirnoCard {
 		this.addToBot(new DamageCallbackAction(m, new DamageInfo(p, this.damage,
 				this.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL,
 				(Integer damage) -> {
-					if (damage / 2 > 0)
-						this.addToTop(new ApplyPowerAction(p, p, new ChillPower(damage / 2)));
+					if (damage / this.magicNumber > 0)
+						this.addToTop(new ApplyPowerAction(p, p,
+								new ChillPower(damage / this.magicNumber)));
 				}));
 	}
 	

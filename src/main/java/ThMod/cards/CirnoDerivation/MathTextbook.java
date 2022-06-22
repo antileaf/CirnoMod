@@ -9,8 +9,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class MathTextbook extends AbstractCirnoCard {
 	private static final int COST = -2;
-	private static final int CNT = 4;
-	private static final int UPGRADED_CNT = 6;
+	private static final int CNT = 3;
+	private static final int UPGRADED_CNT = 4;
 	protected CardType cardType;
 	
 	public MathTextbook(

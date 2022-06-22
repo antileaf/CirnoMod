@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.powers.watcher.VigorPower;
 
 import java.util.Iterator;
 
+@Deprecated
 public class SwordFreezer extends AbstractCirnoCard {
 	
 	public static final String ID = SwordFreezer.class.getSimpleName();

@@ -9,8 +9,6 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-
 public class FrostKingPower extends AbstractPower {
 	
 	public static final String POWER_ID = FrostKingPower.class.getSimpleName();
@@ -20,14 +18,14 @@ public class FrostKingPower extends AbstractPower {
 	public static final String[] DESCRIPTIONS =
 			powerStrings.DESCRIPTIONS;
 	
-	public HashSet<String> visited;
+//	public HashSet<String> visited;
 	
 	public FrostKingPower(int amount) {
 		this.name = NAME;
 		this.ID = POWER_ID;
 		this.owner = AbstractDungeon.player;
 		this.amount = amount;
-		this.visited = new HashSet<>();
+//		this.visited = new HashSet<>();
 		
 		this.type = PowerType.BUFF;
 		this.updateDescription();
@@ -36,19 +34,17 @@ public class FrostKingPower extends AbstractPower {
 	}
 	
 	public void trigger(@NotNull AbstractCard card) {
-		this.addToBot(new GainBlockAction(this.owner,
-				this.visited.contains(card.cardID) ?
-				this.amount : this.amount * 2));
+		this.addToBot(new GainBlockAction(this.owner, this.amount));
 		
-		this.visited.add(card.cardID);
+//		this.visited.add(card.cardID);
 		this.updateDescription();
 	}
 	
 	@Override
 	public void updateDescription() {
 		this.description = DESCRIPTIONS[0] + this.amount + DESCRIPTIONS[1] +
-			this.amount * 2 + DESCRIPTIONS[2] + " NL " +
-				DESCRIPTIONS[3] + this.visited.size() + DESCRIPTIONS[4];
+			this.amount; // * 2 + DESCRIPTIONS[2] + " NL " +
+//				DESCRIPTIONS[3] + this.visited.size() + DESCRIPTIONS[4];
 	}
 	
 //	@Override

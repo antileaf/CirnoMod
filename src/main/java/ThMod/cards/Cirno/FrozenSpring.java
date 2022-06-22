@@ -3,7 +3,6 @@ package ThMod.cards.Cirno;
 import ThMod.abstracts.AbstractCirnoCard;
 import ThMod.patches.AbstractCardEnum;
 import ThMod.powers.Cirno.FrozenSpringHealPower;
-import ThMod.powers.Cirno.FrozenSpringMotivationPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -21,6 +20,7 @@ public class FrozenSpring extends AbstractCirnoCard {
 	public static final String DESCRIPTION = cardStrings.DESCRIPTION;
 	public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
 	private static final int COST = 1;
+	private static final int UPGRADED_COST = 0;
 	private static final int CNT = 9;
 	
 	public FrozenSpring() {
@@ -43,8 +43,8 @@ public class FrozenSpring extends AbstractCirnoCard {
 	public void use(AbstractPlayer p, AbstractMonster m) {
 		this.addToBot(new ApplyPowerAction(p, p, new FrozenSpringHealPower(CNT)));
 		
-		if (this.upgraded)
-			this.addToBot(new ApplyPowerAction(p, p, new FrozenSpringMotivationPower(CNT)));
+//		if (this.upgraded)
+//			this.addToBot(new ApplyPowerAction(p, p, new FrozenSpringMotivationPower(CNT)));
 	}
 	
 	@Override
@@ -56,7 +56,8 @@ public class FrozenSpring extends AbstractCirnoCard {
 		if (!this.upgraded) {
 			this.upgradeName();
 			
-			this.rawDescription = UPGRADE_DESCRIPTION;
+//			this.rawDescription = UPGRADE_DESCRIPTION;
+			this.upgradeBaseCost(UPGRADED_COST);
 			this.initializeDescription();
 		}
 	}
